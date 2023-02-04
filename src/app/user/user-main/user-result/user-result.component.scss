@@ -1,0 +1,53 @@
+td, th {
+  border: 1px solid #777;
+  padding: 10px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3px;
+}
+
+tbody tr:nth-child(odd) {
+  background: #eee;
+}
+caption {
+  font-size: 0.8rem;
+}
+td{
+  text-align: center;
+}
+tbody tr:nth-child(odd) {
+  background: #202932;
+}
+tbody tr:nth-child(even) {
+  background: #2c3844;
+}
+tbody{
+  color: white;
+}
+th {
+  height: 5px;
+}
+
+td {
+  height: 50px;
+}
+button{
+border: 1px solid #2e2e2e;
+  width: 75px;
+  border: none;
+  margin: 3px;
+}
+.container-btn{
+  display: flex;
+  justify-content: space-around;
+  .btn-remove{
+    color: red;
+  }
+  .btn-edit{
+    color: blue;
+  }
+}

@@ -1,0 +1,46 @@
+<nav class="nav">
+  <ul class="nav-ul">
+    <li class="nav-ul-li" routerLinkActive="active" >
+      <a routerLink="/user" routerLinkActive="active">
+        <i class="fa-solid fa-user nav-ul-li-i" aria-hidden="true">
+    </i>
+        <br>کاربران</a>
+    </li>
+
+    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <a routerLink="/product"><i class="fa-solid fa-store nav-ul-li-i" aria-hidden="true">
+      </i><br>فروشگاه</a>
+    </li>
+
+    <li class="nav-ul-li "  routerLinkActive="active">
+<!--      <div class="count" *ngIf="customerBasket$ | async as customerBasket">{{customerBasket.customerBasketItems.length}}</div>-->
+      <a routerLink="/inventory">
+        <i class="fa-solid fa-layer-group nav-ul-li-i" aria-hidden="true">
+        </i><br>انبار</a>
+    </li>
+
+    <li class="nav-ul-li" routerLinkActive="active">
+      <a routerLink="/seller">
+        <i class="fa-solid fa-handshake nav-ul-li-i" aria-hidden="true">
+        </i><br>فروشنده</a>
+    </li>
+
+    <li class="nav-ul-li" routerLinkActive="active">
+      <a routerLink="/chat"><i class="fa fa-comments nav-ul-li-i" aria-hidden="true">
+      </i><br>چت</a>
+    </li>
+
+    <li class="nav-ul-li" routerLinkActive="active">
+      <a routerLink="/commenting"><i class="fa fa-comment nav-ul-li-i" aria-hidden="true">
+      </i><br>کامنت</a>
+    </li>
+    <li class="nav-ul-li" (click)="logout()" >
+      <a ><i class="fa fa-door-open nav-ul-li-i" aria-hidden="true">
+      </i><br>خروج</a>
+    </li>
+<!--    <li class="nav-ul-li" routerLinkActive="active">
+      <a routerLink="/auth"><i class=" fa-solid fa-money-check-dollar nav-ul-li-i" aria-hidden="true">
+      </i><br>مالی</a>
+    </li>-->
+  </ul>
+</nav>

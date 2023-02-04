@@ -1,0 +1,33 @@
+<div class="container-search">
+  <div class="search-bar">
+    <div class="container-search-btn">
+      <input type="text" #searchPhoneNumber  class="input-search" placeholder="شماره تلفن..." (keyup.enter)="changePhoneSearch()">
+      <button class="btn-search" (click)="changePhoneSearch()"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="container-search-btn">
+      <input type="text" #searchUserName  class="input-search" placeholder="نام..." (keyup.enter)="changeUserNameSearch()">
+      <button class="btn-search" (click)="changeUserNameSearch()"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+  <div class="select-filters">
+    <div class="select-right-filters">
+      <select (change)="onChangeRoleType($any($event.target)?.value)">
+        <option class="option" value="0">نقش</option>
+        <option [selected]="item.key=== userParams?.roleType" class="option" *ngFor="let item of roleType" [value]="item?.key">{{item?.title}}</option>
+      </select>
+    </div>
+    <div class="select-left-filters">
+      <select (change)="onChangeSortType($any($event.target)?.value)">
+        <option class="option" value="0">ترتیب</option>
+        <option [selected]="item.key=== userParams?.sortType" class="option" *ngFor="let item of sortType" [value]="item?.key">{{item?.title}}</option>
+      </select>
+    </div>
+    <div class="select-left-filters">
+      <select (change)="onChangeConfirmedType($any($event.target)?.value)">
+        <option class="option" value="0">تایید؟</option>
+        <option [selected]="item.key=== userParams?.phoneNumberConfirmed" class="option" *ngFor="let item of phoneConfirmed" [value]="item?.key">{{item?.title}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+

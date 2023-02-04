@@ -1,0 +1,3 @@
+<app-seller-filter (updateShopSeller)="updateShopSeller($event)" ></app-seller-filter>
+<app-seller-result [shopSellers]="paginationShopSeller?.data" (updateShopSeller)="updateShopSeller($event)"></app-seller-result>
+<app-seller-pagination (updateShopSeller)="updateShopSeller($event)"  [count]="paginationShopSeller?.count" [index]="paginationShopSeller?.pageIndex" [size]="paginationShopSeller?.pageSize"></app-seller-pagination>

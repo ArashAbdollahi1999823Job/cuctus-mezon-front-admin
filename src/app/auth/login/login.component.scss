@@ -1,0 +1,42 @@
+.login-container {
+  display: flex;
+  width: 100%;
+  height: (86vh);
+  justify-content: center;
+  align-items: center;
+
+  .login {
+    width: 100%;
+    text-align: center;
+    .error{
+      color: red;
+    }
+    input {
+      background: black;
+      padding-right: 10px;
+      color: white;
+      margin: 5px 0;
+
+      border: none;
+      border-bottom: 2px solid saddlebrown;
+      height: 50px;
+      width: 80%;
+      &:focus{
+        outline: none;
+      }
+    }
+
+    button {
+      width: 80%;
+      border: 1px solid darkslategray;
+      background: navajowhite;
+      color: black;
+      font-size: 20px;
+      height: 50px;
+    }
+  }
+}
+
+.disable{
+  opacity: 0.3;
+}

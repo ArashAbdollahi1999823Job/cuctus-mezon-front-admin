@@ -1,0 +1,8 @@
+<app-nav></app-nav>
+<div class="app-body" style="">
+<ngx-spinner style="font-family: IRANSans;font-size: 1rem;padding-top: 30px;color: white">فروشگاه بزرگ کاکتوس ....
+  </ngx-spinner>
+  <main [@allPageAnimation]="o.isActivated ? o.activatedRoute : ''">
+    <router-outlet #o="outlet"></router-outlet>
+  </main>
+</div>
