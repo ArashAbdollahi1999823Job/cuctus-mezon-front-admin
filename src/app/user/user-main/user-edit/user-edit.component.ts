@@ -1,22 +1,24 @@
-import {  Component,  OnInit, } from '@angular/core';
-import {IUserForAdminDto} from "../../../shared/dto/user/IUserForAdminDto";
-import {UserService} from "../../services/user.service";
-import {ActivatedRoute} from "@angular/router";
+import {Component, OnDestroy, OnInit,} from '@angular/core';
+import {UserDto} from "../../../shared/dto/user/userDto";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserForSendEditDto} from "../../../shared/dto/user/UserForSendEditDto";
+import {UserEditDto} from "../../../shared/dto/user/userEditDto";
 import {ToastrService} from "ngx-toastr";
-
+import {UserService} from "../../user-service/user.service";
+import {PaginationDto} from "../../../shared/dto/base/paginationDto";
+import {Subscription} from "rxjs/internal/Subscription";
 @Component({
-  selector: 'app-user-edit',
+  selector: 'user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']
 })
 
-export class UserEditComponent implements OnInit{
+export class UserEditComponent implements OnInit , OnDestroy{
   public id: string;
-  public user: IUserForAdminDto;
-  public editUserForm = new FormGroup({
+  public usersDto: UserDto;
+  public subscription:Subscription;
+  public userEditForm = new FormGroup({
     userName: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
     phoneNumber: new FormControl(null, [Validators.pattern("^[0-9]*$"),Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     password: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(8)]),
@@ -28,45 +30,50 @@ export class UserEditComponent implements OnInit{
       user:new FormControl(),
     })
   });
-  constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService) {}
+  constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router) {}
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.getUserById(this.id);
+    this.userGetById(this.id);
   }
-  public getUserById(id: string) {
-    return this.userService.getUserById(id).subscribe((res) => {
-      this.user = res;
-      this.title.setTitle("در حال اپدیت کاربر" + res.username + "هستید");
-      this.editUserForm.controls.userName.setValue(this.user.username);
-      this.editUserForm.controls.phoneNumber.setValue(this.user.phoneNumber);
-      this.editUserForm.controls.password.setValue(this.user.password);
-      this.editUserForm.controls.phoneNumberConfirmed.setValue(this.user.phoneNumberConfirmed);
-      this.user.roles.forEach(value => {
-        if(value.name=="Boss")this.editUserForm.controls.roles.controls.boss.setValue(true);
-        if(value.name=="Admin")this.editUserForm.controls.roles.controls.admin.setValue(true);
-        if(value.name=="Seller")this.editUserForm.controls.roles.controls.seller.setValue(true);
-        if(value.name=="User")this.editUserForm.controls.roles.controls.user.setValue(true);
+  public userGetById(id: string) {
+    return this.userService.userGetById(id).subscribe((res:PaginationDto<UserDto>) => {
+      this.usersDto = res.data[0];
+      this.title.setTitle("در حال اپدیت کاربر" + this.usersDto.username + "هستید");
+      this.userEditForm.controls.userName.setValue(this.usersDto.username);
+      this.userEditForm.controls.phoneNumber.setValue(this.usersDto.phoneNumber);
+      this.userEditForm.controls.password.setValue(this.usersDto.password);
+      this.userEditForm.controls.phoneNumberConfirmed.setValue(this.usersDto.phoneNumberConfirmed);
+      this.usersDto.roles.forEach(value => {
+        if(value.name=="Boss")this.userEditForm.controls.roles.controls.boss.setValue(true);
+        if(value.name=="Admin")this.userEditForm.controls.roles.controls.admin.setValue(true);
+        if(value.name=="Seller")this.userEditForm.controls.roles.controls.seller.setValue(true);
+        if(value.name=="User")this.userEditForm.controls.roles.controls.user.setValue(true);
       })
     })
   }
-  editUser() {
-    let user2=new UserForSendEditDto;
-    user2.id =this.id;
-    user2.password=this.editUserForm.controls.password.value;
-    user2.phoneNumber=this.editUserForm.controls.phoneNumber.value;
-    user2.username=this.editUserForm.controls.userName.value;
-    user2.phoneNumberConfirmed=this.editUserForm.controls.phoneNumberConfirmed.value;
+  userEdit() {
+    let userEditDto=new UserEditDto;
+    userEditDto.id =this.id;
+    userEditDto.password=this.userEditForm.controls.password.value;
+    userEditDto.phoneNumber=this.userEditForm.controls.phoneNumber.value;
+    userEditDto.username=this.userEditForm.controls.userName.value;
+    userEditDto.phoneNumberConfirmed=this.userEditForm.controls.phoneNumberConfirmed.value;
     let roles:string[]=[];
-    if(this.editUserForm.controls.roles.controls.boss.value==true)roles.push("Boss");
-    if(this.editUserForm.controls.roles.controls.admin.value==true)roles.push("Admin");
-    if(this.editUserForm.controls.roles.controls.seller.value==true)roles.push("Seller");
-    if(this.editUserForm.controls.roles.controls.user.value==true)roles.push("User");
-    user2.roles=roles;
-    return this.userService.editUser(user2).subscribe((res:IUserForAdminDto)=>{
-      if(res){
-        this.toastService.success(`کاربر${res.username}باموفقیت اپدیت شد.`)
+    if(this.userEditForm.controls.roles.controls.boss.value==true)roles.push("Boss");
+    if(this.userEditForm.controls.roles.controls.admin.value==true)roles.push("Admin");
+    if(this.userEditForm.controls.roles.controls.seller.value==true)roles.push("Seller");
+    if(this.userEditForm.controls.roles.controls.user.value==true)roles.push("User");
+    userEditDto.roles=roles;
+    return this.userService.userEdit(userEditDto).subscribe((res:boolean)=>{
+      if(res==true){
+        this.toastService.success(`کاربر باموفقیت اپدیت شد.`);
+        this.router.navigateByUrl("/User/UserMain");
+
       }
     })
+  }
+  ngOnDestroy(): void {
+    if(this.subscription){this.subscription.unsubscribe();}
   }
 }
 

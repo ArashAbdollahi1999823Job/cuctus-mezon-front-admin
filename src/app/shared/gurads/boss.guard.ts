@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from 
 import {Observable} from 'rxjs';
 import {AuthService} from "../../auth/services/auth.service";
 import {ToastrService} from "ngx-toastr";
-import {IUserDto} from "../dto/identiry/IUserDto";
+import {UserAuthorizeDto} from "../dto/identiry/userAuthorizeDto";
 import {map} from "rxjs/internal/operators/map";
 
 @Injectable({
@@ -14,7 +14,7 @@ export class BossGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.authService.currentUser$.pipe(map((user: IUserDto) => {
+    return this.authService.currentUser$.pipe(map((user: UserAuthorizeDto) => {
       if (user.roles?.includes("Boss")) {
         return true
       }

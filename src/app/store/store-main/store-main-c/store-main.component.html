@@ -1,0 +1,3 @@
+<store-filter (storeUpdate)="storeUpdate($event)" ></store-filter>
+<store-result [storesDto]="paginationStore?.data" (storeUpdate)="storeUpdate($event)"></store-result>
+<store-pagination (storeUpdate)="storeUpdate($event)"  [count]="paginationStore?.count" [index]="paginationStore?.pageIndex" [size]="paginationStore?.pageSize"></store-pagination>

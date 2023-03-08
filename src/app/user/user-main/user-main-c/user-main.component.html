@@ -1,3 +1,3 @@
-<app-user-filter (updateUser)="updateUser($event)" ></app-user-filter>
-<app-user-result [paginationUsers]="paginationUsers" (updateUser)="updateUser($event)" ></app-user-result>
-<app-user-pagination (updateUser)="updateUser($event)"  [count]="paginationUsers?.count" [index]="paginationUsers?.pageIndex" [size]="paginationUsers?.pageSize"></app-user-pagination>
+<user-filter (userUpdate)="userUpdate($event)" ></user-filter>
+<user-result [paginationUser]="paginationUser" (userUpdate)="userUpdate($event)" ></user-result>
+<user-pagination (userUpdate)="userUpdate($event)"  [count]="paginationUser?.count" [index]="paginationUser?.pageIndex" [size]="paginationUser?.pageSize"></user-pagination>

@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
-import {IUserForAdminDto} from "../../shared/dto/user/IUserForAdminDto";
+import {Component, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserForSendEditDto} from "../../shared/dto/user/UserForSendEditDto";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
-import {UserService} from "../services/user.service";
+import {UserService} from "../user-service/user.service";
+import {UserAddDto} from "../../shared/dto/user/userAddDto";
+import {Router} from "@angular/router";
+import {Subscription} from "rxjs/internal/Subscription";
 @Component({
-  selector: 'app-user-add',
+  selector: 'user-add',
   templateUrl: './user-add.component.html',
   styleUrls: ['./user-add.component.scss']
 })
-export class UserAddComponent {
+export class UserAddComponent implements OnDestroy {
   public id: string;
-  public user: IUserForAdminDto;
-  public addUserForm = new FormGroup({
+  public subscription:Subscription;
+  public userAddForm = new FormGroup({
     userName: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
     phoneNumber: new FormControl(null, [Validators.pattern("^[0-9]*$"),Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     password: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(8)]),
@@ -25,24 +26,27 @@ export class UserAddComponent {
       user:new FormControl(),
     })
   });
-  constructor(private userService: UserService,private title: Title,private toastService:ToastrService) {
-  }
-  addUser() {
-    let user2=new UserForSendEditDto;
-    user2.password=this.addUserForm.controls.password.value;
-    user2.phoneNumber=this.addUserForm.controls.phoneNumber.value;
-    user2.username=this.addUserForm.controls.userName.value;
-    user2.phoneNumberConfirmed=this.addUserForm.controls.phoneNumberConfirmed.value;
+  constructor(private userService: UserService,private title: Title,private toastService:ToastrService,private router:Router) {}
+  userAdd() {
+    let userAddDto=new UserAddDto();
+    userAddDto.password=this.userAddForm.controls.password.value;
+    userAddDto.phoneNumber=this.userAddForm.controls.phoneNumber.value;
+    userAddDto.username=this.userAddForm.controls.userName.value;
+    userAddDto.phoneNumberConfirmed=this.userAddForm.controls.phoneNumberConfirmed.value;
     let roles:string[]=[];
-    if(this.addUserForm.controls.roles.controls.boss.value==true)roles.push("Boss");
-    if(this.addUserForm.controls.roles.controls.admin.value==true)roles.push("Admin");
-    if(this.addUserForm.controls.roles.controls.seller.value==true)roles.push("Seller");
-    if(this.addUserForm.controls.roles.controls.user.value==true)roles.push("User");
-    user2.roles=roles;
-    return this.userService.addUser(user2).subscribe((res:IUserForAdminDto)=>{
-      if(res){
-        this.toastService.success(`کاربر${res.username}باموفقیت ثبت.`)
+    if(this.userAddForm.controls.roles.controls.boss.value==true)roles.push("Boss");
+    if(this.userAddForm.controls.roles.controls.admin.value==true)roles.push("Admin");
+    if(this.userAddForm.controls.roles.controls.seller.value==true)roles.push("Seller");
+    if(this.userAddForm.controls.roles.controls.user.value==true)roles.push("User");
+    userAddDto.roles=roles;
+    this.subscription= this.userService.userAdd(userAddDto).subscribe((res:boolean)=>{
+      if(res==true){
+        this.toastService.success(`کاربر باموفقیت ثبت.`)
+        this.router.navigateByUrl("/User/UserMain");
       }
     })
+  }
+  ngOnDestroy(): void {
+    if(this.subscription){this.subscription.unsubscribe();}
   }
 }

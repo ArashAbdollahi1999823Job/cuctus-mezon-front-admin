@@ -1,7 +1,7 @@
-export enum roleType{
-  NotImportant=0,
-  Boss=1,
-  Admin=2,
-  Seller=3,
-  User=4,
+export enum RoleType{
+  notImportant=0,
+  boss=1,
+  admin=2,
+  seller=3,
+  user=4,
 }

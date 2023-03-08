@@ -1,0 +1,30 @@
+
+<div class="container-search">
+  <div class="search-bar">
+
+    <div class="container-search-btn">
+      <input type="text" #name  class="input-search" placeholder="نام..." (keyup.enter)="changeNameSearch()">
+      <button class="btn-search" (click)="changeNameSearch()"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+  <div class="select-filters">
+    <div class="select-right-filters">
+      <select (change)="onChangeActiveType($any($event.target)?.value)">
+        <option class="option" value="0">فعال؟</option>
+        <option [selected]="item.key=== typeParam?.activeType" class="option" *ngFor="let item of activeType" [value]="item?.key">{{item?.title}}</option>
+      </select>
+    </div>
+    <div class="select-left-filters">
+      <select (change)="onChangeSortType($any($event.target)?.value)">
+        <option [selected]="item.key=== typeParam?.sortType" class="option" *ngFor="let item of sortType" [value]="item?.key">{{item?.title}}</option>
+      </select>
+    </div>
+    <div class="select-left-filters">
+      <select (change)="onChangeType($any($event.target)?.value)">
+        <option class="option" value="-1">دسته بندی</option>
+        <option class="option" value="0"> سطح یک دسته بندی</option>
+        <option [selected]="item.id=== typeParam?.parentTypeId" class="option" *ngFor="let item of typesDto" [value]="item?.id">{{item?.name}}</option>
+      </select>
+    </div>
+  </div>
+</div>

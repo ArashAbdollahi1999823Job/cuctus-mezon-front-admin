@@ -1,0 +1,6 @@
+<main [@allPageAnimation]="o.isActivated ? o.activatedRoute : ''">
+  <type-picture-nav></type-picture-nav>
+  <div class="body-component">
+    <router-outlet #o='outlet'></router-outlet>
+  </div>
+</main>

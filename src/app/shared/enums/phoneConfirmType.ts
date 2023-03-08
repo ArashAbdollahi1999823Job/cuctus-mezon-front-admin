@@ -1,5 +1,5 @@
-export enum phoneConfirmType {
-  NotImportant = 0,
-  True = 1,
-  False = 2
+export enum PhoneConfirmType {
+  notImportant = 0,
+  true = 1,
+  false = 2
 }

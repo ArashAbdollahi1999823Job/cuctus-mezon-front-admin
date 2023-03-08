@@ -5,29 +5,29 @@
       <th>تایید؟</th>
       <th>نام</th>
       <th>شماره</th>
-      <th>رمز</th>
+      <th *appPermissionRole="['Boss']">رمز</th>
       <th>نقش ها</th>
-      <th>عملیات</th>
+      <th *appPermissionRole="['Boss']">عملیات</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of paginationUsers?.data">
+    <tr *ngFor="let item of paginationUser?.data">
       <td>
         <i style="color:green" class="fa-solid fa-check" *ngIf="item.phoneNumberConfirmed"></i>
         <i style="color:red" class="fa-solid fa-xmark" *ngIf="!item.phoneNumberConfirmed"></i>
       </td>
       <td>{{item.username}}</td>
       <td>{{item.phoneNumber}}</td>
-      <td>{{item.password}}</td>
+      <td *appPermissionRole="['Boss']">{{item.password}}</td>
       <td>
         <ng-container *ngFor="let role of item.roles">{{role.name}}</ng-container>
       </td>
-      <td>
+      <td *appPermissionRole="['Boss']">
 
         <div class="container-btn">
 
-          <button *appPermissionRole="['Boss']" class="btn-remove" (click)="deleteUser(item.id)" ><i class="fa-solid fa-trash" ></i></button>
-          <a *appPermissionRole="['Boss']" routerLink="edit/{{item.id}}" >
+          <button  class="btn-remove" (click)="userDelete(item.id)" ><i class="fa-solid fa-trash" ></i></button>
+          <a *appPermissionRole="['Boss']" routerLink="UserEdit/{{item.id}}" >
             <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
           </a>
         </div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {ILoginDto} from "../../shared/dto/identiry/ILoginDto";
-import {IUserDto} from "../../shared/dto/identiry/IUserDto";
+import {LoginDto} from "../../shared/dto/identiry/loginDto";
+import {UserAuthorizeDto} from "../../shared/dto/identiry/userAuthorizeDto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {ToastrService} from "ngx-toastr";
@@ -26,7 +26,7 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     }
-    this.authService.login(<ILoginDto>this.loginForm.value).subscribe((res:IUserDto)=>{
+    this.authService.login(<LoginDto>this.loginForm.value).subscribe((res:UserAuthorizeDto)=>{
       if(res){
         this.toast.success("ورود با موفقیت انجام شد",res.username)
        // this.router.navigateByUrl("/auth/profile")

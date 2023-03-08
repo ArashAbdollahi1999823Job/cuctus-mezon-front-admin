@@ -1,25 +1,32 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
-import {IPaginationDto} from "../../../shared/dto/base/IPaginationDto";
-import {IUserForAdminDto} from "../../../shared/dto/user/IUserForAdminDto";
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PaginationDto} from "../../../shared/dto/base/paginationDto";
+import {UserDto} from "../../../shared/dto/user/userDto";
+import {UserService} from "../../user-service/user.service";
+import {Subscription} from "rxjs/internal/Subscription";
+import {Title} from "@angular/platform-browser";
 @Component({
-  selector: 'app-user-main',
+  selector: 'user-main',
   templateUrl: './user-main.component.html',
   styleUrls: ['./user-main.component.scss']
 })
-export class UserMainComponent implements OnInit {
-  public paginationUsers: IPaginationDto<IUserForAdminDto>;
-  constructor(private userService: UserService) {}
+export class UserMainComponent implements OnInit,OnDestroy {
+
+  public paginationUser: PaginationDto<UserDto>;
+  public subscription:Subscription;
+  constructor(private userService: UserService,private title:Title) {}
   ngOnInit(): void {
-    this.getUsers();
+    this.userGetAll();
+    this.title.setTitle("مدیریت کاربران فروشگاه بزرگ کاکتوس.")
   }
-  public updateUser(updated: boolean) {
-    if (updated) this.getUsers();
+  public userUpdate(updated: boolean) {
+    if (updated) this.userGetAll();
   }
-  public getUsers() {
-    return this.userService.getUsers().subscribe((res) => {
-      this.paginationUsers = res;
+  public userGetAll() {
+    this.subscription= this.userService.userGetAll().subscribe((res:PaginationDto<UserDto>) => {
+      this.paginationUser = res;
     })
+  }
+  ngOnDestroy(): void {
+    if(this.subscription){this.subscription.unsubscribe();}
   }
 }

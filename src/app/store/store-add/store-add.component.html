@@ -1,0 +1,113 @@
+<div class="body-component">
+  <form [formGroup]="storeAddForm" (ngSubmit)="storeAdd()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="user">انتخاب فروشنده</label>
+        <select name="User" formControlName="userId" id="user">
+          <option [ngValue]="null" disabled>انتخاب فروشنده</option>
+          <option *ngFor="let item of usersDto" value="{{item.id}}" >{{item.username}}</option>
+        </select>
+         <div class="error"
+              *ngIf="storeAddForm.controls.userId.errors?.required ">
+           لطفا فروشنده را انتخاب کنید !
+         </div>
+      </div>
+      <div class="body-input">
+        <label for="name">نام فروشگاه</label>
+        <input type="text" placeholder="نام..." id="name" formControlName="name" [ngClass]="
+                     storeAddForm.controls.name.touched && storeAddForm.controls.name.errors?.required
+                     || storeAddForm.controls.name.errors?.maxlength ||
+                     storeAddForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="storeAddForm.controls.name.errors?.required &&storeAddForm.controls.name.touched">
+          لطفا نام فروشگاه را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.name.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="address">ادرس</label>
+        <input type="text" placeholder="ادرس..." id="address" formControlName="address" [ngClass]="
+                     storeAddForm.controls.address.touched && storeAddForm.controls.address.errors?.required
+                     || storeAddForm.controls.address.errors?.maxlength ||
+                     storeAddForm.controls.address.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="storeAddForm.controls.address.errors?.required &&storeAddForm.controls.address.touched">
+          لطفا ادرس را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.address.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 100 باشد !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.address.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="description">توضیحات</label>
+        <textarea  placeholder="توضیحات..." id="description" formControlName="description" [ngClass]="
+                     storeAddForm.controls.description.touched && storeAddForm.controls.description.errors?.required
+                     || storeAddForm.controls.description.errors?.maxlength ||
+                     storeAddForm.controls.description.errors?.minlength ? 'input-error' :'input-success'"></textarea>
+        <div class="error"
+             *ngIf="storeAddForm.controls.description.errors?.required &&storeAddForm.controls.description.touched">
+          لطفا توضیحات را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.description.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.description.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="phoneNumber">شماره تلفن</label>
+        <input type="text" id="phoneNumber" formControlName="phoneNumber" [ngClass]="
+                     storeAddForm.controls.phoneNumber.touched && storeAddForm.controls.phoneNumber.errors?.required
+                     || storeAddForm.controls.phoneNumber.errors?.maxlength ||
+                     storeAddForm.controls.phoneNumber.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="storeAddForm.controls.phoneNumber.errors?.required &&storeAddForm.controls.phoneNumber.touched">
+          لطفا شماره را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.phoneNumber.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 11 باشد !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.phoneNumber.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 11 باشد !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد
+          !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="mobileNumber">شماره موبایل</label>
+        <input type="text" id="mobileNumber" formControlName="mobileNumber" [ngClass]="
+                     storeAddForm.controls.mobileNumber.touched && storeAddForm.controls.mobileNumber.errors?.required
+                     || storeAddForm.controls.mobileNumber.errors?.maxlength ||
+                     storeAddForm.controls.mobileNumber.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="storeAddForm.controls.mobileNumber.errors?.required &&storeAddForm.controls.mobileNumber.touched">
+          لطفا شماره را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.mobileNumber.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 11 باشد !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.mobileNumber.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 11 باشد !
+        </div>
+        <div class="error" *ngIf=" storeAddForm.controls.mobileNumber.hasError('pattern')">شماره همراه صحیح نمیباشد
+          !
+        </div>
+      </div>
+      <div>
+
+      </div>
+      <button type="submit" class="btn" [disabled]="!storeAddForm.valid"   [ngClass]="!storeAddForm.valid ? 'disable':''">ثبت فروشگاه</button>
+    </div>
+
+  </form>
+</div>

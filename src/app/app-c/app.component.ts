@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {allPageAnimation} from "../shared/animations/allPageAnimation";
 import {AuthService} from "../auth/services/auth.service";
-import {IUserDto} from "../shared/dto/identiry/IUserDto";
+import {UserAuthorizeDto} from "../shared/dto/identiry/userAuthorizeDto";
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
     this.authorizeUser();
   }
   private authorizeUser() {
-    const user=<IUserDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
+    const user=<UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
     if (user) {
       this.authService.setCurrentUser(user)
     }

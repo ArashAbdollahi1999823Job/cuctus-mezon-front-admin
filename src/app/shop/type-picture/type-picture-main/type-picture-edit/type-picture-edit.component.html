@@ -1,0 +1,70 @@
+
+<div class="body-component">
+  <form [formGroup]="typePictureEditForm" (ngSubmit)="typePictureEdit()">
+    <div class="body-form">
+      <div>
+        <img src="{{typePicturesDto?.pictureUrl}}" width="150px" height="150px" alt="{{typePicturesDto?.pictureAlt}}" title="{{typePicturesDto?.pictureTitle}}">
+      </div>
+      <div class="body-input">
+        <label for="pictureAlt">pictureAlt</label>
+        <input type="text" placeholder="pictureAlt" id="pictureAlt" formControlName="pictureAlt" [ngClass]="
+                     typePictureEditForm.controls.pictureAlt.touched && typePictureEditForm.controls.pictureAlt.errors?.required
+                     || typePictureEditForm.controls.pictureAlt.errors?.maxlength ||
+                     typePictureEditForm.controls.pictureAlt.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typePictureEditForm.controls.pictureAlt.errors?.required &&typePictureEditForm.controls.pictureAlt.touched">
+          لطفا pictureAlt را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typePictureEditForm.controls.pictureAlt.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" typePictureEditForm.controls.pictureAlt.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="pictureTitle">pictureTitle</label>
+        <input type="text" placeholder="pictureTitle" id="pictureTitle" formControlName="pictureTitle" [ngClass]="
+                     typePictureEditForm.controls.pictureTitle.touched && typePictureEditForm.controls.pictureTitle.errors?.required
+                     || typePictureEditForm.controls.pictureTitle.errors?.maxlength ||
+                     typePictureEditForm.controls.pictureTitle.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typePictureEditForm.controls.pictureTitle.errors?.required &&typePictureEditForm.controls.pictureTitle.touched">
+          لطفا pictureTitle  را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typePictureEditForm.controls.pictureTitle.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" typePictureEditForm.controls.pictureTitle.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="sort">ترتیب</label>
+        <input type="number" placeholder="ترتیب" id="sort" formControlName="sort" [ngClass]="
+                     typePictureEditForm.controls.sort.touched && typePictureEditForm.controls.sort.errors?.required
+                     || typePictureEditForm.controls.sort.errors?.maxlength ||
+                     typePictureEditForm.controls.sort.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typePictureEditForm.controls.sort.errors?.required &&typePictureEditForm.controls.sort.touched">
+          لطفا ترتیب را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typePictureEditForm.controls.sort.hasError('maxlength')">تعداد
+          شماره نمیتواند بیشتر از ۱۰۰ باشد!
+        </div>
+        <div class="error" *ngIf=" typePictureEditForm.controls.sort.hasError('minlength')">تعداد
+          شماره ترتیب  نمیتواند کمتر 1 باشد!
+        </div>
+      </div>
+      <div>
+        <div  class="body-input-role">
+          <label class="label-role" for="isActive" >فعال؟</label>
+          <input type="checkbox" id="isActive" formControlName="isActive">
+        </div>
+      </div>
+      <button type="submit" class="btn" [disabled]="!typePictureEditForm.valid" [ngClass]="!typePictureEditForm.valid ? 'disable':''">ثبت </button>
+    </div>
+
+  </form>
+</div>
+

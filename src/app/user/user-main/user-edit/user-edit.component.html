@@ -1,92 +1,56 @@
 <div class="body-component">
-  <form [formGroup]="editUserForm" (ngSubmit)="editUser()">
+  <form [formGroup]="userEditForm" (ngSubmit)="userEdit()">
     <div class="body-form">
-      <!--    <div>
-            <input type="tel" placeholder="شماره همراه..." formControlName="phoneNumber" name="phoneNumber"
-                   pattern="[0-9]{4}[0-9]{3}[0-9]{4}" required
-                   [ngClass]="
-                         loginForm.controls.phoneNumber.touched && loginForm.controls.phoneNumber.errors?.required
-                         || loginForm.controls.phoneNumber.errors?.maxlength ||
-                         loginForm.controls.phoneNumber.errors?.minlength ? 'input-error' :'input-success'">
-            <div class="error"
-                 *ngIf="loginForm.controls.phoneNumber.hasError('required') &&loginForm.controls.phoneNumber.touched">
-              لطفا شماره همراه را وارد کنید !
-            </div>
-            <div class="error" *ngIf=" loginForm.controls.phoneNumber.hasError('maxlength')">تعداد
-              کاراکتر ها نمیتواند بیشتر از 11 باشد !
-            </div>
-            <div class="error" *ngIf=" loginForm.controls.phoneNumber.hasError('minlength')">تعداد
-              کاراکتر ها نمیتواند کمتر از 11 باشد !
-            </div>
-            <div class="error" *ngIf=" loginForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
-
-          </div>-->
-      <!--     <div>
-             <input type="password" placeholder="گذرواژه..." formControlName="password" [ngClass]="
-                          loginForm.controls.password.touched && loginForm.controls.password.errors?.required
-                          || loginForm.controls.password.errors?.maxlength ||
-                          loginForm.controls.password.errors?.minlength ? 'input-error' :'input-success'">
-             <div class="error"
-                  *ngIf="loginForm.controls.password.errors?.required &&loginForm.controls.password.touched">
-               لطفا گذرواژه را وارد کنید !
-             </div>
-             <div class="error" *ngIf=" loginForm.controls.password.hasError('maxlength')">تعداد
-               کاراکتر ها نمیتواند بیشتر از 30 باشد !
-             </div>
-             <div class="error" *ngIf=" loginForm.controls.password.hasError('minlength')">تعداد
-               کاراکتر ها نمیتواند کمتر از 8 باشد !
-             </div>
-           </div>-->
       <div class="body-input">
         <label for="phoneNumber">شماره موبایل</label>
         <input type="text" id="phoneNumber" formControlName="phoneNumber" [ngClass]="
-                     editUserForm.controls.phoneNumber.touched && editUserForm.controls.phoneNumber.errors?.required
-                     || editUserForm.controls.phoneNumber.errors?.maxlength ||
-                     editUserForm.controls.phoneNumber.errors?.minlength ? 'input-error' :'input-success'">
+                     userEditForm.controls.phoneNumber.touched && userEditForm.controls.phoneNumber.errors?.required
+                     || userEditForm.controls.phoneNumber.errors?.maxlength ||
+                     userEditForm.controls.phoneNumber.errors?.minlength ? 'input-error' :'input-success'">
         <div class="error"
-             *ngIf="editUserForm.controls.phoneNumber.errors?.required &&editUserForm.controls.phoneNumber.touched">
+             *ngIf="userEditForm.controls.phoneNumber.errors?.required &&userEditForm.controls.phoneNumber.touched">
           لطفا شماره را وارد کنید !
         </div>
-        <div class="error" *ngIf=" editUserForm.controls.phoneNumber.hasError('maxlength')">تعداد
+        <div class="error" *ngIf=" userEditForm.controls.phoneNumber.hasError('maxlength')">تعداد
           کاراکتر ها نمیتواند بیشتر از 11 باشد !
         </div>
-        <div class="error" *ngIf=" editUserForm.controls.phoneNumber.hasError('minlength')">تعداد
+        <div class="error" *ngIf=" userEditForm.controls.phoneNumber.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 11 باشد !
         </div>
-        <div class="error" *ngIf=" editUserForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
+        <div class="error" *ngIf=" userEditForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
       </div>
 
       <div class="body-input">
         <label for="userName">نام کاربری </label>
         <input type="text" placeholder="نام کاربری ..." id="userName" formControlName="userName" [ngClass]="
-                     editUserForm.controls.userName.touched && editUserForm.controls.userName.errors?.required
-                     || editUserForm.controls.userName.errors?.maxlength ||
-                     editUserForm.controls.userName.errors?.minlength ? 'input-error' :'input-success'">
+                     userEditForm.controls.userName.touched && userEditForm.controls.userName.errors?.required
+                     || userEditForm.controls.userName.errors?.maxlength ||
+                     userEditForm.controls.userName.errors?.minlength ? 'input-error' :'input-success'">
         <div class="error"
-             *ngIf="editUserForm.controls.userName.errors?.required &&editUserForm.controls.userName.touched">
+             *ngIf="userEditForm.controls.userName.errors?.required &&userEditForm.controls.userName.touched">
           لطفا گذرواژه را وارد کنید !
         </div>
-        <div class="error" *ngIf=" editUserForm.controls.userName.hasError('maxlength')">تعداد
+        <div class="error" *ngIf=" userEditForm.controls.userName.hasError('maxlength')">تعداد
           کاراکتر ها نمیتواند بیشتر از 30 باشد !
         </div>
-        <div class="error" *ngIf=" editUserForm.controls.userName.hasError('minlength')">تعداد
+        <div class="error" *ngIf=" userEditForm.controls.userName.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 8 باشد !
         </div>
       </div>
       <div class="body-input">
         <label for="password">گذر واژه </label>
         <input type="text" placeholder="پسوورد ..." id="password" formControlName="password" [ngClass]="
-                     editUserForm.controls.password.touched && editUserForm.controls.password.errors?.required
-                     || editUserForm.controls.password.errors?.maxlength ||
-                     editUserForm.controls.password.errors?.minlength ? 'input-error' :'input-success'">
+                     userEditForm.controls.password.touched && userEditForm.controls.password.errors?.required
+                     || userEditForm.controls.password.errors?.maxlength ||
+                     userEditForm.controls.password.errors?.minlength ? 'input-error' :'input-success'">
         <div class="error"
-             *ngIf="editUserForm.controls.password.errors?.required &&editUserForm.controls.password.touched">
+             *ngIf="userEditForm.controls.password.errors?.required &&userEditForm.controls.password.touched">
           لطفا گذرواژه را وارد کنید !
         </div>
-        <div class="error" *ngIf=" editUserForm.controls.password.hasError('maxlength')">تعداد
+        <div class="error" *ngIf=" userEditForm.controls.password.hasError('maxlength')">تعداد
           کاراکتر ها نمیتواند بیشتر از 30 باشد !
         </div>
-        <div class="error" *ngIf=" editUserForm.controls.password.hasError('minlength')">تعداد
+        <div class="error" *ngIf=" userEditForm.controls.password.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 8 باشد !
         </div>
       </div>
@@ -116,7 +80,7 @@
             <input type="checkbox" formControlName="user">
           </div>
         </div>
-        <button type="submit" class="btn" [disabled]="!editUserForm.valid" [ngClass]="!editUserForm.valid ? 'disable':''">ثبت کاربر</button>
+        <button type="submit" class="btn" [disabled]="!userEditForm.valid" [ngClass]="!userEditForm.valid ? 'disable':''">ثبت کاربر</button>
       </div>
     </div>
   </form>

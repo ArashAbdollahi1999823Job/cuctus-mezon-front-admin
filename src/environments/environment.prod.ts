@@ -1,6 +1,7 @@
 export const environment={
   production:true,
   backendUrl:'http://localhost:9001/api',
-  keyBasketLocalStorage:"CustomerBasketId"
-
+  backendUrlPicture:'http://localhost:9001',
+  keyBasketLocalStorage:"customerBasketId",
+  keyUserToken:"userToken",
 }

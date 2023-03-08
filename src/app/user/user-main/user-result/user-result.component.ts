@@ -1,27 +1,33 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {IUserForAdminDto} from "../../../shared/dto/user/IUserForAdminDto";
-import {IPaginationDto} from "../../../shared/dto/base/IPaginationDto";
-import {UserService} from "../../services/user.service";
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {UserDto} from "../../../shared/dto/user/userDto";
+import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {ToastrService} from "ngx-toastr";
-
+import {UserService} from "../../user-service/user.service";
+import {Subscription} from "rxjs/internal/Subscription";
 @Component({
-  selector: 'app-user-result',
+  selector: 'user-result',
   templateUrl: './user-result.component.html',
   styleUrls: ['./user-result.component.scss'],
 })
-export class UserResultComponent {
-  @Input("paginationUsers") paginationUsers: IPaginationDto<IUserForAdminDto>;
-  @Output() updateUser=new EventEmitter<boolean>();
+export class UserResultComponent implements OnDestroy {
+  @Input("paginationUser") paginationUser: PaginationDto<UserDto>;
+  public subscription:Subscription;
+  @Output() userUpdate=new EventEmitter<boolean>();
   constructor(private userService: UserService, private toastService: ToastrService) {}
-  deleteUser(id: string) {
-    this.userService.deleteUser(id).subscribe((res: boolean) => {
-      if (res == true) {
-        this.toastService.success(`کاربر با موفقیت حذف شد`)
-        this.updateUser.emit(true)
-      } else {
-        this.toastService.error(`خطا در حذف کاربر`)
-        this.updateUser.emit(true)
-      }
-    })
+  userDelete(id: string) {
+    if(confirm("ایا از حذف کاربر مطمعن هستید؟")) {
+      this.subscription = this.userService.userDelete(id).subscribe((res: boolean) => {
+        if (res == true) {
+          this.toastService.success(`کاربر با موفقیت حذف شد`)
+          this.userUpdate.emit(true)
+        } else {
+          this.toastService.error(`خطا در حذف کاربر`)
+          this.userUpdate.emit(true)
+        }
+      })
+    }
+  }
+  ngOnDestroy(): void {
+    if(this.subscription){this.subscription.unsubscribe();}
   }
 }

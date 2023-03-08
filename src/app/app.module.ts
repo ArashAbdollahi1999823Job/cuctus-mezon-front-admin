@@ -8,7 +8,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LoadingInterceptor} from "./shared/interceptors/loading.interceptor";
 import {ErrorHandlingInterceptor} from "./shared/interceptors/error-handling.interceptor";
 import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
-
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, SharedModule,BrowserAnimationsModule,HttpClientModule],

@@ -13,19 +13,18 @@
     <div class="select-right-filters">
       <select (change)="onChangeRoleType($any($event.target)?.value)">
         <option class="option" value="0">نقش</option>
-        <option [selected]="item.key=== userParams?.roleType" class="option" *ngFor="let item of roleType" [value]="item?.key">{{item?.title}}</option>
+        <option [selected]="item.key=== userParamDto?.roleType" class="option" *ngFor="let item of roleType" [value]="item?.key">{{item?.title}}</option>
       </select>
     </div>
     <div class="select-left-filters">
       <select (change)="onChangeSortType($any($event.target)?.value)">
-        <option class="option" value="0">ترتیب</option>
-        <option [selected]="item.key=== userParams?.sortType" class="option" *ngFor="let item of sortType" [value]="item?.key">{{item?.title}}</option>
+        <option [selected]="item.key=== userParamDto?.sortType" class="option" *ngFor="let item of sortType" [value]="item?.key">{{item?.title}}</option>
       </select>
     </div>
     <div class="select-left-filters">
       <select (change)="onChangeConfirmedType($any($event.target)?.value)">
         <option class="option" value="0">تایید؟</option>
-        <option [selected]="item.key=== userParams?.phoneNumberConfirmed" class="option" *ngFor="let item of phoneConfirmed" [value]="item?.key">{{item?.title}}</option>
+        <option [selected]="item.key=== userParamDto?.phoneNumberConfirmed" class="option" *ngFor="let item of phoneConfirmed" [value]="item?.key">{{item?.title}}</option>
       </select>
     </div>
   </div>

@@ -2,27 +2,24 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {ILoginDto} from "../../shared/dto/identiry/ILoginDto";
+import {LoginDto} from "../../shared/dto/identiry/loginDto";
 import {Observable} from "rxjs";
-import {IUserDto} from 'src/app/shared/dto/identiry/IUserDto';
+import {UserAuthorizeDto} from 'src/app/shared/dto/identiry/userAuthorizeDto';
 import {map} from "rxjs/internal/operators/map";
 import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private backendUrl = environment.backendUrl;
-  private currentUser = new BehaviorSubject<IUserDto>(null);
+  private backendUrlAdmin = environment.backendUrlAdmin;
+  private currentUser = new BehaviorSubject<UserAuthorizeDto>(null);
   public currentUser$ = this.currentUser.asObservable();
-
-  constructor(private http: HttpClient, private router: Router) {
-  }
-
-  public login(loginDto: ILoginDto): Observable<IUserDto> {
-    return this.http.post<IUserDto>(`${this.backendUrl}/account/login`, loginDto).pipe(map((res): IUserDto => {
+  constructor(private http: HttpClient, private router: Router) {}
+  public login(loginDto: LoginDto): Observable<UserAuthorizeDto> {
+    return this.http.put<UserAuthorizeDto>(`${this.backendUrlAdmin}/AccountAdmin/UserLogin`, loginDto).pipe(map((res:UserAuthorizeDto)=> {
         if (res) {
           this.setCurrentUser(res);
-          this.router.navigateByUrl('/product');
+          this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})
           return res;
         }
         return null;
@@ -32,9 +29,9 @@ export class AuthService {
   public logout() {
     localStorage.removeItem(environment.keyUserToken);
     this.currentUser.next(null);
-    this.router.navigateByUrl('/');
+    window.location.reload();
   }
-  public setCurrentUser(user: IUserDto) {
+  public setCurrentUser(user: UserAuthorizeDto) {
     if (user) {
       let roles = this.decodeToken(user.token)?.role;
       if (Array.isArray(roles)) {
@@ -48,7 +45,7 @@ export class AuthService {
     this.currentUser.next(user);
   }
   public getToken() {
-    const user = <IUserDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
+    const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
     if (user) {
       return user.token;
     }

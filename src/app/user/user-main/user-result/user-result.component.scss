@@ -3,6 +3,9 @@ td, th {
   padding: 10px;
   text-align: center;
 }
+th{
+  padding: 10px 3px;
+}
 
 table {
   width: 100%;
@@ -36,7 +39,6 @@ td {
   height: 50px;
 }
 button{
-border: 1px solid #2e2e2e;
   width: 75px;
   border: none;
   margin: 3px;

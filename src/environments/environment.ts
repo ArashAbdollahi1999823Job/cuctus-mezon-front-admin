@@ -1,6 +1,8 @@
 export const environment={
   production:false,
-  backendUrl:'http://localhost:9001/api',
+  backendUrlAdmin:'http://localhost:9001/Api/Admin',
+  backendUrlUser:'http://localhost:9001/Api/User',
+  backendUrlPicture:'http://localhost:9001',
   keyBasketLocalStorage:"customerBasketId",
   keyUserToken:"userToken",
 }

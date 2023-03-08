@@ -18,7 +18,7 @@ export class AuthorizeGuard implements CanActivate {
         return true;
       } else {
         this.toast.error("ابتدا وارد سایت شوید");
-        this.router.navigateByUrl("/auth");
+        this.router.navigateByUrl("/Auth");
         return false;
       }
     }));

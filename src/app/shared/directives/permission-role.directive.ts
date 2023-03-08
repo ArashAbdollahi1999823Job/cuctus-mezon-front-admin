@@ -1,5 +1,5 @@
 import {Directive, Input, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
-import {IUserDto} from "../dto/identiry/IUserDto";
+import {UserAuthorizeDto} from "../dto/identiry/userAuthorizeDto";
 import {AuthService} from "../../auth/services/auth.service";
 import { first } from 'rxjs/internal/operators/first';
 @Directive({
@@ -7,7 +7,7 @@ import { first } from 'rxjs/internal/operators/first';
 })
 export class PermissionRoleDirective implements OnInit{
   @Input() appPermissionRole:string[];
-  user:IUserDto;
+  user:UserAuthorizeDto;
   constructor(private viewContainerRef:ViewContainerRef,private templateRef:TemplateRef<any>,private authService:AuthService) { }
   ngOnInit(): void {
     this.authService.currentUser$.pipe(first()).subscribe((user)=>{
@@ -16,7 +16,7 @@ export class PermissionRoleDirective implements OnInit{
         this.viewContainerRef.clear();
         return;
       }
-      if(this.user.roles.some(x=>this.appPermissionRole.includes(x))){
+      if(this.user?.roles.some(x=>this.appPermissionRole.includes(x))){
         this.viewContainerRef.createEmbeddedView(this.templateRef);
       }else{
         this.viewContainerRef.clear();

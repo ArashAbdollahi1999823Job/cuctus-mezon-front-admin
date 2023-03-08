@@ -1,0 +1,101 @@
+<div class="body-component">
+  <form [formGroup]="typeEditForm" (ngSubmit)="typeEdit()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="parentTypeId">انتخاب دسته بندی مادر</label>
+        <select name="parentTypeId" formControlName="parentTypeId" id="parentTypeId">
+          <option [ngValue]="null" disabled>انتخاب دسته بندی </option>
+          <option value="0"> دسته بندی مادر</option>
+          <option *ngFor="let item of typesDto" [defaultSelected]="item.id == type?.parentTypeId " value="{{item.id}}" >{{item.name}}</option>
+        </select>
+        <div class="error"
+             *ngIf="typeEditForm.controls.parentTypeId.errors?.required ">
+          لطفا دسته بندی را انتخاب کنید !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="name">نام دسته بندی</label>
+        <input type="text" placeholder="نام..." id="name" formControlName="name" [ngClass]="
+                     typeEditForm.controls.name.touched && typeEditForm.controls.name.errors?.required
+                     || typeEditForm.controls.name.errors?.maxlength ||
+                     typeEditForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typeEditForm.controls.name.errors?.required &&typeEditForm.controls.name.touched">
+          لطفا نام دسته بندی را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.name.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="description">توضیحات</label>
+        <input type="text" placeholder="توضیحات..." id="description" formControlName="description" [ngClass]="
+                     typeEditForm.controls.description.touched && typeEditForm.controls.description.errors?.required
+                     || typeEditForm.controls.description.errors?.maxlength ||
+                     typeEditForm.controls.description.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typeEditForm.controls.description.errors?.required &&typeEditForm.controls.description.touched">
+          لطفا توضیحات را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.description.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.description.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="metaDescription">توضیحات متا</label>
+        <textarea  placeholder="توضیحات متا..." id="metaDescription" formControlName="metaDescription" [ngClass]="
+                     typeEditForm.controls.metaDescription.touched && typeEditForm.controls.metaDescription.errors?.required
+                     || typeEditForm.controls.metaDescription.errors?.maxlength ||
+                     typeEditForm.controls.metaDescription.errors?.minlength ? 'input-error' :'input-success'"></textarea>
+        <div class="error"
+             *ngIf="typeEditForm.controls.metaDescription.errors?.required &&typeEditForm.controls.metaDescription.touched">
+          لطفا توضیحات متا را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.metaDescription.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.metaDescription.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="summary">سامری</label>
+        <input type="text" id="summary" formControlName="summary" [ngClass]="
+                     typeEditForm.controls.summary.touched && typeEditForm.controls.summary.errors?.required
+                     || typeEditForm.controls.summary.errors?.maxlength ||
+                     typeEditForm.controls.summary.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typeEditForm.controls.summary.errors?.required &&typeEditForm.controls.summary.touched">
+          لطفا سامری را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.summary.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.summary.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input-role">
+        <label>نقش کاریر</label>
+        <div   class="body-nested-role">
+          <div  class="body-input-role">
+            <label class="label-role" for="boss" >فعال؟</label>
+            <input type="checkbox" id="boss" formControlName="isActive">
+          </div>
+          <div class="body-input-role">
+            <label for="boss">حذف منطقی</label>
+            <input type="checkbox" formControlName="isDelete">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn" [disabled]="!typeEditForm.valid"   [ngClass]="!typeEditForm.valid ? 'disable':''">ثبت دسته بندی</button>
+    </div>
+
+  </form>
+</div>
