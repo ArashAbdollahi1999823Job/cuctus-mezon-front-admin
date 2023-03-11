@@ -31,7 +31,6 @@ export class StoreEditComponent implements OnInit,OnDestroy{
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     userId: new FormControl(null, [Validators.required]),
     isActive: new FormControl(),
-
   })
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -39,7 +38,7 @@ export class StoreEditComponent implements OnInit,OnDestroy{
     this.userGet();
   }
   public storeGetById(id: string) {
-    return this.storeService.storeGetById(id).subscribe((res:PaginationDto<StoreDto>) => {
+    this.subscription= this.storeService.storeGetById(id).subscribe((res:PaginationDto<StoreDto>) => {
       this.storeDto = res.data[0];
       this.title.setTitle("در حال اپدیت مغازه" +res.data[0].name  + " هستید ");
       this.storeEditForm.controls.name.setValue(this.storeDto.name);
@@ -73,7 +72,7 @@ export class StoreEditComponent implements OnInit,OnDestroy{
 
     this.subscription= this.storeService.storeEdit(storeEditDto).subscribe((res:boolean)=>{
       if(res==true){
-        this.toastService.success(`کاربر باموفقیت اپدیت شد.`);
+        this.toastService.success(`مغازه باموفقیت اپدیت شد.`);
         this.router.navigateByUrl("/Store/StoreMain");
       }
     })

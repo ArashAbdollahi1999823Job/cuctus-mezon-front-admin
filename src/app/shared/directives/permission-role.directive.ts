@@ -10,7 +10,7 @@ export class PermissionRoleDirective implements OnInit{
   user:UserAuthorizeDto;
   constructor(private viewContainerRef:ViewContainerRef,private templateRef:TemplateRef<any>,private authService:AuthService) { }
   ngOnInit(): void {
-    this.authService.currentUser$.pipe(first()).subscribe((user)=>{
+    this.authService.currentUser$.pipe(first()).subscribe((user:UserAuthorizeDto)=>{
       this.user=user;
       if(!this.user?.roles && this.user){
         this.viewContainerRef.clear();

@@ -1,0 +1,72 @@
+
+<div class="body-component">
+  <form [formGroup]="typePictureAddForm" (ngSubmit)="typePictureAdd()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="pictureAlt">pictureAlt</label>
+        <input type="text" placeholder="pictureAlt" id="pictureAlt" formControlName="pictureAlt" [ngClass]="
+                     typePictureAddForm.controls.pictureAlt.touched && typePictureAddForm.controls.pictureAlt.errors?.required
+                     || typePictureAddForm.controls.pictureAlt.errors?.maxlength ||
+                     typePictureAddForm.controls.pictureAlt.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typePictureAddForm.controls.pictureAlt.errors?.required &&typePictureAddForm.controls.pictureAlt.touched">
+          لطفا pictureAlt را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typePictureAddForm.controls.pictureAlt.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" typePictureAddForm.controls.pictureAlt.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="pictureTitle">pictureTitle</label>
+        <input type="text" placeholder="pictureTitle" id="pictureTitle" formControlName="pictureTitle" [ngClass]="
+                     typePictureAddForm.controls.pictureTitle.touched && typePictureAddForm.controls.pictureTitle.errors?.required
+                     || typePictureAddForm.controls.pictureTitle.errors?.maxlength ||
+                     typePictureAddForm.controls.pictureTitle.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typePictureAddForm.controls.pictureTitle.errors?.required &&typePictureAddForm.controls.pictureTitle.touched">
+          لطفا pictureTitle  را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typePictureAddForm.controls.pictureTitle.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" typePictureAddForm.controls.pictureTitle.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="sort">ترتیب</label>
+        <input type="number" placeholder="ترتیب" id="sort" formControlName="sort" [ngClass]="
+                     typePictureAddForm.controls.sort.touched && typePictureAddForm.controls.sort.errors?.required
+                     || typePictureAddForm.controls.sort.errors?.maxlength ||
+                     typePictureAddForm.controls.sort.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typePictureAddForm.controls.sort.errors?.required &&typePictureAddForm.controls.sort.touched">
+          لطفا ترتیب را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typePictureAddForm.controls.sort.hasError('maxlength')">تعداد
+          شماره نمیتواند بیشتر از ۱۰۰ باشد!
+        </div>
+        <div class="error" *ngIf=" typePictureAddForm.controls.sort.hasError('minlength')">تعداد
+          شماره ترتیب  نمیتواند کمتر 1 باشد!
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="file">جستجوی عکس</label>
+        <input type="file" placeholder="file" id="file" formControlName="file" accept="image/png, image/gif, image/jpeg" (change)="onFileChange($event)" [ngClass]="
+                     typePictureAddForm.controls.file.touched && typePictureAddForm.controls.file.errors?.required ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typePictureAddForm.controls.file.errors?.required &&typePictureAddForm.controls.file.touched">
+          لطفا عکس را وارد کنید !
+        </div>
+      </div>
+
+      <button type="submit" class="btn" [disabled]="!typePictureAddForm.valid" [ngClass]="!typePictureAddForm.valid ? 'disable':''">ثبت دسته بندی</button>
+    </div>
+
+  </form>
+</div>
+
+

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import {AuthService} from "../../auth/services/auth.service";
 import {ToastrService} from "ngx-toastr";
@@ -9,15 +9,15 @@ import {UserAuthorizeDto} from "../dto/identiry/userAuthorizeDto";
 @Injectable({
   providedIn: 'root'
 })
-export class SellerGuard implements CanActivate {
+export class SellerJustGuard implements CanActivate {
   constructor(private authService: AuthService, private toastService: ToastrService) {
   }
   canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean> {
     return this.authService.currentUser$.pipe(map((user: UserAuthorizeDto) => {
-      if (user.roles?.includes("Admin") || user.roles?.includes("Boss") || user.roles?.includes("Seller")) {
+      if ( user.roles?.includes("Seller")) {
         return true
       }
-      this.toastService.error("فقط فروشنده و پشتیبان سایت دسترسی دارد !","خطای دسترسی")
+      this.toastService.error("فقط فروشنده سایت دسترسی دارد !","خطای دسترسی")
       return false
     }));
   }

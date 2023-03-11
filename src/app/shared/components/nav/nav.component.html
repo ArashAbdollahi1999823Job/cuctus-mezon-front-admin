@@ -8,7 +8,7 @@
     </li>
 
     <li class="nav-ul-li" routerLinkActive="active" >
-      <a routerLink="/Shop"><i class="fa-solid fa-store nav-ul-li-i" aria-hidden="true">
+      <a routerLink="/Shop"><i class="fa-solid fa-shop nav-ul-li-i" aria-hidden="true">
       </i><br>فروشگاه</a>
     </li>
 
@@ -22,6 +22,11 @@
       <a routerLink="/Store">
         <i class="fa-solid fa-handshake nav-ul-li-i" aria-hidden="true">
         </i><br>مغازه ها</a>
+    </li>
+    <li class="nav-ul-li" routerLinkActive="active" *appPermissionRole="['Seller']" >
+      <a routerLink="/StoreUser">
+        <i class="fa-solid fa-store nav-ul-li-i" aria-hidden="true">
+        </i><br>مغازه</a>
     </li>
 
     <li class="nav-ul-li" routerLinkActive="active">

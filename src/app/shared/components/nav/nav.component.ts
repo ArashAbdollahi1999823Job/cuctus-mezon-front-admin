@@ -7,6 +7,7 @@ import {AuthService} from "../../../auth/services/auth.service";
 })
 export class NavComponent{
 
+  public userId:string;
   constructor(private authService:AuthService) {
   }
 

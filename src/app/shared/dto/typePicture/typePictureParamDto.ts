@@ -1,4 +1,4 @@
 export class TypePictureParamDto {
   id:number;
-  productTypeId: number;
+  typeId: number;
 }

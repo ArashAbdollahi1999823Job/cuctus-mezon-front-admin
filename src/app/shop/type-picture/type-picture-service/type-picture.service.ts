@@ -23,7 +23,7 @@ export class TypePictureService {
   }
   setTypeId(id){
     this.typeId=id;
-    this.typePictureParam.productTypeId=id;
+    this.typePictureParam.typeId=id;
   }
   getTypeId(){
     return this.typeId;
@@ -40,7 +40,7 @@ export class TypePictureService {
   }
   private generateProductTypePictureParams() {
     let requestParams = new HttpParams();
-    if (this.typePictureParam.productTypeId) requestParams = requestParams.append("typeId", this.typePictureParam.productTypeId);
+    if (this.typePictureParam.typeId) requestParams = requestParams.append("typeId", this.typePictureParam.typeId);
     if (this.typePictureParam.id) requestParams=requestParams.append('id',this.typePictureParam.id);
     return requestParams;
   }

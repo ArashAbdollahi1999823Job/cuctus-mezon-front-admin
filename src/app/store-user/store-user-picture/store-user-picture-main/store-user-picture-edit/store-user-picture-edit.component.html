@@ -1,0 +1,70 @@
+
+<div class="body-component">
+  <form [formGroup]="storeUserPictureEditForm" (ngSubmit)="typePictureEdit()">
+    <div class="body-form">
+      <div>
+        <img src="{{storeUserPicturesDto?.pictureUrl}}" width="150px" height="150px" alt="{{storeUserPicturesDto?.pictureAlt}}" title="{{storeUserPicturesDto?.pictureTitle}}">
+      </div>
+      <div class="body-input">
+        <label for="pictureAlt">pictureAlt</label>
+        <input type="text" placeholder="pictureAlt" id="pictureAlt" formControlName="pictureAlt" [ngClass]="
+                     storeUserPictureEditForm.controls.pictureAlt.touched && storeUserPictureEditForm.controls.pictureAlt.errors?.required
+                     || storeUserPictureEditForm.controls.pictureAlt.errors?.maxlength ||
+                     storeUserPictureEditForm.controls.pictureAlt.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="storeUserPictureEditForm.controls.pictureAlt.errors?.required &&storeUserPictureEditForm.controls.pictureAlt.touched">
+          لطفا pictureAlt را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" storeUserPictureEditForm.controls.pictureAlt.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" storeUserPictureEditForm.controls.pictureAlt.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="pictureTitle">pictureTitle</label>
+        <input type="text" placeholder="pictureTitle" id="pictureTitle" formControlName="pictureTitle" [ngClass]="
+                     storeUserPictureEditForm.controls.pictureTitle.touched && storeUserPictureEditForm.controls.pictureTitle.errors?.required
+                     || storeUserPictureEditForm.controls.pictureTitle.errors?.maxlength ||
+                     storeUserPictureEditForm.controls.pictureTitle.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="storeUserPictureEditForm.controls.pictureTitle.errors?.required &&storeUserPictureEditForm.controls.pictureTitle.touched">
+          لطفا pictureTitle  را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" storeUserPictureEditForm.controls.pictureTitle.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" storeUserPictureEditForm.controls.pictureTitle.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="sort">ترتیب</label>
+        <input type="number" placeholder="ترتیب" id="sort" formControlName="sort" [ngClass]="
+                     storeUserPictureEditForm.controls.sort.touched && storeUserPictureEditForm.controls.sort.errors?.required
+                     || storeUserPictureEditForm.controls.sort.errors?.maxlength ||
+                     storeUserPictureEditForm.controls.sort.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="storeUserPictureEditForm.controls.sort.errors?.required &&storeUserPictureEditForm.controls.sort.touched">
+          لطفا ترتیب را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" storeUserPictureEditForm.controls.sort.hasError('maxlength')">تعداد
+          شماره نمیتواند بیشتر از ۱۰۰ باشد!
+        </div>
+        <div class="error" *ngIf=" storeUserPictureEditForm.controls.sort.hasError('minlength')">تعداد
+          شماره ترتیب  نمیتواند کمتر 1 باشد!
+        </div>
+      </div>
+      <div>
+        <div  class="body-input-role">
+          <label class="label-role" for="isActive" >فعال؟</label>
+          <input type="checkbox" id="isActive" formControlName="isActive">
+        </div>
+      </div>
+      <button type="submit" class="btn" [disabled]="!storeUserPictureEditForm.valid || storeUserPictureEditForm.pristine" [ngClass]="!storeUserPictureEditForm.valid ? 'disable':''">ثبت </button>
+    </div>
+
+  </form>
+</div>
+
