@@ -5,4 +5,5 @@ export const environment={
   backendUrlPicture:'http://localhost:9001',
   keyBasketLocalStorage:"customerBasketId",
   keyUserToken:"userToken",
+  storeId:"storeId"
 }

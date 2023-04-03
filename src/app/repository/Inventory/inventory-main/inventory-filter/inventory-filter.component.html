@@ -1,0 +1,16 @@
+<div class="container-search">
+  <div class="search-bar">
+    <div class="container-search-btn">
+      <input type="text" #name  class="input-search" placeholder="نام..." (keyup.enter)="changeNameSearch()">
+      <button class="btn-search" (click)="changeNameSearch()"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+  <div class="select-filters">
+    <div class="select-right-filters">
+      <select (change)="onChangeActiveType($any($event.target)?.value)">
+        <option class="option" value="0">فعال؟</option>
+        <option [selected]="item.key=== inventoryParam?.activeType" class="option" *ngFor="let item of activeType" [value]="item?.key">{{item?.title}}</option>
+      </select>
+    </div>
+  </div>
+</div>

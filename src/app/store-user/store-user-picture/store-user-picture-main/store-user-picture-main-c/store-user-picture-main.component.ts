@@ -6,6 +6,8 @@ import {TypePictureService} from "../../../../shop/type-picture/type-picture-ser
 import {ToastrService} from "ngx-toastr";
 import {StoreUserPictureDto} from "../../../../shared/dto/storeUserPicture/storeUserPictureDto";
 import {StoreUserPictureService} from "../../store-user-picture-service/store-user-picture.service";
+import {StoreUserPictureParamDto} from "../../../../shared/dto/storeUserPicture/storeUserPictureParamDto";
+import {StoreService} from "../../../../store/store-service/store.service";
 @Component({
   selector: 'app-store-user-picture-main',
   templateUrl: './store-user-picture-main.component.html',
@@ -15,12 +17,15 @@ export class StoreUserPictureMainComponent {
   public storeUserPicturesDto:StoreUserPictureDto[]|undefined;
   public backendUrlPicture = environment.backendUrlPicture;
   public subscription:Subscription;
-  constructor(private storeUserPictureService:StoreUserPictureService,private toastService: ToastrService) {}
+  public storeUserPictureParamDto=new StoreUserPictureParamDto();
+  constructor(private storeUserPictureService:StoreUserPictureService,private toastService: ToastrService,private storeService:StoreService) {}
   ngOnInit(): void {
     this.storeUserPictureGetAll();
-
+    this.storeUserPictureParamDto=this.storeUserPictureService.storeUserPictureGetParam();
   }
   public storeUserPictureGetAll(){
+    this.storeUserPictureParamDto.storeId=localStorage.getItem(environment.storeId);
+    this.storeUserPictureService.storeUserPictureSetParam(this.storeUserPictureParamDto);
     this.subscription= this.storeUserPictureService.storeUserPictureGetAll().subscribe((res:StoreUserPictureDto[])=>{
       this.storeUserPicturesDto=res;
     });

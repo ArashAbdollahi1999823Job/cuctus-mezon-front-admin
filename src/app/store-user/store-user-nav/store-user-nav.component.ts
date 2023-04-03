@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./store-user-nav.component.scss']
 })
 export class StoreUserNavComponent {
-  public userId:number;
 }

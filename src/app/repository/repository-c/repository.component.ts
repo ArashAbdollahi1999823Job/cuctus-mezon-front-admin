@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {allPageAnimation} from "../../shared/animations/allPageAnimation";
 
 @Component({
-  selector: 'app-inventory-c',
-  templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.scss'],
+  selector: 'repository',
+  templateUrl: './repository.component.html',
+  styleUrls: ['./repository.component.scss'],
   animations:[allPageAnimation]
 })
-export class InventoryComponent {
-
+export class RepositoryComponent {
 }

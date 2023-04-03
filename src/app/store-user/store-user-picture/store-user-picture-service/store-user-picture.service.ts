@@ -7,12 +7,13 @@ import {StoreUserPictureParamDto} from "../../../shared/dto/storeUserPicture/sto
 import {StoreUserPictureDto} from "../../../shared/dto/storeUserPicture/storeUserPictureDto";
 import {TypePictureEditDto} from "../../../shared/dto/typePicture/typePictureEditDto";
 import {StoreUserPictureEditDto} from "../../../shared/dto/storeUserPicture/storeUserPictureEditDto";
+import {StoreParamDto} from "../../../shared/dto/store/storeParamDto";
 @Injectable({
   providedIn: 'root'
 })
 export class StoreUserPictureService {
   private backendUrlAdmin = environment.backendUrlAdmin;
-  public storeUserPictureParam = new StoreUserPictureParamDto();
+  public storeUserPictureParamDto = new StoreUserPictureParamDto();
 
   constructor(private http: HttpClient) { }
 
@@ -21,8 +22,8 @@ export class StoreUserPictureService {
   }
   public storeUserPictureGetAll(): Observable<StoreUserPictureDto[]> {
     let storeUserPictureParam =new HttpParams();
-    if (this.storeUserPictureParam.storeId) storeUserPictureParam = storeUserPictureParam.append("storeId", this.storeUserPictureParam.storeId);
-    if (this.storeUserPictureParam.id) storeUserPictureParam=storeUserPictureParam.append('id',this.storeUserPictureParam.id);
+    if (this.storeUserPictureParamDto.storeId) storeUserPictureParam = storeUserPictureParam.append("storeId", this.storeUserPictureParamDto.storeId);
+    if (this.storeUserPictureParamDto.id) storeUserPictureParam=storeUserPictureParam.append('id',this.storeUserPictureParamDto.id);
     return this.http.get<StoreUserPictureDto[]>(`${this.backendUrlAdmin}/StoreUserPictureAdmin/StoreUserPictureGetAll`, {params: storeUserPictureParam});
   }
   public storeUserPictureDelete(id:number){
@@ -35,5 +36,11 @@ export class StoreUserPictureService {
   }
   public storeUserPictureEdit(storeUserPictureEditDto:StoreUserPictureEditDto):Observable<boolean> {
     return this.http.put<boolean>(`${this.backendUrlAdmin}/StoreUserPictureAdmin/StoreUserPictureEdit`, storeUserPictureEditDto);
+  }
+  public storeUserPictureGetParam() {
+    return this.storeUserPictureParamDto;
+  }
+  public storeUserPictureSetParam(storeUserPictureParamDto: StoreUserPictureParamDto) {
+    this.storeUserPictureParamDto = storeUserPictureParamDto;
   }
 }

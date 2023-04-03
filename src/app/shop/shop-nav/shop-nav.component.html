@@ -6,11 +6,11 @@
         </i>
         دسته بندی</a>
     </li>
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <li class="nav-ul-li" *appPermissionRole="['Seller']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <a routerLink="Product"><i class="fa-solid fa-clipboard-list nav-ul-li-i" aria-hidden="true">
-      </i>محصولات</a>
+      </i>محصول</a>
     </li>
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <li class="nav-ul-li" *appPermissionRole="['Seller']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <a routerLink="Off"><i class="fa-solid fa-money-bill-wave nav-ul-li-i" aria-hidden="true">
       </i>تخفیفات</a>
     </li>

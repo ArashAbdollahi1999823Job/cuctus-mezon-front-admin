@@ -8,16 +8,20 @@ import {environment} from "../../environments/environment";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations:[allPageAnimation]
+  animations: [allPageAnimation]
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'مدیریت فروشگاه بزرگ کاکتوس';
-  constructor(private authService:AuthService) {}
+
+  constructor(private authService: AuthService) {
+  }
+
   ngOnInit(): void {
     this.authorizeUser();
   }
+
   private authorizeUser() {
-    const user=<UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
+    const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
     if (user) {
       this.authService.setCurrentUser(user)
     }

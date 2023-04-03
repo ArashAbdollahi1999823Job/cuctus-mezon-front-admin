@@ -1,0 +1,44 @@
+<div style="overflow-y: auto">
+  <table>
+    <thead>
+    <tr>
+      <th>فعال؟</th>
+      <th>نام</th>
+      <th>عملیات</th>
+      <th>دسته</th>
+      <th>قیمت</th>
+      <th>انبار</th>
+      <th>تخفیف</th>
+      <th>اسلاگ</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of Products">
+      <td>
+        <i style="color:green" class="fa-solid fa-check" *ngIf="item.isActive"></i>
+        <i style="color:red" class="fa-solid fa-xmark" *ngIf="!item.isActive"></i>
+      </td>
+      <td>{{item.name}}</td>
+      <td>
+        <div class="container-btn">
+           <button class="btn-remove" (click)="productDelete(item.id)" ><i class="fa-solid fa-trash"></i></button>
+          <a routerLink="../ProductEdit/{{item.id}}">
+            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+          </a>
+          <a routerLink="../../TypePicture/{{item.id}}">
+            <button class="btn-edit"><i class="fa-solid fa-images"></i></button>
+          </a>
+        </div>
+      </td>
+      <td>{{item.type}}</td>
+      <td>{{item.price}}</td>
+      <td>{{item.inventory}}</td>
+      <td>{{item?.off?.name}}</td>
+      <td>{{item.slug}}</td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>

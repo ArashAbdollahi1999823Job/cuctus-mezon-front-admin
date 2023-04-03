@@ -1,0 +1,57 @@
+@import "../../../../assets/styles/practicalValue";
+
+.body-form {
+  height: 86vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+
+  .btn {
+    width: 80%;
+    background: #0074D9;
+    font-size: 20px;
+    border: 1px solid #ca3a11;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .body-input {
+    margin-top: 5px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    label {
+      font-size: 20px;
+    }
+
+    input {
+
+    }
+    textarea{
+      padding: 10px;
+      width: 80%;
+      height: 50px;
+    }
+  }
+}
+
+input {
+  background: $color-black;
+  padding-right: 10px;
+  color: $color-white;
+  margin: 5px 0;
+
+  border: none;
+  border-bottom: 2px solid $color-saddlebrown;
+  height: 50px;
+  width: 80%;
+
+  &:focus {
+    outline: none;
+  }
+}

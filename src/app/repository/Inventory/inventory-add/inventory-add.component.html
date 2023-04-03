@@ -1,0 +1,25 @@
+<div class="body-component">
+  <form [formGroup]="inventoryAddForm" (ngSubmit)="inventoryAdd()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="name">نام انبار </label>
+        <input type="text" placeholder="نام..." id="name" formControlName="name" [ngClass]="
+                     inventoryAddForm.controls.name.touched && inventoryAddForm.controls.name.errors?.required
+                     || inventoryAddForm.controls.name.errors?.maxlength ||
+                     inventoryAddForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="inventoryAddForm.controls.name.errors?.required &&inventoryAddForm.controls.name.touched">
+          لطفا نام دسته بندی را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" inventoryAddForm.controls.name.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" inventoryAddForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <button type="submit" class="btn" [disabled]="!inventoryAddForm.valid" [ngClass]="!inventoryAddForm.valid ? 'disable':''">ثبت انبار </button>
+    </div>
+  </form>
+</div>
+

@@ -20,8 +20,24 @@ import {TypePictureNavComponent} from "./type-picture/type-picture-nav/type-pict
 import {TypePictureComponent} from "./type-picture/type-picture-c/type-picture.component";
 import {TypePictureAddComponent} from "./type-picture/type-picture-add/type-picture-add.component";
 import {TypePictureEditComponent} from "./type-picture/type-picture-main/type-picture-edit/type-picture-edit.component";
+import {ProductNavComponent} from "./product/product-nav/product-nav.component";
+import {ProductComponent} from "./product/product-c/product.component";
+import {ProductAddComponent} from "./product/product-add/product-add.component";
+import {ProductMainComponent} from "./product/product-main/product-main-c/product-main.component";
+import {ProductFilterComponent} from "./product/product-main/product-filter/product-filter.component";
+import {ProductResultComponent} from "./product/product-main/product-result/product-result.component";
+import {ProductPaginationComponent} from "./product/product-main/product-pagination/product-pagination.component";
+import {ProductEditComponent} from "./product/product-main/product-edit/product-edit.component";
 @NgModule({
   declarations: [
+    ProductEditComponent,
+    ProductPaginationComponent,
+    ProductResultComponent,
+    ProductFilterComponent,
+    ProductMainComponent,
+    ProductAddComponent,
+    ProductComponent,
+    ProductNavComponent,
     TypePictureMainComponent,
     TypePictureNavComponent,
     TypePictureComponent,

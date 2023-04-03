@@ -6,31 +6,38 @@ import {TypeComponent} from "./type/type-c/type.component";
 import {TypeMainComponent} from "./type/type-main/type-main-c/type-main.component";
 import {TypeAddComponent} from "./type/type-add/type-add.component";
 import {TypeEditComponent} from "./type/type-main/type-edit/type-edit.component";
-import {ProductComponent} from "./product-product/product.component";
 import {TypePictureComponent} from "./type-picture/type-picture-c/type-picture.component";
 import {
   TypePictureMainComponent
 } from "./type-picture/type-picture-main/type-picture-main-c/type-picture-main.component";
 import {TypePictureAddComponent} from "./type-picture/type-picture-add/type-picture-add.component";
 import {TypePictureEditComponent} from "./type-picture/type-picture-main/type-picture-edit/type-picture-edit.component";
-
-
-
-
+import {SellerJustGuard} from "../shared/gurads/seller-just.guard";
+import {ProductComponent} from "./product/product-c/product.component";
+import {ProductAddComponent} from "./product/product-add/product-add.component";
+import {ProductMainComponent} from "./product/product-main/product-main-c/product-main.component";
+import {ProductEditComponent} from "./product/product-main/product-edit/product-edit.component";
 const routes: Routes = [
   {
     path: '', component: ShopComponent, children: [
       {
         path: 'Type', canActivate: [AdminGuard], component: TypeComponent, children:
           [
-            {path: 'TypeMain', component:TypeMainComponent},
+            {path: 'TypeMain', component: TypeMainComponent},
             {path: '', redirectTo: 'TypeMain', pathMatch: 'full'},
             {path: 'TypeAdd', component: TypeAddComponent},
             {path: 'TypeEdit/:id', component: TypeEditComponent},
           ]
       },
-      {path: 'Product', component: ProductComponent},
-      {path: '', redirectTo: 'Product', pathMatch: 'full'},
+      {
+        path: 'Product', canActivate: [SellerJustGuard], component: ProductComponent, children: [
+          {path: 'ProductMain', component: ProductMainComponent},
+          {path: '', redirectTo: 'ProductMain', pathMatch: 'full'},
+          {path: 'ProductAdd', component: ProductAddComponent},
+          {path: 'ProductEdit/:ProductId', component: ProductEditComponent},
+        ]
+      },
+      /* {path: '', redirectTo: 'Product', pathMatch: 'full'},*/
       {
         path: 'TypePicture/:TypeId', component: TypePictureComponent, children:
           [
@@ -43,6 +50,7 @@ const routes: Routes = [
     ]
   }
 ]
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

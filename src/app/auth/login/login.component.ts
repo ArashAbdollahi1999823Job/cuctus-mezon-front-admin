@@ -5,6 +5,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {StoreService} from "../../store/store-service/store.service";
+import {StoreUserService} from "../../store-user/store-user-service/store-user.service";
+import {PaginationDto} from "../../shared/dto/base/paginationDto";
+import {StoreDto} from "../../shared/dto/store/storeDto";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +25,7 @@ export class LoginComponent {
   }
 
   ngOnInit(): void {
+
   }
   login() {
     if (this.loginForm.invalid) {

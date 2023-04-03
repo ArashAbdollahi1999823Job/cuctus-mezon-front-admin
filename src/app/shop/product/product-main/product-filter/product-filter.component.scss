@@ -1,0 +1,126 @@
+.search-bar {
+  background: rgba(147, 101, 80, 0.4);
+  width: 100%;
+  height: 4vh;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  margin-top: 0px;
+  .select-right-filters {
+    width: 50%;
+    select {
+      width: 100%;
+      font-family: IRANSans;
+      font-size: 2vh;
+      background: rgba(200, 200, 200, 0.5);
+      .option{
+        color: black;
+        background: antiquewhite;
+      }
+    }
+  }
+
+  .container-search-btn {
+    background: black;
+    width: 50%;
+    height: 100%;
+    position: relative;
+
+    .input-search {
+      width: 100%;
+      height: 100%;
+      font-family: IRANSans;
+      padding: 0 10px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+
+    .btn-search {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 20%;
+      background: black;
+      color: burlywood;
+      z-index: 2;
+      border: 1px solid black;
+      font-size: 1.5vh;
+
+      &:hover {
+        background: saddlebrown;
+      }
+    }
+  }
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid black;
+  background: rgba(100, 54, 55, 0.5);
+
+  .menu-title {
+    font-size: 2.5vh;
+    padding-right: 10px;
+  }
+}
+
+.item-content {
+  height: 0;
+  overflow: hidden;
+}
+
+@keyframes expand {
+  0% {
+
+  }
+  100% {
+    height: 100px;
+  }
+}
+
+.btn-visit-menu {
+  background: white;
+  height: 4vh;
+  opacity: .5;
+  border: none;
+  padding: 0px 10px;
+  font-family: IRANSans;
+  cursor: pointer;
+}
+
+.select-filters {
+  display: flex;
+  justify-content: space-between;
+
+  .select-right-filters {
+    width: 50%;
+
+    select {
+      width: 100%;
+      font-family: IRANSans;
+      font-size: 2vh;
+      background: rgba(200, 200, 200, 0.5);
+      .option{
+        color: black;
+        background: antiquewhite;
+      }
+    }
+  }
+
+  .select-left-filters {
+    width: 50%;
+
+    select {
+      width: 100%;
+      font-family: IRANSans;
+      font-size: 2vh;
+      background: rgba(200, 200, 200, 0.5);
+    }
+  }
+}
+

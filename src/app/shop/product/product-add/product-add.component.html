@@ -1,0 +1,133 @@
+<div class="body-component">
+  <form [formGroup]="productAddForm" (ngSubmit)="typeAdd()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="typeId">انتخاب دسته بندی </label>
+        <select name="typeId" formControlName="typeId" id="typeId">
+          <option [ngValue]="null" disabled>انتخاب دسته بندی </option>
+          <option *ngFor="let item of typesDto" value="{{item.id}}" >{{item.name}}</option>
+        </select>
+        <div class="error"
+             *ngIf="productAddForm.controls.typeId.errors?.required ">
+          لطفا دسته بندی را انتخاب کنید !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="inventoryId">انتخاب انبار</label>
+        <select name="inventoryId" formControlName="inventoryId" id="inventoryId">
+          <option [ngValue]="null" disabled>انتخاب انبار </option>
+          <option *ngFor="let item of inventoriesDto" value="{{item.id}}" >{{item.name}}</option>
+        </select>
+        <div class="error"
+             *ngIf="productAddForm.controls.inventoryId.errors?.required ">
+          لطفا  انبار را انتخاب کنید !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="name">نام </label>
+        <input type="text" placeholder="نام..." (focusout)="slugify()" id="name" formControlName="name" [ngClass]="
+                     productAddForm.controls.name.touched && productAddForm.controls.name.errors?.required
+                     || productAddForm.controls.name.errors?.maxlength ||
+                     productAddForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productAddForm.controls.name.errors?.required &&productAddForm.controls.name.touched">
+          لطفا نام  محصول را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.name.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="slug">اسلاگ </label>
+        <input type="text" placeholder="اسلاگ..." id="slug" formControlName="slug" [ngClass]="
+                     productAddForm.controls.slug.touched && productAddForm.controls.slug.errors?.required
+                     || productAddForm.controls.slug.errors?.maxlength ||
+                     productAddForm.controls.slug.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productAddForm.controls.slug.errors?.required &&productAddForm.controls.slug.touched">
+          لطفا اسلاگ  محصول را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.slug.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.slug.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="price">قیمت </label>
+        <input type="number" placeholder="قیمت..." id="price" formControlName="price" [ngClass]="
+                     productAddForm.controls.price.touched && productAddForm.controls.price.errors?.required
+                     || productAddForm.controls.price.errors?.maxlength ||
+                     productAddForm.controls.price.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productAddForm.controls.price.errors?.required &&productAddForm.controls.price.touched">
+          لطفا قیمت  محصول را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.price.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.price.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="description">توضیحات</label>
+        <input type="text" placeholder="توضیحات..." id="description" formControlName="description" [ngClass]="
+                     productAddForm.controls.description.touched && productAddForm.controls.description.errors?.required
+                     || productAddForm.controls.description.errors?.maxlength ||
+                     productAddForm.controls.description.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productAddForm.controls.description.errors?.required &&productAddForm.controls.description.touched">
+          لطفا توضیحات را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.description.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.description.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="metaDescription">توضیحات متا</label>
+        <textarea  placeholder="توضیحات متا..." id="metaDescription" formControlName="metaDescription" [ngClass]="
+                     productAddForm.controls.metaDescription.touched && productAddForm.controls.metaDescription.errors?.required
+                     || productAddForm.controls.metaDescription.errors?.maxlength ||
+                     productAddForm.controls.metaDescription.errors?.minlength ? 'input-error' :'input-success'"></textarea>
+        <div class="error"
+             *ngIf="productAddForm.controls.metaDescription.errors?.required &&productAddForm.controls.metaDescription.touched">
+          لطفا توضیحات متا را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.metaDescription.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.metaDescription.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="summary">سامری</label>
+        <input type="text" id="summary" formControlName="summary" [ngClass]="
+                     productAddForm.controls.summary.touched && productAddForm.controls.summary.errors?.required
+                     || productAddForm.controls.summary.errors?.maxlength ||
+                     productAddForm.controls.summary.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productAddForm.controls.summary.errors?.required &&productAddForm.controls.summary.touched">
+          لطفا سامری را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.summary.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" productAddForm.controls.summary.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <button type="submit" class="btn" [disabled]="!productAddForm.valid" [ngClass]="!productAddForm.valid ? 'disable':''">ثبت دسته بندی</button>
+    </div>
+
+  </form>
+</div>
+

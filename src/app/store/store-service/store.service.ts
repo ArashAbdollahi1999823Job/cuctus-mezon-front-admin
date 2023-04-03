@@ -14,6 +14,8 @@ import {StoreDto} from "../../shared/dto/store/storeDto";
 export class StoreService {
   private backendUrlAdmin = environment.backendUrlAdmin;
   public storeParamDto = new StoreParamDto();
+  public storeId:string;
+
   public constructor(private http: HttpClient) {}
   public storeEdit(storeEditDto:StoreEditDto):Observable<boolean>{
     return this.http.put<boolean>(`${this.backendUrlAdmin}/StoreAdmin/StoreEdit`,storeEditDto);

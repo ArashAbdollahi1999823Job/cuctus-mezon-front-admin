@@ -12,8 +12,8 @@
       </i><br>فروشگاه</a>
     </li>
 
-    <li class="nav-ul-li "  routerLinkActive="active">
-      <a routerLink="/Inventory">
+    <li class="nav-ul-li " *appPermissionRole="['Seller']"  routerLinkActive="active">
+      <a routerLink="/Repository">
         <i class="fa-solid fa-layer-group nav-ul-li-i" aria-hidden="true">
         </i><br>انبار</a>
     </li>

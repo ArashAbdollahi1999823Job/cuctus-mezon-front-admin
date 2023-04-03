@@ -1,0 +1,30 @@
+<div style="overflow-y: auto">
+  <table>
+    <thead>
+    <tr>
+      <th>فعال؟</th>
+      <th>نام</th>
+      <th>عملیات</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of inventoriesDto">
+      <td>
+        <i style="color:green" class="fa-solid fa-check" *ngIf="item.isActive"></i>
+        <i style="color:red" class="fa-solid fa-xmark" *ngIf="!item.isActive"></i>
+      </td>
+      <td>{{item.name}}</td>
+      <td>
+        <div class="container-btn">
+          <button class="btn-remove" (click)="inventoryDelete(item.id)" ><i class="fa-solid fa-trash"></i></button>
+
+          <a routerLink="../InventoryEdit/{{item.id}}">
+            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+          </a>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

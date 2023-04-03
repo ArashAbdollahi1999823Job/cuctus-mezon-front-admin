@@ -1,1 +1,7 @@
-<p>product works!</p>
+<main [@allPageAnimation]="o.isActivated ? o.activatedRoute : ''">
+  <product-nav></product-nav>
+  <div class="body-component">
+    <router-outlet #o='outlet'></router-outlet>
+  </div>
+</main>
+
