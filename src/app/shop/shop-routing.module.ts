@@ -17,6 +17,10 @@ import {ProductComponent} from "./product/product-c/product.component";
 import {ProductAddComponent} from "./product/product-add/product-add.component";
 import {ProductMainComponent} from "./product/product-main/product-main-c/product-main.component";
 import {ProductEditComponent} from "./product/product-main/product-edit/product-edit.component";
+import {BrandAddComponent} from "./brand/brand-add/brand-add.component";
+import {BrandComponent} from "./brand/brand-c/brand.component";
+import {BrandMainComponent} from "./brand/brand-main/brand-main-c/brand-main.component";
+import {BrandEditComponent} from "./brand/brand-main/brand-edit/brand-edit.component";
 const routes: Routes = [
   {
     path: '', component: ShopComponent, children: [
@@ -27,6 +31,15 @@ const routes: Routes = [
             {path: '', redirectTo: 'TypeMain', pathMatch: 'full'},
             {path: 'TypeAdd', component: TypeAddComponent},
             {path: 'TypeEdit/:id', component: TypeEditComponent},
+          ]
+      },
+      {
+        path: 'Brand', canActivate: [AdminGuard], component: BrandComponent, children:
+          [
+            {path: 'BrandMain', component: BrandMainComponent},
+            {path: '', redirectTo: 'BrandMain', pathMatch: 'full'},
+            {path: 'BrandAdd', component: BrandAddComponent},
+            {path: 'BrandEdit/:BrandId', component: BrandEditComponent},
           ]
       },
       {

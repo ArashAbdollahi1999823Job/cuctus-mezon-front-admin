@@ -1,0 +1,77 @@
+<div class="body-component">
+  <form [formGroup]="brandAddForm" (ngSubmit)="brandAdd()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="name">نام  برند</label>
+        <input type="text" placeholder="نام..." id="name" formControlName="name" [ngClass]="
+                     brandAddForm.controls.name.touched && brandAddForm.controls.name.errors?.required
+                     || brandAddForm.controls.name.errors?.maxlength ||
+                     brandAddForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="brandAddForm.controls.name.errors?.required &&brandAddForm.controls.name.touched">
+          لطفا نام  برند را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" brandAddForm.controls.name.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" brandAddForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="description">توضیحات</label>
+        <input type="text" placeholder="توضیحات..." id="description" formControlName="description" [ngClass]="
+                     brandAddForm.controls.description.touched && brandAddForm.controls.description.errors?.required
+                     || brandAddForm.controls.description.errors?.maxlength ||
+                     brandAddForm.controls.description.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="brandAddForm.controls.description.errors?.required &&brandAddForm.controls.description.touched">
+          لطفا توضیحات را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" brandAddForm.controls.description.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" brandAddForm.controls.description.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="metaDescription">توضیحات متا</label>
+        <textarea  placeholder="توضیحات متا..." id="metaDescription" formControlName="metaDescription" [ngClass]="
+                     brandAddForm.controls.metaDescription.touched && brandAddForm.controls.metaDescription.errors?.required
+                     || brandAddForm.controls.metaDescription.errors?.maxlength ||
+                     brandAddForm.controls.metaDescription.errors?.minlength ? 'input-error' :'input-success'"></textarea>
+        <div class="error"
+             *ngIf="brandAddForm.controls.metaDescription.errors?.required &&brandAddForm.controls.metaDescription.touched">
+          لطفا توضیحات متا را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" brandAddForm.controls.metaDescription.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" brandAddForm.controls.metaDescription.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="summary">سامری</label>
+        <input type="text" id="summary" formControlName="summary" [ngClass]="
+                     brandAddForm.controls.summary.touched && brandAddForm.controls.summary.errors?.required
+                     || brandAddForm.controls.summary.errors?.maxlength ||
+                     brandAddForm.controls.summary.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="brandAddForm.controls.summary.errors?.required &&brandAddForm.controls.summary.touched">
+          لطفا سامری را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" brandAddForm.controls.summary.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" brandAddForm.controls.summary.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <button type="submit" class="btn" [disabled]="!brandAddForm.valid" [ngClass]="!brandAddForm.valid ? 'disable':''">ثبت دسته بندی</button>
+    </div>
+
+  </form>
+</div>
+

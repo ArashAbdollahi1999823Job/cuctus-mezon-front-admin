@@ -6,6 +6,12 @@
         </i>
         دسته بندی</a>
     </li>
+    <li class="nav-ul-li" *appPermissionRole="['Admin','Boss']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <a routerLink="./Brand" routerLinkActive="active">
+        <i class="fa-solid fa-certificate nav-ul-li-i" aria-hidden="true">
+        </i>
+         برند</a>
+    </li>
     <li class="nav-ul-li" *appPermissionRole="['Seller']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <a routerLink="Product"><i class="fa-solid fa-clipboard-list nav-ul-li-i" aria-hidden="true">
       </i>محصول</a>

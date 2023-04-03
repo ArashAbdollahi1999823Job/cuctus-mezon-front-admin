@@ -1,0 +1,5 @@
+<brand-filter (brandUpdate)="brandUpdate($event)" ></brand-filter>
+<brand-result [brandsDto]="paginationBrand?.data" (brandUpdate)="brandUpdate($event)"></brand-result>
+<brand-pagination (brandUpdate)="brandUpdate($event)" [count]="paginationBrand?.count" [index]="paginationBrand?.pageIndex" [size]="paginationBrand?.pageSize"></brand-pagination>
+
+
