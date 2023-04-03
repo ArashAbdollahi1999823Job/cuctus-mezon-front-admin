@@ -1,0 +1,71 @@
+
+<div class="body-component">
+  <form [formGroup]="productPictureAddForm" (ngSubmit)="productPictureAdd()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="pictureAlt">pictureAlt</label>
+        <input type="text" placeholder="pictureAlt" id="pictureAlt" formControlName="pictureAlt" [ngClass]="
+                     productPictureAddForm.controls.pictureAlt.touched && productPictureAddForm.controls.pictureAlt.errors?.required
+                     || productPictureAddForm.controls.pictureAlt.errors?.maxlength ||
+                     productPictureAddForm.controls.pictureAlt.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productPictureAddForm.controls.pictureAlt.errors?.required &&productPictureAddForm.controls.pictureAlt.touched">
+          لطفا pictureAlt را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productPictureAddForm.controls.pictureAlt.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" productPictureAddForm.controls.pictureAlt.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="pictureTitle">pictureTitle</label>
+        <input type="text" placeholder="pictureTitle" id="pictureTitle" formControlName="pictureTitle" [ngClass]="
+                     productPictureAddForm.controls.pictureTitle.touched && productPictureAddForm.controls.pictureTitle.errors?.required
+                     || productPictureAddForm.controls.pictureTitle.errors?.maxlength ||
+                     productPictureAddForm.controls.pictureTitle.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productPictureAddForm.controls.pictureTitle.errors?.required &&productPictureAddForm.controls.pictureTitle.touched">
+          لطفا pictureTitle  را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productPictureAddForm.controls.pictureTitle.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" productPictureAddForm.controls.pictureTitle.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="sort">ترتیب</label>
+        <input type="number" placeholder="ترتیب" id="sort" formControlName="sort" [ngClass]="
+                     productPictureAddForm.controls.sort.touched && productPictureAddForm.controls.sort.errors?.required
+                     || productPictureAddForm.controls.sort.errors?.maxlength ||
+                     productPictureAddForm.controls.sort.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productPictureAddForm.controls.sort.errors?.required &&productPictureAddForm.controls.sort.touched">
+          لطفا ترتیب را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productPictureAddForm.controls.sort.hasError('maxlength')">تعداد
+          شماره نمیتواند بیشتر از ۱۰۰ باشد!
+        </div>
+        <div class="error" *ngIf=" productPictureAddForm.controls.sort.hasError('minlength')">تعداد
+          شماره ترتیب  نمیتواند کمتر 1 باشد!
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="file">جستجوی عکس</label>
+        <input type="file" placeholder="file" id="file" formControlName="file" accept="image/png, image/gif, image/jpeg" (change)="onFileChange($event)" [ngClass]="
+                     productPictureAddForm.controls.file.touched && productPictureAddForm.controls.file.errors?.required ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productPictureAddForm.controls.file.errors?.required &&productPictureAddForm.controls.file.touched">
+          لطفا عکس را وارد کنید !
+        </div>
+      </div>
+
+      <button type="submit" class="btn" [disabled]="!productPictureAddForm.valid" [ngClass]="!productPictureAddForm.valid ? 'disable':''">ثبت دسته بندی</button>
+    </div>
+
+  </form>
+</div>
+

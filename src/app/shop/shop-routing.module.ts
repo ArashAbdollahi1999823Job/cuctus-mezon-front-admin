@@ -21,6 +21,14 @@ import {BrandAddComponent} from "./brand/brand-add/brand-add.component";
 import {BrandComponent} from "./brand/brand-c/brand.component";
 import {BrandMainComponent} from "./brand/brand-main/brand-main-c/brand-main.component";
 import {BrandEditComponent} from "./brand/brand-main/brand-edit/brand-edit.component";
+import {
+  ProductPictureEditComponent
+} from "./product-picture/product-picture-main/product-picture-edit/product-picture-edit.component";
+import {ProductPictureAddComponent} from "./product-picture/product-picture-add/product-picture-add.component";
+import {
+  ProductPictureMainComponent
+} from "./product-picture/product-picture-main/product-picture-main-c/product-picture-main.component";
+import {ProductPictureComponent} from "./product-picture/product-picture-c/product-picture.component";
 const routes: Routes = [
   {
     path: '', component: ShopComponent, children: [
@@ -58,6 +66,15 @@ const routes: Routes = [
             {path: '', redirectTo: 'TypePictureMain', pathMatch: 'full'},
             {path: 'TypePictureAdd', component: TypePictureAddComponent},
             {path: 'TypePictureEdit/:TypePictureId', component: TypePictureEditComponent},
+          ]
+      },
+      {
+        path: 'ProductPicture/:ProductId', component: ProductPictureComponent, children:
+          [
+            {path: 'ProductPictureMain', component: ProductPictureMainComponent},
+            {path: '', redirectTo: 'ProductPictureMain', pathMatch: 'full'},
+            {path: 'ProductPictureAdd', component: ProductPictureAddComponent},
+            {path: 'ProductPictureEdit/:ProductPictureId', component: ProductPictureEditComponent},
           ]
       },
     ]

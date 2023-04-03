@@ -38,6 +38,7 @@ export class AuthService {
   }
   public logout() {
     localStorage.removeItem(environment.keyUserToken);
+    localStorage.removeItem(environment.storeId);
     this.currentUser.next(null);
     window.location.reload();
   }

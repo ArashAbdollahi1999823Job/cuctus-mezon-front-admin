@@ -1,0 +1,39 @@
+<div style="overflow-y: auto">
+
+  <div class="title-type" >
+    <ng-container *ngFor="let item of productPicturesDto;let index=index;">{{index == 0 ? item.product: ""}}</ng-container>
+  </div>
+  <table>
+    <thead>
+    <tr>
+      <th>فعال؟</th>
+      <th>عکس</th>
+      <th>ترتیب</th>
+      <th>Title</th>
+      <th>Alt</th>
+      <th>عملیات</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of productPicturesDto">
+      <td>
+        <i style="color:green" class="fa-solid fa-check" *ngIf="item.isActive"></i>
+        <i style="color:red" class="fa-solid fa-xmark" *ngIf="!item.isActive"></i>
+      </td>
+      <td class="picture"><img src="{{backendUrlPicture}}/{{item.pictureUrl}}" width="100px" height="100px"
+                               alt="{{item.pictureAlt}}" title="{{item.pictureTitle}}"></td>
+      <td>{{item.sort}}</td>
+      <td>{{item.pictureTitle}}</td>
+      <td>{{item.pictureAlt}}</td>
+      <td>
+        <div class="container-btn">
+          <a routerLink="../ProductPictureEdit/{{item.id}}">
+            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+          </a>
+          <button class="btn-remove" (click)="productPictureDelete(item.id)"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

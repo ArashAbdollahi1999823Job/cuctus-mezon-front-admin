@@ -36,8 +36,22 @@ import {BrandEditComponent} from "./brand/brand-main/brand-edit/brand-edit.compo
 import {BrandFilterComponent} from "./brand/brand-main/brand-filter/brand-filter.component";
 import {BrandPaginationComponent} from "./brand/brand-main/brand-pagination/brand-pagination.component";
 import {BrandResultComponent} from "./brand/brand-main/brand-result/brand-result.component";
+import {ProductPictureAddComponent} from "./product-picture/product-picture-add/product-picture-add.component";
+import {ProductPictureComponent} from "./product-picture/product-picture-c/product-picture.component";
+import {ProductPictureNavComponent} from "./product-picture/product-picture-nav/product-picture-nav.component";
+import {
+  ProductPictureMainComponent
+} from "./product-picture/product-picture-main/product-picture-main-c/product-picture-main.component";
+import {
+  ProductPictureEditComponent
+} from "./product-picture/product-picture-main/product-picture-edit/product-picture-edit.component";
 @NgModule({
   declarations: [
+    ProductPictureEditComponent,
+    ProductPictureMainComponent,
+    ProductPictureNavComponent,
+    ProductPictureComponent,
+    ProductPictureAddComponent,
     BrandResultComponent,
     BrandPaginationComponent,
     BrandFilterComponent,
