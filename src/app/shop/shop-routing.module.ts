@@ -29,6 +29,11 @@ import {
   ProductPictureMainComponent
 } from "./product-picture/product-picture-main/product-picture-main-c/product-picture-main.component";
 import {ProductPictureComponent} from "./product-picture/product-picture-c/product-picture.component";
+import {OffComponent} from "./off/off-c/off.component";
+import {OffMainComponent} from "./off/off-main/off-main-c/off-main.component";
+import {OffAddComponent} from "./off/off-add/off-add.component";
+import {OffEditComponent} from "./off/off-main/off-edit/off-edit.component";
+import {ProductAddOffComponent} from "./product/product-main/product-add-off/product-add-off.component";
 const routes: Routes = [
   {
     path: '', component: ShopComponent, children: [
@@ -51,14 +56,23 @@ const routes: Routes = [
           ]
       },
       {
+        path: 'Off', canActivate: [SellerJustGuard], component: OffComponent, children:
+          [
+            {path: 'OffMain', component: OffMainComponent},
+            {path: '', redirectTo: 'OffMain', pathMatch: 'full'},
+            {path: 'OffAdd', component: OffAddComponent},
+            {path: 'OffEdit/:OffId', component: OffEditComponent},
+          ]
+      },
+      {
         path: 'Product', canActivate: [SellerJustGuard], component: ProductComponent, children: [
           {path: 'ProductMain', component: ProductMainComponent},
           {path: '', redirectTo: 'ProductMain', pathMatch: 'full'},
           {path: 'ProductAdd', component: ProductAddComponent},
           {path: 'ProductEdit/:ProductId', component: ProductEditComponent},
+          {path: 'ProductAddOff/:ProductId', component: ProductAddOffComponent},
         ]
       },
-      /* {path: '', redirectTo: 'Product', pathMatch: 'full'},*/
       {
         path: 'TypePicture/:TypeId', component: TypePictureComponent, children:
           [

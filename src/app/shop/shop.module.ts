@@ -45,8 +45,21 @@ import {
 import {
   ProductPictureEditComponent
 } from "./product-picture/product-picture-main/product-picture-edit/product-picture-edit.component";
+import {OffNavComponent} from "./off/off-nav/off-nav.component";
+import {OffAddComponent} from "./off/off-add/off-add.component";
+import {OffComponent} from "./off/off-c/off.component";
+import {OffEditComponent} from "./off/off-main/off-edit/off-edit.component";
+import {OffMainComponent} from "./off/off-main/off-main-c/off-main.component";
+import {OffResultComponent} from "./off/off-main/off-result/off-result.component";
+import { ProductAddOffComponent } from './product/product-main/product-add-off/product-add-off.component';
 @NgModule({
   declarations: [
+    OffResultComponent,
+    OffMainComponent,
+    OffEditComponent,
+    OffComponent,
+    OffAddComponent,
+    OffNavComponent,
     ProductPictureEditComponent,
     ProductPictureMainComponent,
     ProductPictureNavComponent,
@@ -82,7 +95,8 @@ import {
     TypeResultComponent,
     TypePaginationComponent,
     TypeAddComponent,
-    TypeEditComponent
+    TypeEditComponent,
+    ProductAddOffComponent
   ],
     imports: [
         CommonModule,

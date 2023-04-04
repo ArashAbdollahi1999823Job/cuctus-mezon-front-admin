@@ -1,0 +1,82 @@
+<div class="body-component">
+  <form [formGroup]="offAddForm" (ngSubmit)="brandAdd()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="name">نام  تخفیف</label>
+        <input type="text" placeholder="نام..." id="name" formControlName="name" [ngClass]="
+                     offAddForm.controls.name.touched && offAddForm.controls.name.errors?.required
+                     || offAddForm.controls.name.errors?.maxlength ||
+                     offAddForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="offAddForm.controls.name.errors?.required &&offAddForm.controls.name.touched">
+          لطفا نام  تخفیف را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" offAddForm.controls.name.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" offAddForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="offPercent">درصد  تخفیف</label>
+        <input type="number" placeholder="درصد تخفیف..." id="offPercent" formControlName="offPercent" [ngClass]="
+                     offAddForm.controls.name.touched && offAddForm.controls.name.errors?.required
+                     || offAddForm.controls.name.errors?.maxlength ||
+                     offAddForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="offAddForm.controls.name.errors?.required &&offAddForm.controls.name.touched">
+          لطفا درصد  تخفیف را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" offAddForm.controls.name.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" offAddForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="description">توضیحات</label>
+        <input type="text" placeholder="توضیحات..." id="description" formControlName="description" [ngClass]="
+                     offAddForm.controls.description.touched && offAddForm.controls.description.errors?.required
+                     || offAddForm.controls.description.errors?.maxlength ||
+                     offAddForm.controls.description.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="offAddForm.controls.description.errors?.required &&offAddForm.controls.description.touched">
+          لطفا توضیحات را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" offAddForm.controls.description.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" offAddForm.controls.description.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="startDate">تاریخ شروع</label>
+        <input type="date" placeholder="تاریخ شروع..." id="startDate" formControlName="startDate" [ngClass]="
+                     offAddForm.controls.startDate.touched && offAddForm.controls.startDate.errors?.required
+                     || offAddForm.controls.startDate.errors?.maxlength ||
+                     offAddForm.controls.startDate.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="offAddForm.controls.startDate.errors?.required &&offAddForm.controls.startDate.touched">
+          لطفا تاریخ شروع را وارد کنید !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="endDate">تاریخ پایان</label>
+        <input type="date" placeholder="تاریخ پایان..." id="endDate" formControlName="endDate" [ngClass]="
+                     offAddForm.controls.endDate.touched && offAddForm.controls.endDate.errors?.required
+                     || offAddForm.controls.endDate.errors?.maxlength ||
+                     offAddForm.controls.endDate.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="offAddForm.controls.endDate.errors?.required &&offAddForm.controls.endDate.touched">
+          لطفا تاریخ پایان را وارد کنید !
+        </div>
+      </div>
+      <button type="submit" class="btn" [disabled]="!offAddForm.valid" [ngClass]="!offAddForm.valid ? 'disable':''">ثبت تخفیف</button>
+    </div>
+
+  </form>
+</div>
+

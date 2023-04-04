@@ -18,4 +18,5 @@ export class ProductDto {
   inventory: string
   inventoryId:number
   off: OffDto
+  offId:number
 }

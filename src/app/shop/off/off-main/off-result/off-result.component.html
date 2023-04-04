@@ -1,0 +1,31 @@
+<div style="overflow-y: auto">
+  <table>
+    <thead>
+    <tr>
+      <th>نام</th>
+      <th>عملیات</th>
+      <th>درصد</th>
+      <th>شروع</th>
+      <th>پایان</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of offsDto">
+      <td>{{item.name}}</td>
+      <td>
+        <div class="container-btn">
+          <button class="btn-remove" (click)="offDelete(item.id)" ><i class="fa-solid fa-trash"></i></button>
+
+          <a routerLink="../OffEdit/{{item.id}}">
+            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+          </a>
+        </div>
+      </td>
+      <td>{{item.offPercent}}</td>
+      <td>{{item.startDate}}</td>
+      <td>{{item.endDate}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -85,6 +85,7 @@ export class ProductEditComponent implements OnDestroy,OnInit {
     productEditDto.typeId= this.productEditForm.controls['typeId'].value;
     productEditDto.inventoryId= this.productEditForm.controls['inventoryId'].value;
     productEditDto.isActive= this.productEditForm.controls['isActive'].value;
+    productEditDto.offId=this.productDto.offId;
     this.subscription= this.productService.productEdit(productEditDto).subscribe((res:boolean)=>{
       if(res==true){
         this.toastService.success(` محصول باموفقیت اپدیت شد.`);

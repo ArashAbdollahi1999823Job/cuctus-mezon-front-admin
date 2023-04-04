@@ -17,7 +17,6 @@ export class ProductMainComponent implements OnDestroy{
 
   constructor(private productService:ProductService,private title:Title) {}
   ngOnInit(): void {
-    this.productParamDto=this.productService.productGetParam();
     this.productParamDto.storeId=localStorage.getItem('storeId');
     this.productService.productSetParam(this.productParamDto);
     this.productGetAll();

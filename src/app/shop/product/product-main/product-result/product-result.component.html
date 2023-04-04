@@ -10,7 +10,6 @@
       <th>انبار</th>
       <th>تخفیف</th>
       <th>اسلاگ</th>
-
     </tr>
     </thead>
     <tbody>
@@ -34,9 +33,17 @@
       <td>{{item.type}}</td>
       <td>{{item.price}}</td>
       <td>{{item.inventory}}</td>
-      <td>{{item?.off?.name}}</td>
-      <td>{{item.slug}}</td>
+      <td>
+        <ng-container *ngIf="item.off" >{{item?.off?.name}}/{{item?.off?.offPercent}}درصد</ng-container>
 
+
+
+        <a *ngIf="!item.off" routerLink="../ProductAddOff/{{item.id}}">
+          <button class="btn-edit"> افزودن تخفیف<i class="fa-solid fa-money-bill-alt"></i></button>
+        </a>
+        <button *ngIf="item.off" class="btn-remove" (click)="productOffDelete(item.id)" >حذف تخفیف<i class="fa-solid fa-trash"></i></button>
+      </td>
+      <td>{{item.slug}}</td>
     </tr>
     </tbody>
   </table>

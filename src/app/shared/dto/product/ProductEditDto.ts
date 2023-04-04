@@ -1,4 +1,3 @@
-import {OffDto} from "../off/offDto";
 
 export class ProductEditDto{
   id: string
@@ -9,7 +8,7 @@ export class ProductEditDto{
   price: number
   summary: string
   isActive: boolean
-  store: string
   typeId:number
   inventoryId:number
+  offId:number;
 }

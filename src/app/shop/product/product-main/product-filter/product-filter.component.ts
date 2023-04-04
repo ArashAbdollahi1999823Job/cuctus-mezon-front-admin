@@ -23,7 +23,7 @@ export class ProductFilterComponent {
   constructor(private ef:ElementRef,private typeService: TypeService,private productService:ProductService,private inventoryService:InventoryService){}
   ngOnInit(): void {
     this.inventoryParamDto=this.inventoryService.inventoryGetParam();
-    this.inventoryParamDto.storeId=localStorage.getItem('storeId'); 
+    this.inventoryParamDto.storeId=localStorage.getItem('storeId');
     this.inventoryGet();
     this.typeGet();
     this.productParamDto=this.productService.productGetParam();
@@ -42,6 +42,7 @@ export class ProductFilterComponent {
     });
   }
   inventoryGet() {
+    this.inventoryService.inventorySetParam(this.inventoryParamDto);
     this.inventoryService.inventoryGetAll().subscribe((res:InventoryDto[]) => {
       this.inventoriesDto = res;
     });

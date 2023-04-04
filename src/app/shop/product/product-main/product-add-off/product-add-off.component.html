@@ -1,0 +1,26 @@
+<div style="overflow-y: auto">
+  <table>
+    <thead>
+    <tr>
+      <th>نام</th>
+      <th>عملیات</th>
+      <th>درصد</th>
+      <th>شروع</th>
+      <th>پایان</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of offsDto">
+      <td>{{item.name}}</td>
+      <td>
+        <div class="container-btn">
+          <button class="btn-remove" (click)="productAddOff(item.id)" > اعمال این تخفیف<i class="fa-solid fa-money-bill-transfer"></i></button>
+        </div>
+      </td>
+      <td>{{item.offPercent}}</td>
+      <td>{{item.startDate}}</td>
+      <td>{{item.endDate}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
