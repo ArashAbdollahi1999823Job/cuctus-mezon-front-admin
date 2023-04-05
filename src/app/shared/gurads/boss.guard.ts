@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from 
 import {Observable} from 'rxjs';
 import {AuthService} from "../../auth/services/auth.service";
 import {ToastrService} from "ngx-toastr";
-import {UserAuthorizeDto} from "../dto/identiry/userAuthorizeDto";
+import {UserAuthorizeDto} from "../dto/identity/userAuthorizeDto";
 import {map} from "rxjs/internal/operators/map";
 
 @Injectable({

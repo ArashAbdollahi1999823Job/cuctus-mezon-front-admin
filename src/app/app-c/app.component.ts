@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {allPageAnimation} from "../shared/animations/allPageAnimation";
 import {AuthService} from "../auth/services/auth.service";
-import {UserAuthorizeDto} from "../shared/dto/identiry/userAuthorizeDto";
+import {UserAuthorizeDto} from "../shared/dto/identity/userAuthorizeDto";
 import {environment} from "../../environments/environment";
 
 @Component({

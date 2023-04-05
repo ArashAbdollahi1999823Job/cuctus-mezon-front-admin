@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {AuthService} from "../../auth/services/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {map} from "rxjs/internal/operators/map";
-import {UserAuthorizeDto} from "../dto/identiry/userAuthorizeDto";
+import {UserAuthorizeDto} from "../dto/identity/userAuthorizeDto";
 
 @Injectable({
   providedIn: 'root'

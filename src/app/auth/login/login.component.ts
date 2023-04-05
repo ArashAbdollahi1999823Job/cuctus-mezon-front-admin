@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import {LoginDto} from "../../shared/dto/identiry/loginDto";
-import {UserAuthorizeDto} from "../../shared/dto/identiry/userAuthorizeDto";
+import {LoginDto} from "../../shared/dto/identity/loginDto";
+import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
-import {StoreService} from "../../store/store-service/store.service";
-import {StoreUserService} from "../../store-user/store-user-service/store-user.service";
-import {PaginationDto} from "../../shared/dto/base/paginationDto";
-import {StoreDto} from "../../shared/dto/store/storeDto";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

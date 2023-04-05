@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import {map} from "rxjs/internal/operators/map";
-import {UserAuthorizeDto} from "../dto/identiry/userAuthorizeDto";
+import {UserAuthorizeDto} from "../dto/identity/userAuthorizeDto";
 import {AuthService} from "../../auth/services/auth.service";
 import {ToastrService} from "ngx-toastr";
 @Injectable({

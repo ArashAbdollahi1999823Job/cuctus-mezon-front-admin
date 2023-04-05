@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {LoginDto} from "../../shared/dto/identiry/loginDto";
+import {LoginDto} from "../../shared/dto/identity/loginDto";
 import {Observable} from "rxjs";
-import {UserAuthorizeDto} from 'src/app/shared/dto/identiry/userAuthorizeDto';
+import {UserAuthorizeDto} from 'src/app/shared/dto/identity/userAuthorizeDto';
 import {map} from "rxjs/internal/operators/map";
 import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
 import {StoreService} from "../../store/store-service/store.service";
@@ -25,11 +25,17 @@ export class AuthService {
           this.setCurrentUser(res);
           this.storeParamDto=this.storeService.storeGetParam();
           this.storeParamDto.userId=this.decodeToken(this.getToken()).Id;
-          this.storeService.storeGetAll().subscribe((res)=>{
-            localStorage.setItem(environment.storeId,res.data[0].id.toString())
+          this.currentUser$.subscribe((res)=>{
+            if(res.roles.includes('Seller')){
+              this.storeService.storeGetAll().subscribe((res)=>{
+                if(res){
+                  localStorage.setItem(environment.storeId,res.data[0].id.toString())
+                  this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})
+                }
+              })
+            }
+            this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})
           })
-          this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})
-          console.log( )
           return res;
         }
         return null;

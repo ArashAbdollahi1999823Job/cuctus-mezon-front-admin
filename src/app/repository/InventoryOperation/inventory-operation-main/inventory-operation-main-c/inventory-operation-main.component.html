@@ -1,0 +1,3 @@
+<inventory-operation-filter (inventoryOperationUpdate)="inventoryOperationUpdate($event)" ></inventory-operation-filter>
+<inventory-operation-result [inventoryOperationsDto]="paginationInventoryOperation?.data" (inventoryOperationUpdate)="inventoryOperationUpdate($event)"></inventory-operation-result>
+<inventory-operation-pagination (inventoryOperationUpdate)="inventoryOperationUpdate($event)" [count]="paginationInventoryOperation?.count" [index]="paginationInventoryOperation?.pageIndex" [size]="paginationInventoryOperation?.pageSize"></inventory-operation-pagination>

@@ -16,7 +16,6 @@ export class ProductService {
   public productParamDto = new ProductParamDto();
   public constructor(private http: HttpClient) {}
   public productAdd(productAddDto: ProductAddDto):Observable<boolean> {
-    console.log(productAddDto)
     return this.http.post<boolean>(`${this.backendUrlAdmin}/ProductAdmin/ProductAdd`, productAddDto);
   }
   public productGetParam() {
@@ -46,7 +45,6 @@ export class ProductService {
     requestProductParam=requestProductParam.append('sortType',this.productParamDto.sortType);
     return requestProductParam;
   }
-
   public productEdit(productEditDto:ProductEditDto):Observable<boolean> {
     return this.http.put<boolean>(`${this.backendUrlAdmin}/ProductAdmin/ProductEdit`, productEditDto);
   }
@@ -58,30 +56,4 @@ export class ProductService {
   public productDelete(id:number):Observable<boolean>{
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/ProductAdmin/ProductDelete/${id}`);
   }
- /*
-
-
-
-
-
-  public typeGet(): Observable<PaginationDto<TypeDto>> {
-    let requestTypeGetParam = this.generateTypeGetParam();
-    return this.http.get<PaginationDto<TypeDto>>(`${this.backendUrlAdmin}/TypeAdmin/TypeGetAll`, {params: requestTypeGetParam});
-  }
-  private generateTypeGetParam() {
-    let requestTypeGetParam = new HttpParams();
-    requestTypeGetParam = requestTypeGetParam.append('pageIndex', 1);
-    requestTypeGetParam = requestTypeGetParam.append('pageSize', 1000);
-    return requestTypeGetParam;
-  }
-
-
-
-  private generateTypeByIdParam(id) {
-      let requestTypeParam = new HttpParams();
-      requestTypeParam=requestTypeParam.append('id',id);
-      return requestTypeParam;
-    }
-
- */
 }

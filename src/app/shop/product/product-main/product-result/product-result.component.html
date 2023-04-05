@@ -9,6 +9,8 @@
       <th>قیمت</th>
       <th>انبار</th>
       <th>تخفیف</th>
+      <th>موجودی انبار</th>
+      <th>عملیات انبار</th>
       <th>اسلاگ</th>
     </tr>
     </thead>
@@ -21,7 +23,7 @@
       <td>{{item.name}}</td>
       <td>
         <div class="container-btn">
-           <button class="btn-remove" (click)="productDelete(item.id)" ><i class="fa-solid fa-trash"></i></button>
+          <button class="btn-remove" (click)="productDelete(item.id)"><i class="fa-solid fa-trash"></i></button>
           <a routerLink="../ProductEdit/{{item.id}}">
             <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
           </a>
@@ -34,14 +36,18 @@
       <td>{{item.price}}</td>
       <td>{{item.inventory}}</td>
       <td>
-        <ng-container *ngIf="item.off" >{{item?.off?.name}}/{{item?.off?.offPercent}}درصد</ng-container>
-
-
-
+        <ng-container *ngIf="item.off">{{item?.off?.name}}/{{item?.off?.offPercent}}درصد</ng-container>
         <a *ngIf="!item.off" routerLink="../ProductAddOff/{{item.id}}">
           <button class="btn-edit"> افزودن تخفیف<i class="fa-solid fa-money-bill-alt"></i></button>
         </a>
-        <button *ngIf="item.off" class="btn-remove" (click)="productOffDelete(item.id)" >حذف تخفیف<i class="fa-solid fa-trash"></i></button>
+        <button *ngIf="item.off" class="btn-remove" (click)="productOffDelete(item.id)">حذف تخفیف<i
+          class="fa-solid fa-trash"></i></button>
+      </td>
+      <td>{{item.count}}</td>
+      <td>
+        <a routerLink="/Repository/InventoryOperation/InventoryOperationAdd/{{item.id}}">
+          <button class="btn-edit"> دادن گزارش<i class="fa-solid fa-paper-plane"></i></button>
+        </a>
       </td>
       <td>{{item.slug}}</td>
     </tr>

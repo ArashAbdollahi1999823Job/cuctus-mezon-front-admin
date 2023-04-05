@@ -1,5 +1,5 @@
 import {Directive, Input, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
-import {UserAuthorizeDto} from "../dto/identiry/userAuthorizeDto";
+import {UserAuthorizeDto} from "../dto/identity/userAuthorizeDto";
 import {AuthService} from "../../auth/services/auth.service";
 import { first } from 'rxjs/internal/operators/first';
 @Directive({

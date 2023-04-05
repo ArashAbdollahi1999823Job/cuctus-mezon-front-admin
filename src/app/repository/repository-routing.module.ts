@@ -1,17 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {RepositoryComponent} from "./repository-c/repository.component";
-import {ShopComponent} from "../shop/shop-c/shop.component";
-import {AdminGuard} from "../shared/gurads/admin.guard";
-import {TypeComponent} from "../shop/type/type-c/type.component";
-import {TypeMainComponent} from "../shop/type/type-main/type-main-c/type-main.component";
-import {TypeAddComponent} from "../shop/type/type-add/type-add.component";
-import {TypeEditComponent} from "../shop/type/type-main/type-edit/type-edit.component";
 import {SellerJustGuard} from "../shared/gurads/seller-just.guard";
 import {InventoryComponent} from "./Inventory/inventory-c/inventory.component";
 import {InventoryMainComponent} from "./Inventory/inventory-main/inventory-main-c/inventory-main.component";
 import {InventoryAddComponent} from "./Inventory/inventory-add/inventory-add.component";
 import {InventoryEditComponent} from "./Inventory/inventory-main/inventory-edit/inventory-edit.component";
+import {
+  InventoryOperationAddComponent
+} from "./InventoryOperation/inventory-operation-add/inventory-operation-add.component";
+import {InventoryOperationComponent} from "./InventoryOperation/inventory-operation-c/inventory-operation.component";
+import {
+  InventoryOperationMainComponent
+} from "./InventoryOperation/inventory-operation-main/inventory-operation-main-c/inventory-operation-main.component";
 
 const routes: Routes = [
   {
@@ -24,7 +25,15 @@ const routes: Routes = [
             {path: 'InventoryAdd', component: InventoryAddComponent},
             {path: 'InventoryEdit/:id', component: InventoryEditComponent},
           ]
-      }
+      },
+      {
+        path: 'InventoryOperation', canActivate: [SellerJustGuard], component: InventoryOperationComponent, children:
+          [
+            {path: 'InventoryOperationMain', component: InventoryOperationMainComponent},
+            {path: '', redirectTo: 'InventoryOperationMain', pathMatch: 'full'},
+            {path: 'InventoryOperationAdd/:ProductId', component: InventoryOperationAddComponent},
+          ]
+      },
     ]
   }
   ]
