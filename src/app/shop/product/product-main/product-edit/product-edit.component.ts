@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TypeDto} from "../../../../shared/dto/Type/typeDto";
+import {TypeDto} from "../../../../shared/dto/type/typeDto";
 import {PaginationDto} from "../../../../shared/dto/base/paginationDto";
 import {Subscription} from "rxjs/internal/Subscription";
 import {InventoryParamDto} from "../../../../shared/dto/inventory/inventoryParamDto";

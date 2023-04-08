@@ -3,10 +3,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TypeDto} from "../../../../shared/dto/Type/typeDto";
+import {TypeDto} from "../../../../shared/dto/type/typeDto";
 import {TypeService} from "../../type-service/type.service";
 import {PaginationDto} from "../../../../shared/dto/base/paginationDto";
-import {TypeEditDto} from "../../../../shared/dto/Type/typeEditDto";
+import {TypeEditDto} from "../../../../shared/dto/type/typeEditDto";
 import {Subscription} from "rxjs/internal/Subscription";
 @Component({
   selector: 'type-edit',

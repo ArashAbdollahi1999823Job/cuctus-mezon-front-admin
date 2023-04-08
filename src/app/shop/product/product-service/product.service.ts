@@ -15,9 +15,7 @@ export class ProductService {
   private backendUrlAdmin = environment.backendUrlAdmin;
   public productParamDto = new ProductParamDto();
   public constructor(private http: HttpClient) {}
-  public productAdd(productAddDto: ProductAddDto):Observable<boolean> {
-    return this.http.post<boolean>(`${this.backendUrlAdmin}/ProductAdmin/ProductAdd`, productAddDto);
-  }
+
   public productGetParam() {
     return this.productParamDto;
   }
@@ -44,6 +42,9 @@ export class ProductService {
     requestProductParam = requestProductParam.append('pageSize', this.productParamDto.pageSize);
     requestProductParam=requestProductParam.append('sortType',this.productParamDto.sortType);
     return requestProductParam;
+  }
+  public productAdd(productAddDto: ProductAddDto):Observable<boolean> {
+    return this.http.post<boolean>(`${this.backendUrlAdmin}/ProductAdmin/ProductAdd`, productAddDto);
   }
   public productEdit(productEditDto:ProductEditDto):Observable<boolean> {
     return this.http.put<boolean>(`${this.backendUrlAdmin}/ProductAdmin/ProductEdit`, productEditDto);

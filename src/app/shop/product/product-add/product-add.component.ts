@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs/internal/Subscription";
-import {TypeDto} from "../../../shared/dto/Type/typeDto";
+import {TypeDto} from "../../../shared/dto/type/typeDto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TypeService} from "../../type/type-service/type.service";
 import {ToastrService} from "ngx-toastr";

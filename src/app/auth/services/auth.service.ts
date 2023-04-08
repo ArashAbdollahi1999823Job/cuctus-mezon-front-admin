@@ -34,7 +34,7 @@ export class AuthService {
                 }
               })
             }
-            this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})
+            /*this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})*/
           })
           return res;
         }

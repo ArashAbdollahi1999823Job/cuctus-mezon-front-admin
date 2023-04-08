@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {TypeDto} from "../../../../shared/dto/Type/typeDto";
+import {TypeDto} from "../../../../shared/dto/type/typeDto";
 import {Subscription} from "rxjs/internal/Subscription";
 import {TypeService} from "../../type-service/type.service";
 import {ToastrService} from "ngx-toastr";

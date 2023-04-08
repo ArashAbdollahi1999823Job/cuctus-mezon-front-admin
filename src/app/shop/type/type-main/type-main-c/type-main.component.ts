@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {PaginationDto} from "../../../../shared/dto/base/paginationDto";
 import {Subscription} from "rxjs";
-import {TypeDto} from "../../../../shared/dto/Type/typeDto";
+import {TypeDto} from "../../../../shared/dto/type/typeDto";
 import {TypeService} from "../../type-service/type.service";
 import {Title} from "@angular/platform-browser";
 @Component({

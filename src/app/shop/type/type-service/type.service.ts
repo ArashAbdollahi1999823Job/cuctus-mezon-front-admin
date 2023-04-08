@@ -3,10 +3,10 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
-import {TypeParamDto} from "../../../shared/dto/Type/typeParamDto";
-import {TypeDto} from "../../../shared/dto/Type/typeDto";
-import {TypeAddDto} from "../../../shared/dto/Type/typeAddDto";
-import {TypeEditDto} from "../../../shared/dto/Type/typeEditDto";
+import {TypeParamDto} from "../../../shared/dto/type/typeParamDto";
+import {TypeDto} from "../../../shared/dto/type/typeDto";
+import {TypeAddDto} from "../../../shared/dto/type/typeAddDto";
+import {TypeEditDto} from "../../../shared/dto/type/typeEditDto";
 @Injectable({
   providedIn: 'root'
 })

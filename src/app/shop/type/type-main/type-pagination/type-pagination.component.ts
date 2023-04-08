@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
-import {TypeParamDto} from "../../../../shared/dto/Type/typeParamDto";
+import {TypeParamDto} from "../../../../shared/dto/type/typeParamDto";
 import {TypeService} from "../../type-service/type.service";
 @Component({
   selector: 'type-pagination',

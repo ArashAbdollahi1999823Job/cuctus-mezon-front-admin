@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
-import {TypeDto} from "../../../shared/dto/Type/typeDto";
+import {TypeDto} from "../../../shared/dto/type/typeDto";
 import {TypeService} from "../type-service/type.service";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
-import {TypeAddDto} from "../../../shared/dto/Type/typeAddDto";
+import {TypeAddDto} from "../../../shared/dto/type/typeAddDto";
 import {Subscription} from "rxjs/internal/Subscription";
 import {Router} from "@angular/router";
 @Component({

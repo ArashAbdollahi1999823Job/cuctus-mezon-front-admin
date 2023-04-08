@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
-import {TypeDto} from "../../../../shared/dto/Type/typeDto";
+import {TypeDto} from "../../../../shared/dto/type/typeDto";
 import {PaginationDto} from "../../../../shared/dto/base/paginationDto";
 import {ProductParamDto} from "../../../../shared/dto/product/productParamDto";
 import {ProductService} from "../../product-service/product.service";

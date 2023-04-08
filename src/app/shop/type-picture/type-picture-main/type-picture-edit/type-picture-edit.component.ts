@@ -7,7 +7,7 @@ import {Subscription} from "rxjs/internal/Subscription";
 import {TypePictureDto} from "../../../../shared/dto/typePicture/typePictureDto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {environment} from "../../../../../environments/environment";
-import {TypeEditDto} from "../../../../shared/dto/Type/typeEditDto";
+import {TypeEditDto} from "../../../../shared/dto/type/typeEditDto";
 import {TypePictureEditDto} from "../../../../shared/dto/typePicture/typePictureEditDto";
 @Component({
   selector: 'type-picture-edit',

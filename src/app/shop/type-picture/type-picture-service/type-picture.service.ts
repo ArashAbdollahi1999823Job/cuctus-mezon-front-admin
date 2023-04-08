@@ -6,7 +6,7 @@ import {TypePictureParamDto} from "../../../shared/dto/typePicture/typePicturePa
 import {TypePictureDto} from "../../../shared/dto/typePicture/typePictureDto";
  import {PaginationDto} from "../../../shared/dto/base/paginationDto";
  import {StoreDto} from "../../../shared/dto/store/storeDto";
- import {TypeEditDto} from "../../../shared/dto/Type/typeEditDto";
+ import {TypeEditDto} from "../../../shared/dto/type/typeEditDto";
  import {TypePictureEditDto} from "../../../shared/dto/typePicture/typePictureEditDto";
 @Injectable({
   providedIn: 'root'
