@@ -1,4 +1,5 @@
 export class TypeEditDto {
+  slug: string;
   id: string;
   parentTypeId: number;
   name: string;

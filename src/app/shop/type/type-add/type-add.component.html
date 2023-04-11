@@ -15,7 +15,7 @@
       </div>
       <div class="body-input">
         <label for="name">نام دسته بندی</label>
-        <input type="text" placeholder="نام..." id="name" formControlName="name" [ngClass]="
+        <input type="text" placeholder="نام..." id="name" (focusout)="slugify()" formControlName="name" [ngClass]="
                      typeAddForm.controls.name.touched && typeAddForm.controls.name.errors?.required
                      || typeAddForm.controls.name.errors?.maxlength ||
                      typeAddForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
@@ -27,6 +27,23 @@
           کاراکتر ها نمیتواند بیشتر از 30 باشد !
         </div>
         <div class="error" *ngIf=" typeAddForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="slug">اسلاگ </label>
+        <input type="text" placeholder="اسلاگ..." id="slug" formControlName="slug" [ngClass]="
+                     typeAddForm.controls.slug.touched && typeAddForm.controls.slug.errors?.required
+                     || typeAddForm.controls.slug.errors?.maxlength ||
+                     typeAddForm.controls.slug.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typeAddForm.controls.slug.errors?.required &&typeAddForm.controls.slug.touched">
+          لطفا اسلاگ  محصول را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typeAddForm.controls.slug.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" typeAddForm.controls.slug.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 3 باشد !
         </div>
       </div>

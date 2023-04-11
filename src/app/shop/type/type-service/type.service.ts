@@ -61,7 +61,6 @@ export class TypeService {
       requestTypeParam=requestTypeParam.append('id',id);
       return requestTypeParam;
     }
-
   public typeDelete(id:number):Observable<boolean>{
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/TypeAdmin/TypeDelete/${id}`);
   }

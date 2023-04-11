@@ -34,22 +34,18 @@ export class ProductAddComponent implements OnInit, OnDestroy {
     inventoryId: new FormControl(null, [Validators.required]),
     typeId: new FormControl(null, [Validators.required]),
   })
-
   constructor(private typeService: TypeService, private toast: ToastrService, private router: Router, private inventoryService: InventoryService,private productService:ProductService) {}
-
   ngOnInit(): void {
     this.inventoryParamDto=this.inventoryService.inventoryGetParam();
     this.typeGet();
     this.inventoryGet();
 
   }
-
   typeGet() {
     this.subscription = this.typeService.typeGet().subscribe((res: PaginationDto<TypeDto>) => {
       this.typesDto = res.data;
     });
   }
-
   inventoryGet() {
     this.inventoryParamDto.storeId=localStorage.getItem('storeId');
     this.inventoryService.inventorySetParam(this.inventoryParamDto);
@@ -57,7 +53,6 @@ export class ProductAddComponent implements OnInit, OnDestroy {
       this.inventoriesDto = res;
     })
   }
-
   typeAdd() {
     let productAddDto: ProductAddDto = this.productAddForm.value;
     this.subscription = this.productService.productAdd(productAddDto).subscribe((res: boolean) => {
@@ -67,13 +62,11 @@ export class ProductAddComponent implements OnInit, OnDestroy {
       }
     })
   }
-
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
-
   slugify() {
     this.productAddForm.controls['slug'].setValue(slugify(this.productAddForm.controls['name'].value+"-"+Math.floor((Math.random() * 1000) + 1)));
   }

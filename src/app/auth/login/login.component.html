@@ -22,7 +22,7 @@
 
       </div>
       <div>
-        <input type="password" placeholder="گذرواژه..." formControlName="password" [ngClass]="
+        <input type="password" #password  placeholder="گذرواژه..." formControlName="password" [ngClass]="
                      loginForm.controls.password.touched && loginForm.controls.password.errors?.required
                      || loginForm.controls.password.errors?.maxlength ||
                      loginForm.controls.password.errors?.minlength ? 'input-error' :'input-success'">
@@ -36,6 +36,10 @@
         <div class="error" *ngIf=" loginForm.controls.password.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 8 باشد !
         </div>
+      </div>
+      <div class="check-box">
+        <label for="show-password">نمایش رمز</label>
+        <input type="checkbox" id="show-password" (change)="togglePassword()">
       </div>
       <button type="submit" [disabled]="!loginForm.valid" [ngClass]="!loginForm.valid ? 'disable':''">ورورد</button>
     </form>

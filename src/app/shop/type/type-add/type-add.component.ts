@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {slugify} from "../../../shared/tool/slugify";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {TypeDto} from "../../../shared/dto/type/typeDto";
@@ -18,6 +19,7 @@ export class TypeAddComponent implements OnInit , OnDestroy{
   public subscription:Subscription;
   public typeAddForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
+    slug: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.minLength(3)]),
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     metaDescription: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     summary: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
@@ -38,6 +40,9 @@ export class TypeAddComponent implements OnInit , OnDestroy{
         this.router.navigateByUrl("Type/TypeMain")
       }
     })
+  }
+  slugify() {
+    this.typeAddForm.controls['slug'].setValue(slugify(this.typeAddForm.controls['name'].value));
   }
   ngOnDestroy(): void {
     if(this.subscription){this.subscription.unsubscribe();}

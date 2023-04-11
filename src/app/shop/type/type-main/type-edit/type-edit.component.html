@@ -4,9 +4,10 @@
       <div class="body-input">
         <label for="parentTypeId">انتخاب دسته بندی مادر</label>
         <select name="parentTypeId" formControlName="parentTypeId" id="parentTypeId">
-          <option [ngValue]="null" disabled>انتخاب دسته بندی </option>
-          <option value="0"> دسته بندی مادر</option>
-          <option *ngFor="let item of typesDto" [defaultSelected]="item.id == type?.parentTypeId " value="{{item.id}}" >{{item.name}}</option>
+          <option selected value="0">دسته بندی مادر</option>
+          <ng-container *ngFor="let item of typesDto">
+            <option *ngIf="item?.id!=typeDto?.id"  [defaultSelected]="item?.id == typeDto?.parentTypeId " value="{{item?.id}}" >{{item?.name}}</option>
+          </ng-container>
         </select>
         <div class="error"
              *ngIf="typeEditForm.controls.parentTypeId.errors?.required ">
@@ -15,7 +16,7 @@
       </div>
       <div class="body-input">
         <label for="name">نام دسته بندی</label>
-        <input type="text" placeholder="نام..." id="name" formControlName="name" [ngClass]="
+        <input type="text" placeholder="نام..." id="name" (focusout)="slugify()" formControlName="name" [ngClass]="
                      typeEditForm.controls.name.touched && typeEditForm.controls.name.errors?.required
                      || typeEditForm.controls.name.errors?.maxlength ||
                      typeEditForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
@@ -27,6 +28,23 @@
           کاراکتر ها نمیتواند بیشتر از 30 باشد !
         </div>
         <div class="error" *ngIf=" typeEditForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="slug">اسلاگ </label>
+        <input type="text" placeholder="اسلاگ..." id="slug" formControlName="slug" [ngClass]="
+                     typeEditForm.controls.slug.touched && typeEditForm.controls.slug.errors?.required
+                     || typeEditForm.controls.slug.errors?.maxlength ||
+                     typeEditForm.controls.slug.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typeEditForm.controls.slug.errors?.required &&typeEditForm.controls.slug.touched">
+          لطفا اسلاگ  محصول را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.slug.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.slug.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 3 باشد !
         </div>
       </div>
@@ -94,8 +112,7 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="btn" [disabled]="!typeEditForm.valid"   [ngClass]="!typeEditForm.valid ? 'disable':''">ثبت دسته بندی</button>
+      <button type="submit" class="btn" [disabled]="!typeEditForm.valid || typeEditForm.pristine"   [ngClass]="!typeEditForm.valid ? 'disable':''">ثبت دسته بندی</button>
     </div>
-
   </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {LoginDto} from "../../shared/dto/identity/loginDto";
 import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -12,16 +12,14 @@ import {Router} from "@angular/router";
 })
 
 export class LoginComponent {
+  @ViewChild('password') password:ElementRef;
+  public toggle:boolean=false;
   loginForm = new FormGroup({
     phoneNumber: new FormControl("", [Validators.pattern("^[0-9]*$"),Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     password: new FormControl("", [Validators.required, Validators.maxLength(30), Validators.minLength(8)])
   })
 
   constructor(private authService: AuthService,private toast:ToastrService,private router:Router) {
-  }
-
-  ngOnInit(): void {
-
   }
   login() {
     if (this.loginForm.invalid) {
@@ -33,5 +31,11 @@ export class LoginComponent {
        // this.router.navigateByUrl("/auth/profile")
       }
     });
+  }
+
+  togglePassword(){
+    this.toggle=!this.toggle;
+    if(this.toggle==true)this.password.nativeElement.type='text';
+    if(this.toggle!=true)this.password.nativeElement.type='password';
   }
 }

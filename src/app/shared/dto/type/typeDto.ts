@@ -1,4 +1,5 @@
 export class TypeDto {
+  slug: string
   id: number;
   name:string;
   description:string;

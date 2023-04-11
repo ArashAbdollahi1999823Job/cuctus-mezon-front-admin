@@ -1,4 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
+import {slugify} from "../../../../shared/tool/slugify";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
@@ -15,10 +16,12 @@ import {Subscription} from "rxjs/internal/Subscription";
 })
 export class TypeEditComponent implements OnDestroy {
   public typesDto:TypeDto[];
+
   public id: string;
   public subscription:Subscription;
   public typeEditForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
+    slug: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.minLength(3)]),
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     metaDescription: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     summary: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
@@ -26,7 +29,7 @@ export class TypeEditComponent implements OnDestroy {
     isActive: new FormControl(),
     isDelete: new FormControl(),
   })
-  public type: TypeDto;
+  public typeDto: TypeDto;
   constructor(private typeService: TypeService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router) {}
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -35,15 +38,19 @@ export class TypeEditComponent implements OnDestroy {
   }
   public typeGetById(id: string) {
     this.subscription= this.typeService.typeGetById(id).subscribe((res:PaginationDto<TypeDto>) => {
-      this.type = res.data[0];
-      this.title.setTitle("در حال اپدیت مغازه" +res.data[0].name  + " هستید ");
-      this.typeEditForm.controls["name"].setValue(this.type.name);
-      this.typeEditForm.controls["description"].setValue(this.type.description);
-      this.typeEditForm.controls["metaDescription"].setValue(this.type.metaDescription);
-      this.typeEditForm.controls["summary"].setValue(this.type.summary);
-      this.typeEditForm.controls["parentTypeId"].setValue(this.type.parentTypeId);
-      this.typeEditForm.controls["isActive"].setValue(this.type.isActive);
-      this.typeEditForm.controls["isDelete"].setValue(false);
+      if(res){
+        this.typeDto = res.data[0];
+        if(this.typeDto.parentTypeId==null)this.typeDto.parentTypeId=0;
+        this.title.setTitle(" در حال اپدیت دسته " +res.data[0].name  + " هستید ");
+        this.typeEditForm.controls["name"].setValue(this.typeDto.name);
+        this.typeEditForm.controls["slug"].setValue(this.typeDto.slug);
+        this.typeEditForm.controls["description"].setValue(this.typeDto.description);
+        this.typeEditForm.controls["metaDescription"].setValue(this.typeDto.metaDescription);
+        this.typeEditForm.controls["summary"].setValue(this.typeDto.summary);
+        this.typeEditForm.controls["parentTypeId"].setValue(this.typeDto.parentTypeId);
+        this.typeEditForm.controls["isActive"].setValue(this.typeDto.isActive);
+        this.typeEditForm.controls["isDelete"].setValue(false);
+      }
     })
   }
   typeGet() {
@@ -61,12 +68,16 @@ export class TypeEditComponent implements OnDestroy {
     typeEditDto.parentTypeId= this.typeEditForm.controls['parentTypeId'].value;
     typeEditDto.isActive= this.typeEditForm.controls['isActive'].value;
     typeEditDto.isDelete= this.typeEditForm.controls['isDelete'].value;
+    typeEditDto.slug= this.typeEditForm.controls['slug'].value;
     this.subscription= this.typeService.typeEdit(typeEditDto).subscribe((res:boolean)=>{
       if(res==true){
         this.toastService.success(` دسته باموفقیت اپدیت شد.`);
         this.router.navigateByUrl("Type/TypeMain")
       }
     })
+  }
+  slugify() {
+    this.typeEditForm.controls['slug'].setValue(slugify(this.typeEditForm.controls['name'].value));
   }
   ngOnDestroy(): void {
     if(this.subscription){this.subscription.unsubscribe();}
