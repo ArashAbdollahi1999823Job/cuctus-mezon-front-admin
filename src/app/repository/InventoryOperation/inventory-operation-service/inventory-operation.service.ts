@@ -17,7 +17,6 @@ export class InventoryOperationService {
   public inventoryOperationParamDto = new InventoryOperationParamDto();
   public constructor(private http: HttpClient) {}
   public inventoryOperationAdd(inventoryOperationAddDto: InventoryOperationAddDto):Observable<boolean> {
-    console.log(inventoryOperationAddDto)
     return this.http.post<boolean>(`${this.backendUrlAdmin}/InventoryOperationAdmin/InventoryOperationAdd`,inventoryOperationAddDto);
   }
   public inventoryOperationGetAll(): Observable<PaginationDto<InventoryOperationDto>> {

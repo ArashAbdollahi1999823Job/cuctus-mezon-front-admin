@@ -10,6 +10,8 @@ import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
 import {StoreService} from "../../store/store-service/store.service";
 import {StoreUserService} from "../../store-user/store-user-service/store-user.service";
 import {StoreParamDto} from "../../shared/dto/store/storeParamDto";
+import {PaginationDto} from "../../shared/dto/base/paginationDto";
+import {StoreDto} from "../../shared/dto/store/storeDto";
 @Injectable({
   providedIn: 'root'
 })
@@ -25,16 +27,17 @@ export class AuthService {
           this.setCurrentUser(res);
           this.storeParamDto=this.storeService.storeGetParam();
           this.storeParamDto.userId=this.decodeToken(this.getToken()).Id;
-          this.currentUser$.subscribe((res)=>{
+          this.currentUser$.subscribe((res:UserAuthorizeDto)=>{
             if(res.roles.includes('Seller')){
-              this.storeService.storeGetAll().subscribe((res)=>{
+              this.storeService.storeGetAll().subscribe((res:PaginationDto<StoreDto>)=>{
                 if(res){
                   localStorage.setItem(environment.storeId,res.data[0].id.toString())
                   this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})
                 }
               })
+            }else{
+              this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})
             }
-            /*this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})*/
           })
           return res;
         }
