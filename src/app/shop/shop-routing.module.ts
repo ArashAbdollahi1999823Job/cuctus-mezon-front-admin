@@ -34,9 +34,20 @@ import {OffMainComponent} from "./off/off-main/off-main-c/off-main.component";
 import {OffAddComponent} from "./off/off-add/off-add.component";
 import {OffEditComponent} from "./off/off-main/off-edit/off-edit.component";
 import {ProductAddOffComponent} from "./product/product-main/product-add-off/product-add-off.component";
+import {ColorAddComponent} from "./color/color-add/color-add.component";
+import {ColorComponent} from "./color/color-c/color.component";
+import {ColorMainComponent} from "./color/color-main/color-main-c/color-main.component";
 const routes: Routes = [
   {
     path: '', component: ShopComponent, children: [
+      {
+        path: 'Color/:ProductId', canActivate: [SellerJustGuard], component: ColorComponent, children:
+          [
+            {path: 'ColorMain', component: ColorMainComponent},
+            {path: '', redirectTo: 'ColorMain', pathMatch: 'full'},
+            {path: 'ColorAdd', component: ColorAddComponent},
+          ]
+      },
       {
         path: 'Type', canActivate: [AdminGuard], component: TypeComponent, children:
           [

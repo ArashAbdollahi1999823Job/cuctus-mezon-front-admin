@@ -4,7 +4,7 @@ import {Subscription} from "rxjs";
 import {Title} from "@angular/platform-browser";
 import {ProductDto} from "../../../../shared/dto/product/productDto";
 import {ProductService} from "../../product-service/product.service";
-import {ProductParamDto} from "../../../../shared/dto/product/productParamDto";
+import {ProductSearchDto} from "../../../../shared/dto/product/productSearchDto";
 @Component({
   selector: 'product-main',
   templateUrl: './product-main.component.html',
@@ -13,12 +13,12 @@ import {ProductParamDto} from "../../../../shared/dto/product/productParamDto";
 export class ProductMainComponent implements OnDestroy{
   public paginationProduct:PaginationDto<ProductDto>;
   public subscription:Subscription;
-  public productParamDto=new ProductParamDto;
+  public productParamDto=new ProductSearchDto;
 
   constructor(private productService:ProductService,private title:Title) {}
   ngOnInit(): void {
     this.productParamDto.storeId=localStorage.getItem('storeId');
-    this.productService.productSetParam(this.productParamDto);
+    this.productService.productSearchDtoSet(this.productParamDto);
     this.productGetAll();
     this.title.setTitle("مدیریت محصولات فروشگاه بزرگ کاکتوس.");
 

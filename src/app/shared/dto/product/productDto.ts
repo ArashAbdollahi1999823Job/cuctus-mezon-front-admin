@@ -1,4 +1,6 @@
 import {OffDto} from "../off/offDto";
+import {ProductPictureDto} from "../productPicture/productPictureDto";
+import {ColorDto} from "../color/colorDto";
 
 export class ProductDto {
   id: number
@@ -19,4 +21,6 @@ export class ProductDto {
   inventoryId:number
   off: OffDto
   offId:number
+  productPictures:ProductPictureDto[];
+  colorsDto:ColorDto[];
 }

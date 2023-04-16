@@ -52,8 +52,16 @@ import {OffEditComponent} from "./off/off-main/off-edit/off-edit.component";
 import {OffMainComponent} from "./off/off-main/off-main-c/off-main.component";
 import {OffResultComponent} from "./off/off-main/off-result/off-result.component";
 import { ProductAddOffComponent } from './product/product-main/product-add-off/product-add-off.component';
+import {ColorAddComponent} from "./color/color-add/color-add.component";
+import {ColorNavComponent} from "./color/color-nav/color-nav.component";
+import {ColorComponent} from "./color/color-c/color.component";
+import {ColorMainComponent} from "./color/color-main/color-main-c/color-main.component";
 @NgModule({
   declarations: [
+    ColorMainComponent,
+    ColorComponent,
+    ColorNavComponent,
+    ColorAddComponent,
     OffResultComponent,
     OffMainComponent,
     OffEditComponent,

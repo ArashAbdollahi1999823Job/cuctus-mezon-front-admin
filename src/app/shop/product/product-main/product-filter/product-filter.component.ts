@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 import {TypeDto} from "../../../../shared/dto/type/typeDto";
 import {PaginationDto} from "../../../../shared/dto/base/paginationDto";
-import {ProductParamDto} from "../../../../shared/dto/product/productParamDto";
+import {ProductSearchDto} from "../../../../shared/dto/product/productSearchDto";
 import {ProductService} from "../../product-service/product.service";
 import {TypeService} from "../../../type/type-service/type.service";
 import {InventoryDto} from "../../../../shared/dto/inventory/inventoryDto";
@@ -15,7 +15,7 @@ import {InventoryParamDto} from "../../../../shared/dto/inventory/inventoryParam
 export class ProductFilterComponent {
   @ViewChild("name",{static:false}) name:ElementRef;
   @Output() productUpdate=new EventEmitter<boolean>();
-  public productParamDto=new ProductParamDto;
+  public productParamDto=new ProductSearchDto;
   public typesDto:TypeDto[];
   public inventoriesDto:InventoryDto[];
   public inventoryParamDto:InventoryParamDto;
@@ -26,7 +26,7 @@ export class ProductFilterComponent {
     this.inventoryParamDto.storeId=localStorage.getItem('storeId');
     this.inventoryGet();
     this.typeGet();
-    this.productParamDto=this.productService.productGetParam();
+    this.productParamDto=this.productService.productSearchDtoGet();
   }
   activeType=[
     {key:1,title:'فعال'},
@@ -49,27 +49,27 @@ export class ProductFilterComponent {
   }
   onChangeInventory(inventory:any) {
     this.productParamDto.inventoryId=inventory;
-    this.productService.productSetParam(this.productParamDto);
+    this.productService.productSearchDtoSet(this.productParamDto);
     this.productUpdate.emit(true)
   }
   onChangeActiveType(activeType:any) {
     this.productParamDto.isActive=activeType;
-    this.productService.productSetParam(this.productParamDto);
+    this.productService.productSearchDtoSet(this.productParamDto);
     this.productUpdate.emit(true)
   }
   onChangeSortType(sortType:any) {
     this.productParamDto.sortType=sortType;
-    this.productService.productSetParam(this.productParamDto);
+    this.productService.productSearchDtoSet(this.productParamDto);
     this.productUpdate.emit(true)
   }
   onChangeType(type:any) {
     this.productParamDto.typeId=type;
-    this.productService.productSetParam(this.productParamDto);
+    this.productService.productSearchDtoSet(this.productParamDto);
     this.productUpdate.emit(true)
   }
   changeNameSearch() {
     this.productParamDto.name=this.name?.nativeElement?.value;
-    this.productService.productSetParam(this.productParamDto);
+    this.productService.productSearchDtoSet(this.productParamDto);
     this.productUpdate.emit(true)
   }
 }

@@ -6,6 +6,8 @@
 @import "node_modules/ngx-toastr/toastr.css";
 //spinner
 @import "node_modules/ngx-spinner/animations/line-scale-pulse-out.css";
+//
+@import "assets/styles/practicalClass";
 
 *{
   padding: 0;
@@ -18,20 +20,7 @@ a{
   color: inherit;
 }
 body {
-  font-family: IRANSans !important;
+  font-family: IRANSans, serif !important;
   position: relative;
 }
-.input-success{
-  /*  box-shadow:1px 1px 1px 5px green ;*/
-  border: 1px solid green !important;
-}
-.input-error{
-  border: 1px solid red !important;
-}
-.disable{
-  opacity: 0.3;
-}
-.error{
-  color: red;
-  margin: 10px 0;
-}
+

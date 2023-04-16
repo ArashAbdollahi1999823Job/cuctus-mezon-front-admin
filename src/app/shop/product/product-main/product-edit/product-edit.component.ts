@@ -13,6 +13,7 @@ import {TypeService} from "../../../type/type-service/type.service";
 import {ProductDto} from "../../../../shared/dto/product/productDto";
 import {ProductService} from "../../product-service/product.service";
 import {ProductEditDto} from "../../../../shared/dto/product/ProductEditDto";
+import { slugify } from 'src/app/shared/tool/slugify';
 @Component({
   selector: 'product-edit',
   templateUrl: './product-edit.component.html',
@@ -98,6 +99,6 @@ export class ProductEditComponent implements OnDestroy,OnInit {
   }
 
   slugify() {
-
+    this.productEditForm.controls['slug'].setValue(slugify(this.productEditForm.controls['name'].value+"-"+Math.floor((Math.random() * 1000) + 1)));
   }
 }

@@ -59,11 +59,14 @@ button{
     color: blue;
   }
 }
-.container-color{
-  display: flex ;
-  justify-items: center  ;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100px;
+
+.title-image{
+  width: 100%;
   height: auto;
+  display: flex;
+  justify-content: center;
+  img{
+    margin: 20px;
+    border: 1px solid black;
+  }
 }

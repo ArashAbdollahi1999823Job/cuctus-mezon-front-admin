@@ -8,7 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
 import {ProductDto} from "../../../../shared/dto/product/productDto";
-import {ProductParamDto} from "../../../../shared/dto/product/productParamDto";
+import {ProductSearchDto} from "../../../../shared/dto/product/productSearchDto";
 import {PaginationDto} from "../../../../shared/dto/base/paginationDto";
 import {ProductEditDto} from "../../../../shared/dto/product/ProductEditDto";
 
@@ -24,7 +24,7 @@ export class ProductAddOffComponent implements OnInit {
   public offParamDto: OffParamDto;
   public subscription: Subscription;
   public productDto: ProductDto;
-  public productParamDto: ProductParamDto;
+  public productParamDto: ProductSearchDto;
 
   constructor(private offService: OffService, private productService: ProductService, private activatedRoute: ActivatedRoute, private title: Title, private toastService: ToastrService, private router: Router) {
   }
@@ -33,7 +33,7 @@ export class ProductAddOffComponent implements OnInit {
     this.offParamDto = this.offService.offGetParam();
     this.offGet();
     this.productId = this.activatedRoute.snapshot.paramMap.get('ProductId');
-    this.productService.productSetParam(this.productParamDto);
+    this.productService.productSearchDtoSet(this.productParamDto);
     this.subscription = this.productService.productGetById(this.productId).subscribe((res: PaginationDto<ProductDto>) => {
       if (res) {
         this.productDto = res.data[0];

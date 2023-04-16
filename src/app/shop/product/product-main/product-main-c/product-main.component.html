@@ -1,5 +1,5 @@
 <product-filter (productUpdate)="productUpdate($event)" ></product-filter>
-<product-result [products]="paginationProduct?.data" (productUpdate)="productUpdate($event)"></product-result>
+<product-result [productsDto]="paginationProduct?.data" (productUpdate)="productUpdate($event)"></product-result>
 <product-pagination (productUpdate)="productUpdate($event)" [count]="paginationProduct?.count" [index]="paginationProduct?.pageIndex" [size]="paginationProduct?.pageSize"></product-pagination>
 
 

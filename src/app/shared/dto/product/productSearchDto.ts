@@ -1,10 +1,10 @@
 import {ActiveType} from "../../enums/activeType";
 import {SortType} from "../../enums/sortType";
 
-export class ProductParamDto{
+export class ProductSearchDto {
   public pageIndex: number=1;
   public pageSize: number=10;
-  public id: number;
+  public id: string;
   public isActive: ActiveType=ActiveType.notImportant;
   public name: string;
   public slug: string;
