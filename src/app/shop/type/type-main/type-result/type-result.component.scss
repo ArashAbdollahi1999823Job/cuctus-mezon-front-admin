@@ -36,14 +36,22 @@ td {
   height: 50px;
 }
 button{
-border: 1px solid #2e2e2e;
+  font-size: 15px;
+  &:hover{
+    cursor: pointer;
+  }
   width: 75px;
-  border: none;
+  height: 75px;
   margin: 3px;
+  box-shadow: 0 0 6px burlywood;
+  border: 1px solid black;
 }
 .container-btn{
   display: flex;
   justify-content: space-around;
+  .btn-icon{
+
+  }
   .btn-remove{
     color: red;
   }
@@ -51,3 +59,4 @@ border: 1px solid #2e2e2e;
     color: blue;
   }
 }
+

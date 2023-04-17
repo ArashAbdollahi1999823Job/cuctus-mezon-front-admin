@@ -56,8 +56,16 @@ import {ColorAddComponent} from "./color/color-add/color-add.component";
 import {ColorNavComponent} from "./color/color-nav/color-nav.component";
 import {ColorComponent} from "./color/color-c/color.component";
 import {ColorMainComponent} from "./color/color-main/color-main-c/color-main.component";
+import {TypeItemAddComponent} from "./type-item/type-item-add/type-item-add.component";
+import {TypeItemMainComponent} from "./type-item/type-item-main/color-main-c/type-item-main.component";
+import {TypeItemNavComponent} from "./type-item/type-item-nav/type-item-nav.component";
+import {TypeItemComponent} from "./type-item/type-item-c/type-item.component";
 @NgModule({
   declarations: [
+    TypeItemComponent,
+    TypeItemNavComponent,
+    TypeItemMainComponent,
+    TypeItemAddComponent,
     ColorMainComponent,
     ColorComponent,
     ColorNavComponent,

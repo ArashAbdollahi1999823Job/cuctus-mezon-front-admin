@@ -37,6 +37,9 @@ import {ProductAddOffComponent} from "./product/product-main/product-add-off/pro
 import {ColorAddComponent} from "./color/color-add/color-add.component";
 import {ColorComponent} from "./color/color-c/color.component";
 import {ColorMainComponent} from "./color/color-main/color-main-c/color-main.component";
+import {TypeItemComponent} from "./type-item/type-item-c/type-item.component";
+import {TypeItemMainComponent} from "./type-item/type-item-main/color-main-c/type-item-main.component";
+import {TypeItemAddComponent} from "./type-item/type-item-add/type-item-add.component";
 const routes: Routes = [
   {
     path: '', component: ShopComponent, children: [
@@ -46,6 +49,14 @@ const routes: Routes = [
             {path: 'ColorMain', component: ColorMainComponent},
             {path: '', redirectTo: 'ColorMain', pathMatch: 'full'},
             {path: 'ColorAdd', component: ColorAddComponent},
+          ]
+      },
+      {
+        path: 'TypeItem/:TypeId', canActivate: [AdminGuard], component: TypeItemComponent, children:
+          [
+            {path: 'TypeItemMain', component: TypeItemMainComponent},
+            {path: '', redirectTo: 'TypeItemMain', pathMatch: 'full'},
+            {path: 'TypeItemAdd', component: TypeItemAddComponent},
           ]
       },
       {

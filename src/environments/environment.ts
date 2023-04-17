@@ -7,15 +7,33 @@ export const environment = {
   keyUserToken: "userToken",
   storeId: "storeId",
   productId: "productId",
+  typeId: "typeId",
   messages: {
     color: {
       colorDeleteSuccess: "حذف رنگ با موفقیت انجام شد.",
-      doYouWantDeleteColor: "ایا از حذف رنگ مطمعن هستید"
-    }
+      doYouWantDeleteColor: "ایا از حذف رنگ مطمعن هستید؟"
+    },
+    off: {
+      offDeleteSuccess: "حذف تخفیف با موفقیت انجام شد.",
+      doYouWantDeleteOff: "ایا از حذف تخفیف مطمعن هستید؟"
+    },
+    type: {
+      typeDeleteSuccess: "حذف دسته با موفقیت انجام شد.",
+      doYouWantDeleteType: "ایا از حذف دسته مطمعن هستید؟",
+      typeAddSuccess: "دسته با موفقیت ثبت شد.",
+    },
+    typeItem: {
+      typeItemDeleteSuccess: "حذف ایتم دسته با موفقیت انجام شد.",
+      doYouWantDeleteTypeItem: "ایا از حذف ایتم دسته مطمعن هستید؟",
+      typeItemAddSuccess: "ایتم دسته با موفقیت ثبت شد.",
+    },
   },
   titlePages:{
     color:{
       colorMain:"مدیریت رنگ فروشگاه بزرگ کاکتوس.",
-    }
+    },
+    typeItem:{
+      typeItemMain:"مدیریت ایتم دسته فروشگاه بزرگ کاکتوس.",
+    },
   }
 }

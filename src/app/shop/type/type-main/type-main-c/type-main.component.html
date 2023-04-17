@@ -1,5 +1,5 @@
 <type-filter (typeUpdate)="typeUpdate($event)" ></type-filter>
-<type-result [types]="paginationType?.data" (typeUpdate)="typeUpdate($event)"></type-result>
+<type-result [typesDto]="paginationType?.data" (typeUpdate)="typeUpdate($event)"></type-result>
 <type-pagination (typeUpdate)="typeUpdate($event)" [count]="paginationType?.count" [index]="paginationType?.pageIndex" [size]="paginationType?.pageSize"></type-pagination>
 
 

@@ -1,0 +1,25 @@
+<div class="body-component">
+  <form [formGroup]="typeItemAddForm" (ngSubmit)="typeItemAdd()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="name">نام  ایتم دسته</label>
+        <input type="text" placeholder="نام ایتم دسته..." id="name" formControlName="name" [ngClass]="
+                     typeItemAddForm.controls.name.touched && typeItemAddForm.controls.name.errors?.required
+                     || typeItemAddForm.controls.name.errors?.maxlength ||
+                     typeItemAddForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typeItemAddForm.controls.name.errors?.required &&typeItemAddForm.controls.name.touched">
+          لطفا نام  ایتم دسته را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typeItemAddForm.controls.name.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" typeItemAddForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <button type="submit" class="btn" [disabled]="!typeItemAddForm.valid" [ngClass]="!typeItemAddForm.valid ? 'disable':''">ثبت ایتم دسته</button>
+    </div>
+  </form>
+</div>
+

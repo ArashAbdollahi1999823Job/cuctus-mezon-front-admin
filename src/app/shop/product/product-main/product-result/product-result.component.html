@@ -45,18 +45,18 @@
             <button class="btn-edit">دادن گزارش انبار<i class="fa-solid fa-list"></i></button>
           </a>
           <a routerLink="/Color/{{product.id}}">
-            <button class="btn-edit">رنگ بندی<i class="fa-solid fa-pencil"></i></button>
+            <button class="btn-edit">رنگ بندی<i class="fa-solid fa-palette"></i></button>
           </a>
         </div>
       </td>
       <td >
         <div class="container-color">
-          <div style="width: 50px;height: 50px;background-color: {{color.value}}" *ngFor="let color of product.colorsDto" ></div>
+          <div style="background-color: {{color.value}}" *ngFor="let color of product.colorsDto" ></div>
         </div>
 
       </td>
       <td>
-        <ng-container *ngIf="product.off">{{product?.off?.name}}/{{product?.off?.offPercent}}درصد</ng-container>
+        <ng-container *ngIf="product.off" >{{product?.off?.name}}/{{product?.off?.offPercent}}درصد</ng-container>
         <ng-container *ngIf="!product.off">تخفیف ندارد</ng-container>
       </td>
       <td>{{product.type}}</td>
