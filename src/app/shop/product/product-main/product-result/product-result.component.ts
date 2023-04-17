@@ -26,13 +26,14 @@ import {Router} from "@angular/router";
   templateUrl: './product-result.component.html',
   styleUrls: ['./product-result.component.scss']
 })
-export class ProductResultComponent implements  OnDestroy,OnChanges {
-  @Input("productsDto") productsDto:ProductDto[];
+export class ProductResultComponent implements OnDestroy, OnChanges {
+  @Input("productsDto") productsDto: ProductDto[];
   public backendUrlPicture = environment.backendUrlPicture;
   @Output() productUpdate = new EventEmitter<boolean>();
   public subscription: Subscription;
 
-  constructor(private productService: ProductService, private toastService: ToastrService, private productPictureService: ProductPictureService) {}
+  constructor(private productService: ProductService, private toastService: ToastrService, private productPictureService: ProductPictureService) {
+  }
 
   public productDelete(id: number) {
     if (confirm("ایا از حذف محصول مطمعن هستید؟")) {
@@ -44,6 +45,7 @@ export class ProductResultComponent implements  OnDestroy,OnChanges {
       })
     }
   }
+
   public productOffDelete(id: number) {
     if (confirm("ایا از کنسل تخفیف  مطمعن هستید؟")) {
       var productDto = this.productsDto.find(x => x.id == id);
@@ -67,33 +69,42 @@ export class ProductResultComponent implements  OnDestroy,OnChanges {
       })
     }
   }
+
   public productPictureGetThumbnail() {
-     this.productsDto?.forEach(x => {
+    this.productsDto?.forEach(x => {
       this.productPictureGet(x.id.toString(), 1)
     })
   }
+
   public productPictureGet(productId: string, sort: number) {
     let productPictureParamDto = new ProductPictureParamDto();
     productPictureParamDto.productId = productId;
     this.productPictureService.productPictureSetParam(productPictureParamDto);
     this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
       if (res) {
-         this.productsDto?.forEach(productDto => {
+        this.productsDto?.forEach(productDto => {
           if (productDto.id == res[0].productId) {
-            productDto.productPictures =[];
+            productDto.productPictures = [];
             productDto.productPictures.push(res[0])
           }
         })
       }
     })
   }
+
   public ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
+
   public ngOnChanges(changes: SimpleChanges): void {
     this.productPictureGetThumbnail();
 
+  }
+
+  setData(typeId: number, productPicture: string) {
+    localStorage.setItem(environment.typeId, typeId.toString())
+    localStorage.setItem(environment.productPicture, productPicture)
   }
 }

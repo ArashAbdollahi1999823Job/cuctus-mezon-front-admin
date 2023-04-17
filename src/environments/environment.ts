@@ -8,6 +8,8 @@ export const environment = {
   storeId: "storeId",
   productId: "productId",
   typeId: "typeId",
+  productPicture:"productPicture",
+  typeItemName:"typeItemName",
   messages: {
     color: {
       colorDeleteSuccess: "حذف رنگ با موفقیت انجام شد.",
@@ -27,6 +29,11 @@ export const environment = {
       doYouWantDeleteTypeItem: "ایا از حذف ایتم دسته مطمعن هستید؟",
       typeItemAddSuccess: "ایتم دسته با موفقیت ثبت شد.",
     },
+    productItem: {
+      productItemDeleteSuccess: "حذف ایتم دسته با موفقیت انجام شد.",
+      doYouWantDeleteProductItem: "ایا از حذف ایتم دسته مطمعن هستید؟",
+      productItemAddSuccess: "ایتم دسته با موفقیت ثبت شد.",
+    },
   },
   titlePages:{
     color:{
@@ -34,6 +41,9 @@ export const environment = {
     },
     typeItem:{
       typeItemMain:"مدیریت ایتم دسته فروشگاه بزرگ کاکتوس.",
+    },
+    productItem:{
+      productItemMain:"مدیریت ایتم فروشگاه بزرگ کاکتوس.",
     },
   }
 }

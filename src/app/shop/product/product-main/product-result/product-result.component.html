@@ -47,6 +47,9 @@
           <a routerLink="/Color/{{product.id}}">
             <button class="btn-edit">رنگ بندی<i class="fa-solid fa-palette"></i></button>
           </a>
+          <a routerLink="/ProductItem/{{product.id}}" (click)="setData(product.typeId,product.productPictures[0].pictureUrl)">
+            <button class="btn-edit">ایتم ها<i class="fa-solid fa-sliders"></i></button>
+          </a>
         </div>
       </td>
       <td >

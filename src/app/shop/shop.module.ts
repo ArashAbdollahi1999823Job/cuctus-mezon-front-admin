@@ -60,8 +60,16 @@ import {TypeItemAddComponent} from "./type-item/type-item-add/type-item-add.comp
 import {TypeItemMainComponent} from "./type-item/type-item-main/color-main-c/type-item-main.component";
 import {TypeItemNavComponent} from "./type-item/type-item-nav/type-item-nav.component";
 import {TypeItemComponent} from "./type-item/type-item-c/type-item.component";
+import {ProductItemAddComponent} from "./product-item/product-item-add/product-item-add.component";
+import {ProductItemMainComponent} from "./product-item/product-item-main/product-main-c/product-item-main.component";
+import {ProductItemNavComponent} from "./product-item/product-item-nav/product-item-nav.component";
+import {ProductItemComponent} from "./product-item/product-item-c/product-item.component";
 @NgModule({
   declarations: [
+    ProductItemComponent,
+    ProductItemNavComponent,
+    ProductItemMainComponent,
+    ProductItemAddComponent,
     TypeItemComponent,
     TypeItemNavComponent,
     TypeItemMainComponent,

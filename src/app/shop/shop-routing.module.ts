@@ -40,6 +40,9 @@ import {ColorMainComponent} from "./color/color-main/color-main-c/color-main.com
 import {TypeItemComponent} from "./type-item/type-item-c/type-item.component";
 import {TypeItemMainComponent} from "./type-item/type-item-main/color-main-c/type-item-main.component";
 import {TypeItemAddComponent} from "./type-item/type-item-add/type-item-add.component";
+import {ProductItemComponent} from "./product-item/product-item-c/product-item.component";
+import {ProductItemMainComponent} from "./product-item/product-item-main/product-main-c/product-item-main.component";
+import {ProductItemAddComponent} from "./product-item/product-item-add/product-item-add.component";
 const routes: Routes = [
   {
     path: '', component: ShopComponent, children: [
@@ -57,6 +60,14 @@ const routes: Routes = [
             {path: 'TypeItemMain', component: TypeItemMainComponent},
             {path: '', redirectTo: 'TypeItemMain', pathMatch: 'full'},
             {path: 'TypeItemAdd', component: TypeItemAddComponent},
+          ]
+      },
+      {
+        path: 'ProductItem/:ProductId', canActivate: [SellerJustGuard], component: ProductItemComponent, children:
+          [
+            {path: 'ProductItemMain', component: ProductItemMainComponent},
+            {path: '', redirectTo: 'ProductItemMain', pathMatch: 'full'},
+            {path: 'ProductItemAdd', component: ProductItemAddComponent},
           ]
       },
       {

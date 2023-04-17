@@ -1,0 +1,42 @@
+<div class="body-component">
+  <form [formGroup]="productItemAddForm" (ngSubmit)="productItemAdd()">
+    <div class="body-form">
+      <div class="body-input">
+        <label for="name">نام  ایتم دسته</label>
+        <input type="text" placeholder="نام ایتم دسته..." id="name" formControlName="name" [ngClass]="
+                     productItemAddForm.controls.name.touched && productItemAddForm.controls.name.errors?.required
+                     || productItemAddForm.controls.name.errors?.maxlength ||
+                     productItemAddForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productItemAddForm.controls.name.errors?.required &&productItemAddForm.controls.name.touched">
+          لطفا نام  ایتم دسته را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productItemAddForm.controls.name.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" productItemAddForm.controls.name.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 3 باشد !
+        </div>
+      </div>
+      <div class="body-input">
+        <label for="value">مقدار  ایتم دسته</label>
+        <input type="text" placeholder="نام ایتم دسته..." id="value" formControlName="value" [ngClass]="
+                     productItemAddForm.controls.value.touched && productItemAddForm.controls.value.errors?.required
+                     || productItemAddForm.controls.value.errors?.maxlength ||
+                     productItemAddForm.controls.value.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="productItemAddForm.controls.value.errors?.required &&productItemAddForm.controls.value.touched">
+          لطفا مقدار  ایتم دسته را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" productItemAddForm.controls.value.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 30 باشد !
+        </div>
+        <div class="error" *ngIf=" productItemAddForm.controls.value.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 1 باشد !
+        </div>
+      </div>
+      <button type="submit" class="btn" [disabled]="!productItemAddForm.valid" [ngClass]="!productItemAddForm.valid ? 'disable':''">ثبت ایتم دسته</button>
+    </div>
+  </form>
+</div>
+
