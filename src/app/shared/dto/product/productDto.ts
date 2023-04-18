@@ -21,6 +21,6 @@ export class ProductDto {
   inventoryId:number
   off: OffDto
   offId:number
-  productPictures:ProductPictureDto[];
-  colorsDto:ColorDto[];
+  productPictureDtos:ProductPictureDto[];
+  colorDtos:ColorDto[];
 }

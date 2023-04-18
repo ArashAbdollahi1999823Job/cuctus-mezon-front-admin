@@ -116,7 +116,7 @@ const routes: Routes = [
           ]
       },
       {
-        path: 'ProductPicture/:ProductId', component: ProductPictureComponent, children:
+        path: 'ProductPicture', component: ProductPictureComponent, children:
           [
             {path: 'ProductPictureMain', component: ProductPictureMainComponent},
             {path: '', redirectTo: 'ProductPictureMain', pathMatch: 'full'},

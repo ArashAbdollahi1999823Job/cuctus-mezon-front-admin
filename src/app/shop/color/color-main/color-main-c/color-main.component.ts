@@ -11,7 +11,7 @@ import {ProductSearchDto} from "../../../../shared/dto/product/productSearchDto"
 import {PaginationDto} from "../../../../shared/dto/base/paginationDto";
 import {ProductDto} from "../../../../shared/dto/product/productDto";
 import {ProductPictureDto} from "../../../../shared/dto/productPicture/productPictureDto";
-import {ProductPictureParamDto} from "../../../../shared/dto/productPicture/productPictureParamDto";
+import {ProductPictureSearchDto} from "../../../../shared/dto/productPicture/productPictureSearchDto";
 import {ProductPictureService} from "../../../product-picture/product-picture-service/product-picture.service";
 
 @Component({
@@ -32,7 +32,7 @@ export class ColorMainComponent implements OnDestroy{
     this.productPictureGetByProductId(localStorage.getItem(environment.productId));
   }
   private productPictureGetByProductId(productId:string){
-    let productPictureSearchDto=new ProductPictureParamDto();
+    let productPictureSearchDto=new ProductPictureSearchDto();
     productPictureSearchDto.productId=productId;
     this.productPictureService.productPictureSetParam(productPictureSearchDto);
     this.subscription=this.productPictureService.productPictureGetAll().subscribe((res:ProductPictureDto[])=>{

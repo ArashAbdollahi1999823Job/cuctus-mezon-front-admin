@@ -1,11 +1,9 @@
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
   Output,
   SimpleChanges
 } from '@angular/core';
@@ -16,10 +14,8 @@ import {ProductService} from "../../product-service/product.service";
 import {ProductEditDto} from "../../../../shared/dto/product/ProductEditDto";
 import {environment} from "../../../../../environments/environment";
 import {ProductPictureService} from "../../../product-picture/product-picture-service/product-picture.service";
-import {ProductPictureParamDto} from "../../../../shared/dto/productPicture/productPictureParamDto";
+import {ProductPictureSearchDto} from "../../../../shared/dto/productPicture/productPictureSearchDto";
 import {ProductPictureDto} from "../../../../shared/dto/productPicture/productPictureDto";
-import {ColorService} from "../../../color/color-service/color.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'product-result',
@@ -27,7 +23,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./product-result.component.scss']
 })
 export class ProductResultComponent implements OnDestroy, OnChanges {
-  @Input("productsDto") productsDto: ProductDto[];
+  @Input("productDtos") productDtos: ProductDto[];
   public backendUrlPicture = environment.backendUrlPicture;
   @Output() productUpdate = new EventEmitter<boolean>();
   public subscription: Subscription;
@@ -48,7 +44,7 @@ export class ProductResultComponent implements OnDestroy, OnChanges {
 
   public productOffDelete(id: number) {
     if (confirm("ایا از کنسل تخفیف  مطمعن هستید؟")) {
-      var productDto = this.productsDto.find(x => x.id == id);
+      var productDto = this.productDtos.find(x => x.id == id);
       var productEditDto = new ProductEditDto();
       productEditDto.id = productDto.id.toString();
       productEditDto.name = productDto.name;
@@ -71,40 +67,45 @@ export class ProductResultComponent implements OnDestroy, OnChanges {
   }
 
   public productPictureGetThumbnail() {
-    this.productsDto?.forEach(x => {
-      this.productPictureGet(x.id.toString(), 1)
+    this.productDtos?.forEach(x => {
+      this.productPictureGet(x.id.toString(), environment.productSetting.thumbnail)
     })
   }
 
   public productPictureGet(productId: string, sort: number) {
-    let productPictureParamDto = new ProductPictureParamDto();
-    productPictureParamDto.productId = productId;
-    this.productPictureService.productPictureSetParam(productPictureParamDto);
+    let productPictureSearchDto = new ProductPictureSearchDto();
+    productPictureSearchDto.productId = productId;
+    productPictureSearchDto.sort = sort;
+    this.productPictureService.productPictureSetParam(productPictureSearchDto);
     this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
       if (res) {
-        this.productsDto?.forEach(productDto => {
-          if (productDto.id == res[0].productId) {
-            productDto.productPictures = [];
-            productDto.productPictures.push(res[0])
+        this.productDtos?.forEach(productDto => {
+          if (productDto?.id == res[0]?.productId) {
+            productDto.productPictureDtos = [];
+            productDto.productPictureDtos.push(res[0])
           }
         })
       }
     })
   }
 
-  public ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
+
 
   public ngOnChanges(changes: SimpleChanges): void {
     this.productPictureGetThumbnail();
-
   }
 
   setData(typeId: number, productPicture: string) {
     localStorage.setItem(environment.typeId, typeId.toString())
     localStorage.setItem(environment.productPicture, productPicture)
+  }
+  setProductId(id: number) {
+    localStorage.setItem(environment.productIdForProductPictureMain,id.toString());
+  }
+
+  public ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

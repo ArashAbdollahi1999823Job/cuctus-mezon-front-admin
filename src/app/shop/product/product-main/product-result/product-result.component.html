@@ -15,14 +15,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let product of productsDto">
+    <tr *ngFor="let product of productDtos">
       <td>
         <i style="color:green" class="fa-solid fa-check" *ngIf="product.isActive"></i>
         <i style="color:red" class="fa-solid fa-xmark" *ngIf="!product.isActive"></i>
       </td>
       <td>{{product.name}}</td>
       <td class="picture">
-        <ng-container *ngFor="let productPicture of product.productPictures;let index=index">
+        <ng-container *ngFor="let productPicture of product.productPictureDtos;let index=index">
           <img *ngIf="index==0" src="{{backendUrlPicture}}/{{productPicture.pictureUrl}}" width="100px" height="100px" alt="{{productPicture.pictureAlt}}" title="{{productPicture.pictureTitle}}">
         </ng-container>
       </td>
@@ -32,7 +32,7 @@
           <a routerLink="../ProductEdit/{{product.id}}">
             <button class="btn-edit">ادیت<i class="fa-solid fa-pen btn-icon"></i></button>
           </a>
-          <a routerLink="../../ProductPicture/{{product.id}}">
+          <a routerLink="../../ProductPicture/ProductPictureMain" (click)="setProductId(product?.id)">
             <button class="btn-edit">عکس ها<i class="fa-solid fa-images btn-icon"></i></button>
           </a>
           <a *ngIf="!product.off" routerLink="../ProductAddOff/{{product.id}}">
@@ -47,14 +47,14 @@
           <a routerLink="/Color/{{product.id}}">
             <button class="btn-edit">رنگ بندی<i class="fa-solid fa-palette"></i></button>
           </a>
-          <a routerLink="/ProductItem/{{product.id}}" (click)="setData(product.typeId,product.productPictures[0].pictureUrl)">
+          <a routerLink="/ProductItem/{{product.id}}" (click)="setData(product.typeId,product.productPictureDtos[0].pictureUrl)">
             <button class="btn-edit">ایتم ها<i class="fa-solid fa-sliders"></i></button>
           </a>
         </div>
       </td>
       <td >
         <div class="container-color">
-          <div style="background-color: {{color.value}}" *ngFor="let color of product.colorsDto" ></div>
+          <div style="background-color:{{color.value}}" *ngFor="let color of product.colorDtos" ></div>
         </div>
 
       </td>

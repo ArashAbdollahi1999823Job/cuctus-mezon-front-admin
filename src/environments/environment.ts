@@ -7,9 +7,15 @@ export const environment = {
   keyUserToken: "userToken",
   storeId: "storeId",
   productId: "productId",
+  productIdForProductPictureMain: "productIdForProductPictureMain",
   typeId: "typeId",
   productPicture:"productPicture",
   typeItemName:"typeItemName",
+  productSetting:{
+    thumbnail:1,
+    sliderStart:2,
+    sliderEnd:10,
+  },
   messages: {
     color: {
       colorDeleteSuccess: "حذف رنگ با موفقیت انجام شد.",
@@ -33,6 +39,11 @@ export const environment = {
       productItemDeleteSuccess: "حذف ایتم دسته با موفقیت انجام شد.",
       doYouWantDeleteProductItem: "ایا از حذف ایتم دسته مطمعن هستید؟",
       productItemAddSuccess: "ایتم دسته با موفقیت ثبت شد.",
+    },
+    productPicture: {
+      productPictureDeleteSuccess: "حذف عکس محصول با موفقیت انجام شد.",
+      doYouWantDeleteProductItem: "ایا از حذف عکس محصول مطمعن هستید؟",
+      productPictureAddSuccess: "عکس محصول با موفقیت ثبت شد.",
     },
   },
   titlePages:{
