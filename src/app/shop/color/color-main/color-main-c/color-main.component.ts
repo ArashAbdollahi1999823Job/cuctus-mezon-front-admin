@@ -49,7 +49,7 @@ export class ColorMainComponent implements OnDestroy{
       this.colorsDto=res;
     });
   }
-  public productPictureDelete(id: number) {
+  public productPictureDelete(id: string) {
     if(confirm(environment.messages.color.doYouWantDeleteColor)==true){
       this.subscription=this.colorService.colorDelete(id).subscribe((res:boolean)=>{
         if(res==true){

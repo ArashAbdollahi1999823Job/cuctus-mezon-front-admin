@@ -11,9 +11,9 @@
       <td>{{item.name}}</td>
       <td>
         <div class="container-btn">
-          <button class="btn-remove" (click)="brandDelete(item.id)" ><i class="fa-solid fa-trash"></i></button>
+          <button class="btn-remove" (click)="brandDelete(item.id)" >حذف<i class="fa-solid fa-trash"></i></button>
           <a routerLink="../BrandEdit/{{item.id}}">
-            <button class="btn-edit"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn-edit">اپدیت<i class="fa-solid fa-pen"></i></button>
           </a>
         </div>
       </td>
@@ -21,4 +21,3 @@
     </tbody>
   </table>
 </div>
-

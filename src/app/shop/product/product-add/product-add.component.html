@@ -1,9 +1,10 @@
-<div class="body-component">
+<div>
   <form [formGroup]="productAddForm" (ngSubmit)="typeAdd()">
     <div class="body-form">
       <div class="body-input">
         <label for="typeId">انتخاب دسته بندی </label>
-        <select name="typeId" formControlName="typeId" id="typeId">
+        <select class="select-list" name="typeId" formControlName="typeId" id="typeId"
+                [ngClass]="productAddForm.controls.typeId.errors?.required ? 'input-error' :'input-success'">
           <option [ngValue]="null" disabled>انتخاب دسته بندی </option>
           <option *ngFor="let item of typesDto" value="{{item.id}}" >{{item.name}}</option>
         </select>
@@ -14,7 +15,8 @@
       </div>
       <div class="body-input">
         <label for="inventoryId">انتخاب انبار</label>
-        <select name="inventoryId" formControlName="inventoryId" id="inventoryId">
+        <select class="select-list" name="inventoryId" formControlName="inventoryId" id="inventoryId"
+                [ngClass]="productAddForm.controls.inventoryId.errors?.required ? 'input-error' :'input-success'" >
           <option [ngValue]="null" disabled>انتخاب انبار </option>
           <option *ngFor="let item of inventoriesDto" value="{{item.id}}" >{{item.name}}</option>
         </select>
@@ -127,7 +129,6 @@
       </div>
       <button type="submit" class="btn" [disabled]="!productAddForm.valid" [ngClass]="!productAddForm.valid ? 'disable':''">ثبت محصول</button>
     </div>
-
   </form>
 </div>
 

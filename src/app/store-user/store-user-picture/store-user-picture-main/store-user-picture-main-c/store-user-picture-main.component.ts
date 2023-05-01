@@ -31,7 +31,7 @@ export class StoreUserPictureMainComponent {
     });
   }
 
-  storeUserPictureDelete(id: number) {
+  storeUserPictureDelete(id: string) {
     if(confirm("ایا از حذف فیزیکی عکس مغازه مطمعن هستید؟")){
       this.subscription= this.storeUserPictureService.storeUserPictureDelete(id).subscribe((res:boolean)=>{
         if(res==true){

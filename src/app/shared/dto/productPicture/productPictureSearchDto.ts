@@ -1,5 +1,5 @@
 export class ProductPictureSearchDto {
-  id:number;
+  id:string;
   productId: string;
   sort:number;
 }

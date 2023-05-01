@@ -1,105 +1,101 @@
-.body-component {
-  width: 100%;
-  margin-top: 50px;
-  height: 87vh;
-
-  .body-form {
-    height: 86vh;
+@import "../../../../assets/styles/practicalValue";
+.body-form {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  .btn {
+    background-color: #008800;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    color: black;
+    border-radius: 5px;
     width: 100%;
+  }
+  .body-input {
+    margin-top: 5px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-flow: column;
-    .btn{
-      width: 80%;
-      background: #0074D9;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    input {
+      padding-right: 10px;
+      color: black;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      height: 50px;
+      width:100%;
+      &:focus {
+        outline: none;
+      }
+    }
+    input[type=date]{
+      width: auto;
+      height: 50px;
+    }
+    label {
       font-size: 20px;
-      border: 1px solid #ca3a11;
-        padding: 10px;
-      margin-top: 20px;
     }
-    .body-input {
-      margin-top: 30px;
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      align-items: center;
+    textarea{
       width: 100%;
-
-      label {
-        font-size: 20px;
-      }
-
-      input {
-        padding: 10px;
-        width: 80%;
-        height: 50px;
-      }
-    }
-    .body-input-confirm {
-      margin-top: 30px;
-      display: flex;
-      flex-flow: row;
-      justify-items: center;
-      justify-content: center;
-      align-content: center;
-      align-items: center;
-      width: 100%;
-
-      label {
-        font-size: 20px;
-      }
-
-      input {
-        padding: 10px;
-        width: 30px;
-        height: 30px;
-      }
-    }
-    .body-input-role {
-      .body-nested-role{
-        display: flex;
-        align-items: baseline;
-        .body-input-role{
-          display: flex;
-            margin-left: 5%;
-          margin-right: 5%;
-          .label-role{
-            align-self: baseline;
-          }
-        }
-      }
-      margin-top: 30px;
-      display: flex;
-      flex-flow: column;
-      justify-items: center;
-      justify-content: center;
-      align-content: center;
-      align-items: center;
-      width: 100%;
-
-      label {
-        font-size: 20px;
-      }
-
-      input {
-        padding: 10px;
-        width: 30px;
-        height: 30px;
-      }
+      padding: 10px;
+      height: 50px;
     }
   }
 }
-input {
-  background: black;
-  padding-right: 10px;
-  color: white;
-  margin: 5px 0;
 
-  border: none;
-  border-bottom: 2px solid saddlebrown;
-  height: 50px;
-  width: 80%;
-  &:focus{
-    outline: none;
-  }}
+.body-input-confirm {
+  margin-top: 30px;
+  display: flex;
+  flex-flow: row;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+
+  label {
+    font-size: 20px;
+  }
+
+  input {
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+  }
+}
+.body-input-role {
+  .body-role{
+    display: flex;
+    align-items: baseline;
+    .body-input-role{
+      display: flex;
+      margin-left: 5%;
+      margin-right: 5%;
+      .label-role{
+        align-self: baseline;
+      }
+    }
+  }
+  margin-top: 30px;
+  display: flex;
+  flex-flow: column;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+
+  label {
+    font-size: 20px;
+  }
+
+  input {
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+  }
+}

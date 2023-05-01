@@ -14,8 +14,8 @@ export class TypeResultComponent implements OnDestroy{
   @Output() typeUpdate=new EventEmitter<boolean>();
   public subscription:Subscription;
   constructor(private typeService:TypeService, private toastService: ToastrService) {}
-  typeDelete(id: number) {
-    if(confirm(environment.messages.type.doYouWantDeleteType)){
+  typeDelete(id: string) {
+    if(confirm(environment.messages.type.typeDoYouWantDelete)){
       this.subscription=  this.typeService.typeDelete(id).subscribe((res: boolean) => {
         if (res == true) {
           this.toastService.success(environment.messages.type.typeDeleteSuccess)

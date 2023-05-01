@@ -7,5 +7,5 @@ export class StoreDto {
   isActive:boolean;
   user: string;
   userId:string;
-  id:number;
+  id:string;
 }

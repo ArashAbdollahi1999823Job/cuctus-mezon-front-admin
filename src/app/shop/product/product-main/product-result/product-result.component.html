@@ -44,10 +44,11 @@
           <a routerLink="/Repository/InventoryOperation/InventoryOperationAdd/{{product.id}}">
             <button class="btn-edit">دادن گزارش انبار<i class="fa-solid fa-list"></i></button>
           </a>
-          <a routerLink="/Color/{{product.id}}">
+          <a routerLink="/Shop/Color/{{product.id}}">
             <button class="btn-edit">رنگ بندی<i class="fa-solid fa-palette"></i></button>
           </a>
-          <a routerLink="/ProductItem/{{product.id}}" (click)="setData(product.typeId,product.productPictureDtos[0].pictureUrl)">
+          <a routerLink="/Shop/ProductItem/ProductItemMain"
+             (click)="setDataForProductItemMain(product.id,product.typeId,product.productPictureDtos[0].pictureUrl)">
             <button class="btn-edit">ایتم ها<i class="fa-solid fa-sliders"></i></button>
           </a>
         </div>
@@ -56,7 +57,6 @@
         <div class="container-color">
           <div style="background-color:{{color.value}}" *ngFor="let color of product.colorDtos" ></div>
         </div>
-
       </td>
       <td>
         <ng-container *ngIf="product.off" >{{product?.off?.name}}/{{product?.off?.offPercent}}درصد</ng-container>
@@ -65,9 +65,8 @@
       <td>{{product.type}}</td>
       <td>{{product.price}}</td>
       <td>{{product.inventory}}</td>
-      <td [ngClass]="product.count<=0?'bg-red':'bg-green'">{{product.count}}</td>
+      <td [ngClass]="product.count<=0?'bg-red-a4':'bg-green-a4'">{{product.count}}</td>
     </tr>
     </tbody>
   </table>
-
 </div>

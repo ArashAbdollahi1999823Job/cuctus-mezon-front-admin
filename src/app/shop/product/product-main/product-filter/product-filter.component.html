@@ -1,35 +1,28 @@
-
 <div class="container-search">
   <div class="search-bar">
     <div class="container-search-btn">
       <input type="text" #name  class="input-search" placeholder="نام..." (keyup.enter)="changeNameSearch()">
       <button class="btn-search" (click)="changeNameSearch()"><i class="fa fa-search"></i></button>
     </div>
-    <div class="select-right-filters">
+    <div class="select-left-filters">
       <select (change)="onChangeInventory($any($event.target)?.value)">
-        <option class="option" value="0">انبار؟</option>
+        <option class="option" value="00000000-0000-0000-0000-000000000000">انبار؟</option>
         <option [selected]="item.id=== productParamDto?.inventoryId" class="option" *ngFor="let item of inventoriesDto" [value]="item?.id">{{item?.name}}</option>
       </select>
     </div>
   </div>
   <div class="select-filters">
-    <div class="select-right-filters">
       <select (change)="onChangeActiveType($any($event.target)?.value)">
         <option class="option" value="0">فعال؟</option>
         <option [selected]="item.key=== productParamDto?.isActive" class="option" *ngFor="let item of activeType" [value]="item?.key">{{item?.title}}</option>
       </select>
-    </div>
-    <div class="select-left-filters">
       <select (change)="onChangeSortType($any($event.target)?.value)">
         <option [selected]="item.key=== productParamDto?.sortType" class="option" *ngFor="let item of sortType" [value]="item?.key">{{item?.title}}</option>
       </select>
-    </div>
-    <div class="select-left-filters">
       <select (change)="onChangeType($any($event.target)?.value)">
-        <option class="option" value="-1">دسته بندی</option>
-        <option class="option" value="0"> سطح یک دسته بندی</option>
+        <option class="option" value="00000000-0000-0000-0000-000000000001">دسته بندی</option>
+        <option class="option" value="00000000-0000-0000-0000-000000000000"> سطح یک دسته بندی</option>
         <option [selected]="item.id=== productParamDto?.typeId" class="option" *ngFor="let item of typesDto" [value]="item?.id">{{item?.name}}</option>
       </select>
-    </div>
   </div>
 </div>

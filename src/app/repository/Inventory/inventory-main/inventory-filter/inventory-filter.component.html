@@ -6,11 +6,9 @@
     </div>
   </div>
   <div class="select-filters">
-    <div class="select-right-filters">
       <select (change)="onChangeActiveType($any($event.target)?.value)">
         <option class="option" value="0">فعال؟</option>
         <option [selected]="item.key=== inventoryParam?.activeType" class="option" *ngFor="let item of activeType" [value]="item?.key">{{item?.title}}</option>
       </select>
     </div>
-  </div>
 </div>

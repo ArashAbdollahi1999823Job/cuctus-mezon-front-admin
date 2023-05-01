@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserDto} from "../../shared/dto/user/userDto";
-import {UserParamDto} from "../../shared/dto/user/userParamDto";
+import {UserSearchDto} from "../../shared/dto/user/userSearchDto";
 import {ToastrService} from "ngx-toastr";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {UserService} from "../../user/user-service/user.service";
@@ -40,10 +40,10 @@ export class StoreAddComponent implements OnInit,OnDestroy {
     })
   }
   userGet() {
-    let userParamDto = new UserParamDto();
+    let userParamDto = new UserSearchDto();
     userParamDto.roleType = 3;
     userParamDto.pageSize = 100;
-    this.userService.userSetParam(userParamDto);
+    this.userService.userSearchDtoSet(userParamDto);
    this.subscription= this.userService.userGetAll().subscribe((res:PaginationDto<UserDto>) => {
       this.usersDto = res.data;
     });

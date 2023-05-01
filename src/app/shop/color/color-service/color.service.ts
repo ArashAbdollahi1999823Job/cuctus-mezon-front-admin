@@ -30,7 +30,7 @@ export class ColorService {
   public colorAdd(colorAddDto:ColorAddDto):Observable<boolean> {
     return this.http.post<boolean>(`${this.backendUrlAdmin}/ColorAdmin/ColorAdd`, colorAddDto);
   }
-  public colorDelete(id:number):Observable<boolean>{
+  public colorDelete(id:string):Observable<boolean>{
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/ColorAdmin/ColorDelete/${id}`);
   }
 }

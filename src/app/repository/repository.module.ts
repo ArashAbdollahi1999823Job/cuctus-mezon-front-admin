@@ -10,7 +10,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {InventoryMainComponent} from "./Inventory/inventory-main/inventory-main-c/inventory-main.component";
 import {InventoryEditComponent} from "./Inventory/inventory-main/inventory-edit/inventory-edit.component";
 import {InventoryFilterComponent} from "./Inventory/inventory-main/inventory-filter/inventory-filter.component";
-import {InventoryResultComponent} from "./Inventory/inventory-main/type-result/inventory-result.component";
+import {InventoryResultComponent} from "./Inventory/inventory-main/inventory-result/inventory-result.component";
 import {
   InventoryOperationAddComponent
 } from "./InventoryOperation/inventory-operation-add/inventory-operation-add.component";

@@ -9,7 +9,7 @@ import {map} from "rxjs/internal/operators/map";
 import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
 import {StoreService} from "../../store/store-service/store.service";
 import {StoreUserService} from "../../store-user/store-user-service/store-user.service";
-import {StoreParamDto} from "../../shared/dto/store/storeParamDto";
+import {StoreSearchDto} from "../../shared/dto/store/storeُSearchDto";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {StoreDto} from "../../shared/dto/store/storeDto";
 @Injectable({
@@ -19,13 +19,13 @@ export class AuthService {
   private backendUrlAdmin = environment.backendUrlAdmin;
   private currentUser = new BehaviorSubject<UserAuthorizeDto>(null);
   public currentUser$ = this.currentUser.asObservable();
-  public storeParamDto=new StoreParamDto();
+  public storeParamDto=new StoreSearchDto();
   constructor(private http: HttpClient, private router: Router,private storeService:StoreService,private storeUserService: StoreUserService) {}
   public login(loginDto: LoginDto): Observable<UserAuthorizeDto> {
     return this.http.put<UserAuthorizeDto>(`${this.backendUrlAdmin}/AccountAdmin/UserLogin`, loginDto).pipe(map((res:UserAuthorizeDto)=> {
         if (res) {
           this.setCurrentUser(res);
-          this.storeParamDto=this.storeService.storeGetParam();
+          this.storeParamDto=this.storeService.storeSearchDtoGet();
           this.storeParamDto.userId=this.decodeToken(this.getToken()).Id;
           this.currentUser$.subscribe((res:UserAuthorizeDto)=>{
             if(res.roles.includes('Seller')){

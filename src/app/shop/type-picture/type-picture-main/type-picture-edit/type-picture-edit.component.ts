@@ -7,7 +7,6 @@ import {Subscription} from "rxjs/internal/Subscription";
 import {TypePictureDto} from "../../../../shared/dto/typePicture/typePictureDto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {environment} from "../../../../../environments/environment";
-import {TypeEditDto} from "../../../../shared/dto/type/typeEditDto";
 import {TypePictureEditDto} from "../../../../shared/dto/typePicture/typePictureEditDto";
 @Component({
   selector: 'type-picture-edit',
@@ -35,7 +34,7 @@ export class TypePictureEditComponent implements OnInit{
     this.subscription= this.typePictureService.typePictureGetById(id).subscribe((res:TypePictureDto[]) => {
       this.typePicturesDto = res[0];
       this.typePicturesDto.pictureUrl=this.backendUrlPicture+"/"+res[0].pictureUrl
-      this.title.setTitle("در حال اپدیت مغازه" +res[0].pictureTitle  + " هستید ");
+      this.title.setTitle("در حال اپدیت عکس دسته" +res[0].pictureTitle  + " هستید ");
 
       this.typePictureEditForm.controls["pictureAlt"].setValue(this.typePicturesDto.pictureAlt);
       this.typePictureEditForm.controls["pictureTitle"].setValue(this.typePicturesDto.pictureTitle);
@@ -52,7 +51,7 @@ export class TypePictureEditComponent implements OnInit{
     typePictureEditDto.isActive= this.typePictureEditForm.controls['isActive'].value;
     this.subscription= this.typePictureService.typePictureEdit(typePictureEditDto).subscribe((res:boolean)=>{
       if(res==true){
-        this.toastService.success(` عکس دسته باموفقیت اپدیت شد.`);
+        this.toastService.success(environment.messages.typePicture.typePictureEditSuccess);
         this.router.navigateByUrl("/TypePicture/"+this.typePictureService.getTypeId()+"/TypePictureMain")
       }
     })

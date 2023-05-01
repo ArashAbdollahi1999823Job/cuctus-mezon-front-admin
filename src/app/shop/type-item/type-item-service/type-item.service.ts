@@ -28,7 +28,7 @@ export class TypeItemService {
   public typeItemAdd(typeItemAddDto:TypeItemAddDto):Observable<boolean> {
     return this.http.post<boolean>(`${this.backendUrlAdmin}/TypeItemAdmin/TypeItemAdd`, typeItemAddDto);
   }
-  public typeItemDelete(id:number):Observable<boolean>{
+  public typeItemDelete(id:string):Observable<boolean>{
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/TypeItemAdmin/TypeItemDelete/${id}`);
   }
 }

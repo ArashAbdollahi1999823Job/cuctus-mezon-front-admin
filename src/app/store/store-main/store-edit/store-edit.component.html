@@ -3,8 +3,10 @@
     <div class="body-form">
       <div class="body-input">
         <label for="user">انتخاب فروشنده</label>
-        <select name="User" formControlName="userId" id="user">
-              <option *ngFor="let item of usersDto" [defaultSelected]="item.id === storeDto?.userId"  value="{{item.id}}" >{{item.username}}</option>
+        <select name="User" class="select-list" formControlName="userId" id="user"
+                [ngClass]="storeEditForm.controls.userId.touched && storeEditForm.controls.userId.errors?.required
+                      ? 'input-error' :'input-success'">
+              <option *ngFor="let user of userDtos" [defaultSelected]="user.id == storeDto.userId" value="{{user.id}}" >{{user.username}}</option>
         </select>
         <div class="error"
              *ngIf="storeEditForm.controls.userId.errors?.required">
@@ -108,7 +110,8 @@
           !
         </div>
       </div>
-      <button type="submit" class="btn" [disabled]="!storeEditForm.valid"   [ngClass]="!storeEditForm.valid ? 'disable':''">ثبت فروشگاه</button>
+      <button type="submit" class="btn" [disabled]="!storeEditForm.valid || storeEditForm.pristine"
+              [ngClass]="!storeEditForm.valid || storeEditForm.pristine ? 'disable':''">اپدیت مغازه</button>
     </div>
   </form>
 </div>

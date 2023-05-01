@@ -1,5 +1,5 @@
 export class OffDto {
-  id:number
+  id:string
   name: string
   description: string
   offPercent: number

@@ -54,7 +54,7 @@ export class ProductService {
     requestProductParam = requestProductParam.append('id', id);
     return this.http.get<PaginationDto<ProductDto>>(`${this.backendUrlAdmin}/ProductAdmin/ProductGetAll`,{params: requestProductParam});
   }
-  public productDelete(id:number):Observable<boolean>{
+  public productDelete(id:string):Observable<boolean>{
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/ProductAdmin/ProductDelete/${id}`);
   }
 }

@@ -14,22 +14,16 @@
     </div>
   </div>
   <div class="select-filters">
-    <div class="select-right-filters">
       <select (change)="onChangeActiveType($any($event.target)?.value)">
         <option class="option" value="0">فعال؟</option>
         <option [selected]="item.key=== storeParamDto?.activeType" class="option" *ngFor="let item of activeType" [value]="item?.key">{{item?.title}}</option>
       </select>
-    </div>
-    <div class="select-left-filters">
       <select (change)="onChangeSortType($any($event.target)?.value)">
         <option [selected]="item.key=== storeParamDto?.sortType" class="option" *ngFor="let item of sortType" [value]="item?.key">{{item?.title}}</option>
       </select>
-    </div>
-    <div class="select-left-filters">
       <select (change)="onChangeUser($any($event.target)?.value)">
         <option class="option" value="">فروشنده</option>
         <option [selected]="item.id=== storeParamDto?.userId" class="option" *ngFor="let item of usersDto" [value]="item?.id">{{item?.username}}</option>
       </select>
-    </div>
   </div>
 </div>

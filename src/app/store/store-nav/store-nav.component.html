@@ -1,15 +1,18 @@
-
 <nav class="nav">
   <ul class="nav-ul">
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="./StoreMain" routerLinkActive="active">
-        <i class="fa-solid fa-city nav-ul-li-i" aria-hidden="true">
+    <a routerLink="./StoreMain">
+      <li class="nav-ul-li" routerLinkActive="active">
+        <i class="fa-solid fa-city nav-ul-li-i">
         </i>
-        مغازه ها</a>
-    </li>
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="StoreAdd"><i class="fa-solid fa-clinic-medical nav-ul-li-i" aria-hidden="true">
-      </i>افزودن مغازه</a>
-    </li>
+        مغازه ها
+      </li>
+    </a>
+    <a routerLink="StoreAdd">
+      <li class="nav-ul-li" routerLinkActive="active">
+        <i class="fa-solid fa-clinic-medical nav-ul-li-i">
+        </i>
+        افزودن مغازه
+      </li>
+    </a>
   </ul>
 </nav>

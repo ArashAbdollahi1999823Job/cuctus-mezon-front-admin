@@ -12,7 +12,7 @@ import {slugify} from "../../../shared/tool/slugify";
 import {ProductAddDto} from "../../../shared/dto/product/productAddDto";
 import {ProductService} from "../product-service/product.service";
 import {InventoryParamDto} from "../../../shared/dto/inventory/inventoryParamDto";
-
+import {environment} from "../../../../environments/environment";
 @Component({
   selector: 'product-add',
   templateUrl: './product-add.component.html',
@@ -20,7 +20,6 @@ import {InventoryParamDto} from "../../../shared/dto/inventory/inventoryParamDto
 })
 
 export class ProductAddComponent implements OnInit, OnDestroy {
-  public inventoryParamDto:InventoryParamDto;
   public typesDto: TypeDto[];
   public inventoriesDto: InventoryDto[];
   public subscription: Subscription;
@@ -36,7 +35,6 @@ export class ProductAddComponent implements OnInit, OnDestroy {
   })
   constructor(private typeService: TypeService, private toast: ToastrService, private router: Router, private inventoryService: InventoryService,private productService:ProductService) {}
   ngOnInit(): void {
-    this.inventoryParamDto=this.inventoryService.inventoryGetParam();
     this.typeGet();
     this.inventoryGet();
 
@@ -47,8 +45,9 @@ export class ProductAddComponent implements OnInit, OnDestroy {
     });
   }
   inventoryGet() {
-    this.inventoryParamDto.storeId=localStorage.getItem('storeId');
-    this.inventoryService.inventorySetParam(this.inventoryParamDto);
+    let inventorySearchDto=new InventoryParamDto();
+    inventorySearchDto.storeId=localStorage.getItem(environment.storeId);
+    this.inventoryService.inventorySetParam(inventorySearchDto);
     this.subscription = this.inventoryService.inventoryGetAll().subscribe((res: InventoryDto[]) => {
       this.inventoriesDto = res;
     })
@@ -57,17 +56,17 @@ export class ProductAddComponent implements OnInit, OnDestroy {
     let productAddDto: ProductAddDto = this.productAddForm.value;
     this.subscription = this.productService.productAdd(productAddDto).subscribe((res: boolean) => {
       if (res == true) {
-        this.toast.success(` محصول  با  موفقیت ثبت شد `);
+        this.toast.success(environment.messages.product.productAddSuccess);
         this.router.navigateByUrl("Product/ProductMain")
       }
     })
+  }
+  slugify() {
+    this.productAddForm.controls['slug'].setValue(slugify(this.productAddForm.controls['name'].value+"-"+Math.floor((Math.random() * 1000) + 1)));
   }
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-  slugify() {
-    this.productAddForm.controls['slug'].setValue(slugify(this.productAddForm.controls['name'].value+"-"+Math.floor((Math.random() * 1000) + 1)));
   }
 }

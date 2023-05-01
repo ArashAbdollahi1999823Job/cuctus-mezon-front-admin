@@ -1,64 +1,48 @@
 .blue{
-  background: cornflowerblue !important;
+  background-color: rgba(0,0,255,.5) !important;
 }
 .orange{
-  background: #BD362F !important;
-}.green{
-  background: #008800 !important;
-}.magenta{
-  background: #8a4182 !important;
+  background-color: rgba(255,100,0,.5) !important;
 }
-
+.green{
+  background-color: rgba(0,255,0,.5) !important;
+}
+.magenta{
+  background-color: rgba(100,100,255,.5) !important;
+}
 td, th {
-  border: 1px solid #777;
   padding: 10px;
   text-align: center;
 }
-
+tr{
+  border: 1px solid black;
+}
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 3px;
-}
-
-tbody tr:nth-child(odd) {
-  background: #eee;
-}
-caption {
-  font-size: 0.8rem;
-}
-td{
-  text-align: center;
 }
 tbody tr:nth-child(odd) {
-  background: #202932;
+  background: navajowhite;
 }
 tbody tr:nth-child(even) {
-  background: #2c3844;
-}
-tbody{
-  color: white;
-}
-th {
-  height: 5px;
-}
-
-td {
-  height: 50px;
+  background:blanchedalmond;
 }
 button{
-border: 1px solid #2e2e2e;
+  border-radius: 5px;
+  font-size: 15px;
+  &:hover{
+    cursor: pointer;
+  }
   width: 75px;
-  border: none;
+  height: 75px;
   margin: 3px;
+  box-shadow: 0 0 6px burlywood;
+  border: 1px solid black;
 }
 .container-btn{
   display: flex;
   justify-content: space-around;
   .btn-remove{
     color: red;
-  }
-  .btn-edit{
-    color: blue;
   }
 }

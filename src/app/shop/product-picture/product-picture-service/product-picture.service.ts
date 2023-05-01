@@ -38,7 +38,7 @@ export class ProductPictureService {
     if (this.productPictureParam.sort) productPictureParam=productPictureParam.append('sort',this.productPictureParam.sort);
     return this.http.get<ProductPictureDto[]>(`${this.backendUrlAdmin}/ProductPictureAdmin/ProductPictureGetAll`, {params: productPictureParam});
   }
-  public productPictureDelete(id:number){
+  public productPictureDelete(id:string){
     return this.http.delete(`${this.backendUrlAdmin}/ProductPictureAdmin/ProductPictureDelete/${id}`);
   }
   public productPictureGetById(id:string):Observable<ProductPictureDto[]>{

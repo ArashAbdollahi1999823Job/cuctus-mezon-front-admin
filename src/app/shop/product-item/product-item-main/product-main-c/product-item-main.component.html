@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let productItemDto of productItemsDto">
+    <tr *ngFor="let productItemDto of productItemDtos">
       <td>{{productItemDto.name}}</td>
       <td>{{productItemDto.value}}</td>
       <td>
@@ -24,11 +24,11 @@
   </table>
   <table>
     <tbody>
-    <tr *ngFor="let typeItemDto of typeItemsDto">
+    <tr *ngFor="let typeItemDto of typeItemDtos">
       <td>{{typeItemDto.name}}</td>
       <td>خالی</td>
       <td>
-        <a routerLink="/ProductItem/{{productId}}/ProductItemAdd" (click)="setNameToAdd(typeItemDto.name)">
+        <a routerLink="/ProductItem/ProductItemAdd" (click)="setNameToAdd(typeItemDto.name)">
           <button class="btn-edit">ایتم احتیاجی<i class="fa-solid fa-plus"></i></button>
         </a>
       </td>

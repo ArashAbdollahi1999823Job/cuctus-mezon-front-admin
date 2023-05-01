@@ -1,46 +1,53 @@
 <nav class="nav" *appPermissionRole="['Boss','Admin','Seller']">
   <ul class="nav-ul">
-    <li class="nav-ul-li" routerLinkActive="active" *appPermissionRole="['Boss','Admin']" >
-      <a routerLink="/User" routerLinkActive="active">
-        <i class="fa-solid fa-user nav-ul-li-i" aria-hidden="true">
+    <a routerLink="/User" *appPermissionRole="['Boss','Admin']">
+    <li class="nav-ul-li" routerLinkActive="active">
+        <i class="fa-solid fa-user nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
     </i>
-        <br>کاربران</a>
+        <br>کاربران
     </li>
-
+    </a>
+    <a routerLink="/Shop">
     <li class="nav-ul-li" routerLinkActive="active" >
-      <a routerLink="/Shop"><i class="fa-solid fa-shop nav-ul-li-i" aria-hidden="true">
-      </i><br>فروشگاه</a>
+        <i class="fa-solid fa-shop nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
+      </i><br>فروشگاه
     </li>
-
-    <li class="nav-ul-li " *appPermissionRole="['Seller']"  routerLinkActive="active">
-      <a routerLink="/Repository">
-        <i class="fa-solid fa-layer-group nav-ul-li-i" aria-hidden="true">
-        </i><br>انبار</a>
+    </a>
+    <a routerLink="/Repository" *appPermissionRole="['Seller']">
+    <li class="nav-ul-li " routerLinkActive="active">
+        <i class="fa-solid fa-layer-group nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
+        </i><br>انبار
     </li>
-
-    <li class="nav-ul-li" routerLinkActive="active" *appPermissionRole="['Boss','Admin']" >
-      <a routerLink="/Store">
-        <i class="fa-solid fa-handshake nav-ul-li-i" aria-hidden="true">
-        </i><br>مغازه ها</a>
+    </a>
+    <a routerLink="/Store" *appPermissionRole="['Boss','Admin']" >
+    <li class="nav-ul-li" routerLinkActive="active" >
+        <i class="fa-solid fa-handshake nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
+        </i><br>مغازه ها
     </li>
-    <li class="nav-ul-li" routerLinkActive="active" *appPermissionRole="['Seller']" >
-      <a routerLink="/StoreUser">
-        <i class="fa-solid fa-store nav-ul-li-i" aria-hidden="true">
-        </i><br>مغازه</a>
+    </a>
+    <a routerLink="/StoreUser"  *appPermissionRole="['Seller']">
+    <li class="nav-ul-li" routerLinkActive="active" >
+        <i class="fa-solid fa-store nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
+        </i><br>مغازه
     </li>
-
+    </a>
+    <a routerLink="/Chat">
     <li class="nav-ul-li" routerLinkActive="active">
-      <a routerLink="/Chat"><i class="fa fa-comments nav-ul-li-i" aria-hidden="true">
-      </i><br>چت</a>
+        <i class="fa fa-comments nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
+      </i><br>چت
     </li>
-
+    </a>
+    <a routerLink="/Commenting">
     <li class="nav-ul-li" routerLinkActive="active">
-      <a routerLink="/Commenting"><i class="fa fa-comment nav-ul-li-i" aria-hidden="true">
-      </i><br>کامنت</a>
+        <i class="fa fa-comment nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
+      </i><br>کامنت
     </li>
-    <li class="nav-ul-li" (click)="logout()" >
-      <a ><i class="fa fa-door-open nav-ul-li-i" aria-hidden="true">
-      </i><br>خروج</a>
+    </a>
+    <a (click)="logout()">
+    <li class="nav-ul-li">
+      <i class="fa fa-door-open nav-ul-li-i" aria-hidden="true">
+      </i><br>خروج
     </li>
+    </a>
   </ul>
 </nav>

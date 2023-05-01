@@ -1,12 +1,13 @@
 <div class="body-component">
   <form [formGroup]="typeAddForm" (ngSubmit)="typeAdd()">
     <div class="body-form">
-      <div class="body-input">
+      <div class="body-input" *ngIf="!typeId">
         <label for="parentTypeId">انتخاب دسته بندی مادر</label>
-        <select name="parentTypeId" formControlName="parentTypeId" id="parentTypeId">
-          <option [ngValue]="null" disabled>انتخاب دسته بندی </option>
-          <option [ngValue]="0"> دسته بندی مادر</option>
-          <option *ngFor="let item of typesDto" value="{{item.id}}" >{{item.name}}</option>
+        <select name="parentTypeId" class="select-list" formControlName="parentTypeId" id="parentTypeId"
+                [ngClass]="typeAddForm.controls.parentTypeId.errors?.required ? 'input-error' :'input-success'">
+          <option [ngValue]="null" disabled>انتخاب دسته بندی</option>
+          <option value="00000000-0000-0000-0000-000000000000"> دسته بندی مادر</option>
+          <option *ngFor="let item of typeDtos"  [value]="item.id" >{{item.name}}</option>
         </select>
         <div class="error"
              *ngIf="typeAddForm.controls.parentTypeId.errors?.required ">

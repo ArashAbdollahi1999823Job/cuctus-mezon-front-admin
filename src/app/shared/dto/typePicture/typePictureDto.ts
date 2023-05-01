@@ -1,10 +1,10 @@
 export class TypePictureDto {
-  id: number
+  id: string
   pictureTitle: any
   pictureAlt: string
   pictureUrl: string
   sort: number
   isActive: boolean
   type: string
-  TypeId: number
+  TypeId: string
 }

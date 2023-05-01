@@ -8,6 +8,9 @@ export const environment = {
   storeId: "storeId",
   productId: "productId",
   productIdForProductPictureMain: "productIdForProductPictureMain",
+  typeIdForProductItemMain:"typeIdForProductItemMain",
+  productPictureForProductItemMain:"productPictureForProductItemMain",
+  productIdForProductItemMain:"productIdForProductItemMain",
   typeId: "typeId",
   productPicture:"productPicture",
   typeItemName:"typeItemName",
@@ -21,29 +24,50 @@ export const environment = {
       colorDeleteSuccess: "حذف رنگ با موفقیت انجام شد.",
       doYouWantDeleteColor: "ایا از حذف رنگ مطمعن هستید؟"
     },
-    off: {
+    off:  {
       offDeleteSuccess: "حذف تخفیف با موفقیت انجام شد.",
-      doYouWantDeleteOff: "ایا از حذف تخفیف مطمعن هستید؟"
+      offDoYouWantDelete: "ایا از حذف تخفیف مطمعن هستید؟",
+      offDoYouWantToCancel:"ایا از کنسل تخفیف  مطمعن هستید؟",
+      offProductDeleteSuccess:"تخفیف محصول باموفقیت حذف شد."
     },
     type: {
       typeDeleteSuccess: "حذف دسته با موفقیت انجام شد.",
-      doYouWantDeleteType: "ایا از حذف دسته مطمعن هستید؟",
+      typeDoYouWantDelete: "ایا از حذف دسته مطمعن هستید؟",
       typeAddSuccess: "دسته با موفقیت ثبت شد.",
     },
     typeItem: {
       typeItemDeleteSuccess: "حذف ایتم دسته با موفقیت انجام شد.",
-      doYouWantDeleteTypeItem: "ایا از حذف ایتم دسته مطمعن هستید؟",
+      typeItemDoYouWantDelete: "ایا از حذف ایتم دسته مطمعن هستید؟",
       typeItemAddSuccess: "ایتم دسته با موفقیت ثبت شد.",
     },
     productItem: {
       productItemDeleteSuccess: "حذف ایتم دسته با موفقیت انجام شد.",
-      doYouWantDeleteProductItem: "ایا از حذف ایتم دسته مطمعن هستید؟",
+      productItemDoYouWantDelete: "ایا از حذف ایتم دسته مطمعن هستید؟",
       productItemAddSuccess: "ایتم دسته با موفقیت ثبت شد.",
     },
     productPicture: {
       productPictureDeleteSuccess: "حذف عکس محصول با موفقیت انجام شد.",
-      doYouWantDeleteProductItem: "ایا از حذف عکس محصول مطمعن هستید؟",
+      productPictureDoYouWantDelete: "ایا از حذف عکس محصول مطمعن هستید؟",
       productPictureAddSuccess: "عکس محصول با موفقیت ثبت شد.",
+      productPictureEditSuccess: "عکس محصول با موفقیت اپدیت شد.",
+    },
+    typePicture: {
+      typePictureDeleteSuccess: "حذف عکس دسته با موفقیت انجام شد.",
+      typePictureEditSuccess: "اپدیت عکس دسته با موفقیت انجام شد.",
+      typeItemDoYouWantDelete: "ایا از حذف عکس دسته مطمعن هستید؟",
+      typePictureAddSuccess: "عکس دسته با موفقیت ثبت شد.",
+    },
+    store: {
+      storePictureDeleteSuccess: "حذف عکس مغازه با موفقیت انجام شد.",
+      storePictureEditSuccess: "اپدیت عکس مغازه با موفقیت انجام شد.",
+      storeItemDoYouWantDelete: "ایا از حذف عکس مغازه مطمعن هستید؟",
+      storePictureAddSuccess: "عکس مغازه با موفقیت ثبت شد.",
+    },
+    product: {
+      productDeleteSuccess: "حذف عکس محصول با موفقیت انجام شد.",
+      productEditSuccess: "اپدیت عکس محصول با موفقیت انجام شد.",
+      productDoYouWantDelete: "ایا از حذف عکس محصول مطمعن هستید؟",
+      productAddSuccess: "عکس محصول با موفقیت ثبت شد.",
     },
   },
   titlePages:{

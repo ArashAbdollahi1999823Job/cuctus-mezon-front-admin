@@ -50,7 +50,6 @@ import {OffAddComponent} from "./off/off-add/off-add.component";
 import {OffComponent} from "./off/off-c/off.component";
 import {OffEditComponent} from "./off/off-main/off-edit/off-edit.component";
 import {OffMainComponent} from "./off/off-main/off-main-c/off-main.component";
-import {OffResultComponent} from "./off/off-main/off-result/off-result.component";
 import { ProductAddOffComponent } from './product/product-main/product-add-off/product-add-off.component';
 import {ColorAddComponent} from "./color/color-add/color-add.component";
 import {ColorNavComponent} from "./color/color-nav/color-nav.component";
@@ -78,7 +77,6 @@ import {ProductItemComponent} from "./product-item/product-item-c/product-item.c
     ColorComponent,
     ColorNavComponent,
     ColorAddComponent,
-    OffResultComponent,
     OffMainComponent,
     OffEditComponent,
     OffComponent,

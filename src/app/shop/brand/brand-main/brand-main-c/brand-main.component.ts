@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {Title} from "@angular/platform-browser";
 import {BrandDto} from "../../../../shared/dto/brand/brandDto";
 import {BrandService} from "../../brand-service/brand.service";
+import {BrandSearchDto} from "../../../../shared/dto/brand/brandSearchDto";
 @Component({
   selector: 'brand-main',
   templateUrl: './brand-main.component.html',
@@ -17,7 +18,9 @@ export class BrandMainComponent implements OnDestroy{
     this.brandGetAll();
     this.title.setTitle("مدیریت برند فروشگاه بزرگ کاکتوس.")
   }
-  public brandGetAll(){
+  private brandGetAll(){
+    let brandSearchDto=new BrandSearchDto();
+    this.brandService.brandSearchDtoSet(brandSearchDto);
     this.subscription= this.brandService.brandGetAll().subscribe((res:PaginationDto<BrandDto>)=>{
       this.paginationBrand=res;
     });

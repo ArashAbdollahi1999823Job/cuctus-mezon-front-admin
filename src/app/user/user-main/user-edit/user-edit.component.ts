@@ -8,6 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {UserService} from "../../user-service/user.service";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {Subscription} from "rxjs/internal/Subscription";
+import {UserSearchDto} from "../../../shared/dto/user/userSearchDto";
 @Component({
   selector: 'user-edit',
   templateUrl: './user-edit.component.html',
@@ -15,8 +16,8 @@ import {Subscription} from "rxjs/internal/Subscription";
 })
 
 export class UserEditComponent implements OnInit , OnDestroy{
-  public id: string;
-  public usersDto: UserDto;
+  public userId: string;
+  public userDto: UserDto;
   public subscription:Subscription;
   public userEditForm = new FormGroup({
     userName: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
@@ -32,18 +33,19 @@ export class UserEditComponent implements OnInit , OnDestroy{
   });
   constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router) {}
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.userGetById(this.id);
+    this.userId = this.activatedRoute.snapshot.paramMap.get('UserId');
+    this.userGetById();
   }
-  public userGetById(id: string) {
-    return this.userService.userGetById(id).subscribe((res:PaginationDto<UserDto>) => {
-      this.usersDto = res.data[0];
-      this.title.setTitle("در حال اپدیت کاربر" + this.usersDto.username + "هستید");
-      this.userEditForm.controls.userName.setValue(this.usersDto.username);
-      this.userEditForm.controls.phoneNumber.setValue(this.usersDto.phoneNumber);
-      this.userEditForm.controls.password.setValue(this.usersDto.password);
-      this.userEditForm.controls.phoneNumberConfirmed.setValue(this.usersDto.phoneNumberConfirmed);
-      this.usersDto.roles.forEach(value => {
+  public userGetById() {
+    let userSearchDto=new UserSearchDto();
+    return this.userService.userGetAll().subscribe((res:PaginationDto<UserDto>) => {
+      this.userDto = res.data[0];
+      this.title.setTitle("در حال اپدیت کاربر" + this.userDto.username + "هستید");
+      this.userEditForm.controls.userName.setValue(this.userDto.username);
+      this.userEditForm.controls.phoneNumber.setValue(this.userDto.phoneNumber);
+      this.userEditForm.controls.password.setValue(this.userDto.password);
+      this.userEditForm.controls.phoneNumberConfirmed.setValue(this.userDto.phoneNumberConfirmed);
+      this.userDto.roles.forEach(value => {
         if(value.name=="Boss")this.userEditForm.controls.roles.controls.boss.setValue(true);
         if(value.name=="Admin")this.userEditForm.controls.roles.controls.admin.setValue(true);
         if(value.name=="Seller")this.userEditForm.controls.roles.controls.seller.setValue(true);
@@ -53,7 +55,7 @@ export class UserEditComponent implements OnInit , OnDestroy{
   }
   userEdit() {
     let userEditDto=new UserEditDto;
-    userEditDto.id =this.id;
+    userEditDto.id =this.userId;
     userEditDto.password=this.userEditForm.controls.password.value;
     userEditDto.phoneNumber=this.userEditForm.controls.phoneNumber.value;
     userEditDto.username=this.userEditForm.controls.userName.value;

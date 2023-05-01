@@ -1,5 +1,5 @@
 export class BrandDto {
-  id: number;
+  id: string;
   name:string;
   description:string;
   metaDescription:string;

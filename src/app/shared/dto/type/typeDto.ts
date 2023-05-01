@@ -1,11 +1,11 @@
 export class TypeDto {
   slug: string
-  id: number;
+  id: string;
   name:string;
   description:string;
   metaDescription:string;
   summary:string;
   isActive: true;
-  parentTypeId:number;
+  parentTypeId:string;
   parentType:string;
 }

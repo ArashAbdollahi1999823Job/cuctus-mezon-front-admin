@@ -1,12 +1,22 @@
+.picture{
+padding: 0;
+
+}
+.title-type{
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+}
 td, th {
-  border: 1px solid #2c3844;
-  padding: 5px;
+  border: 1px solid #777;
+  padding: 10px;
   text-align: center;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  margin: 3px;
 }
 
 tbody tr:nth-child(odd) {
@@ -19,12 +29,10 @@ td{
   text-align: center;
 }
 tbody tr:nth-child(odd) {
-  background: grey;
-  color: black;
+  background: #202932;
 }
 tbody tr:nth-child(even) {
-  background: grey;
-  color: black;
+  background: #2c3844;
 }
 tbody{
   color: white;
@@ -36,24 +44,39 @@ th {
 td {
   height: 50px;
 }
+button{
+  font-size: 15px;
+  &:hover{
+    cursor: pointer;
+  }
+  width: 75px;
+  height: 75px;
+  margin: 3px;
+  box-shadow: 0 0 6px burlywood;
+  border: 1px solid black;
+}
 .container-btn{
   display: flex;
   justify-content: space-around;
+  .btn-icon{
+
+  }
   .btn-remove{
-    padding: 10px;
     color: red;
   }
   .btn-edit{
-    padding: 10px;
     color: blue;
   }
 }
-.picture{
-padding: 0;
-
-}
-.title-type{
-  font-size: 20px;
-  text-align: center;
-  padding: 10px;
+.container-color{
+  display: flex ;
+  justify-items: center  ;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100px;
+  height: auto;
+  div{
+    width: 50px;
+    height: 50px;
+  }
 }

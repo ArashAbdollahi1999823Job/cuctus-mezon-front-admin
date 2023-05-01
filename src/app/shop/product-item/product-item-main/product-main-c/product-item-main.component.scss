@@ -1,41 +1,30 @@
+.title-image{
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  img{
+    border: 1px solid black;
+  }
+}
 td, th {
-  border: 1px solid #777;
   padding: 10px;
   text-align: center;
 }
-
+tr{
+  border: 1px solid black;
+}
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 3px;
-}
-
-tbody tr:nth-child(odd) {
-  background: #eee;
-}
-caption {
-  font-size: 0.8rem;
-}
-td{
-  text-align: center;
 }
 tbody tr:nth-child(odd) {
-  background: #202932;
+  background: navajowhite;
 }
 tbody tr:nth-child(even) {
-  background: #2c3844;
-}
-tbody{
-  color: white;
-}
-th {
-  height: 5px;
-}
-
-td {
-  height: 50px;
+  background:blanchedalmond;
 }
 button{
+  border-radius: 5px;
   font-size: 15px;
   &:hover{
     cursor: pointer;
@@ -49,24 +38,10 @@ button{
 .container-btn{
   display: flex;
   justify-content: space-around;
-  .btn-icon{
-
-  }
   .btn-remove{
     color: red;
   }
   .btn-edit{
     color: blue;
-  }
-}
-
-.title-image{
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  img{
-    margin: 20px;
-    border: 1px solid black;
   }
 }

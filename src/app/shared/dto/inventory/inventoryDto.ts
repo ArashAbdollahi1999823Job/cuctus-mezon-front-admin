@@ -1,5 +1,5 @@
 export class InventoryDto {
-  id: number;
+  id: string;
   name:string;
   isActive: true;
 }

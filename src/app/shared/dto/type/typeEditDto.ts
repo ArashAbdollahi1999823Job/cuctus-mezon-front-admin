@@ -1,7 +1,7 @@
 export class TypeEditDto {
   slug: string;
   id: string;
-  parentTypeId: number;
+  parentTypeId: string;
   name: string;
   description: string;
   metaDescription: string;

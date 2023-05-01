@@ -1,5 +1,5 @@
 export class StoreUserEditDto{
-  id: number;
+  id: string;
   name:string;
   address:string;
   phoneNumber:string;

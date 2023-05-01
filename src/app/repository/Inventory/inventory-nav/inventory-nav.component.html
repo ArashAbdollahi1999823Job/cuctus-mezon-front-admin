@@ -1,15 +1,17 @@
 <nav class="nav">
   <ul class="nav-ul">
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="./InventoryMain" routerLinkActive="active">
+    <a routerLink="./InventoryMain">
+      <li class="nav-ul-li" routerLinkActive="active">
         <i class="fa-solid fa-border-all nav-ul-li-i" aria-hidden="true">
         </i>
-        انبار ها</a>
-    </li>
-
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="./InventoryAdd"><i class="fa-solid fa-book-medical nav-ul-li-i" aria-hidden="true">
-      </i>افزودن انبار</a>
-    </li>
+        انبار ها
+      </li>
+    </a>
+    <a routerLink="./InventoryAdd">
+      <li class="nav-ul-li" routerLinkActive="active">
+        <i class="fa-solid fa-book-medical nav-ul-li-i">
+        </i>افزودن انبار
+      </li>
+    </a>
   </ul>
 </nav>

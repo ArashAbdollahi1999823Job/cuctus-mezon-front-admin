@@ -38,7 +38,7 @@ export class InventoryOperationService {
     requestInventoryOperationParam=requestInventoryOperationParam.append('sortType',this.inventoryOperationParamDto.sortType);
     return requestInventoryOperationParam;
   }
-  public inventoryOperationDelete(id:number):Observable<boolean>{
+  public inventoryOperationDelete(id:string):Observable<boolean>{
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/InventoryOperationAdmin/InventoryOperationDelete/${id}`);
   }
   public inventoryOperationGetParam() {

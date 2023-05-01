@@ -5,5 +5,5 @@ export class InventoryOperationAddDto {
    price: number;
    count: number;
    inventoryOperationType: InventoryOperationType;
-   productId: number;
+   productId: string;
 }

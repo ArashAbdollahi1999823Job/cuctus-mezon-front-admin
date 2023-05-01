@@ -14,7 +14,7 @@ export class StoreResultComponent implements OnDestroy {
   public subscription:Subscription;
   @Output() storeUpdate=new EventEmitter<boolean>();
   constructor(private storeService:StoreService, private toastService: ToastrService) {}
-  storeDelete(id: number) {
+  storeDelete(id: string) {
     if(confirm("ایا از حذف مغازه مطمعن هستید؟")){
       this.subscription=  this.storeService.storeDelete(id).subscribe((res: boolean) => {
         if (res == true) {

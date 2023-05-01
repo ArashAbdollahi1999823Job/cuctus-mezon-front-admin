@@ -34,7 +34,7 @@ export class ProductPictureAddComponent implements OnDestroy{
     formData.append('pictureAlt', this.productPictureAddForm.get("pictureAlt").value);
     formData.append('pictureTitle', this.productPictureAddForm.get("pictureTitle").value);
     formData.append('sort', this.productPictureAddForm.get("sort").value);
-    formData.append('productId', localStorage.getItem(environment.productId));
+    formData.append('productId', localStorage.getItem(environment.productIdForProductPictureMain));
    this.subscription= this.productPictureService.productPictureAdd(formData).subscribe((res:boolean)=>{
       if (res==true){
         this.toastService.success(environment.messages.productPicture.productPictureAddSuccess);

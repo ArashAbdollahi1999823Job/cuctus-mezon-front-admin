@@ -28,7 +28,7 @@ export class ProductItemService {
   public productItemAdd(productItemAddDto:ProductItemAddDto):Observable<boolean> {
     return this.http.post<boolean>(`${this.backendUrlAdmin}/ProductItemAdmin/ProductItemAdd`, productItemAddDto);
   }
-  public productItemDelete(id:number):Observable<boolean>{
+  public productItemDelete(id:string):Observable<boolean>{
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/ProductItemAdmin/ProductItemDelete/${id}`);
   }
 }

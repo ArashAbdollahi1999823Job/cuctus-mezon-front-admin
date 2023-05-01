@@ -15,7 +15,7 @@
           کاراکتر ها نمیتواند بیشتر از 30 باشد !
         </div>
         <div class="error" *ngIf=" typeItemAddForm.controls.name.hasError('minlength')">تعداد
-          کاراکتر ها نمیتواند کمتر از 3 باشد !
+          کاراکتر ها نمیتواند کمتر از 2 باشد !
         </div>
       </div>
       <button type="submit" class="btn" [disabled]="!typeItemAddForm.valid" [ngClass]="!typeItemAddForm.valid ? 'disable':''">ثبت ایتم دسته</button>

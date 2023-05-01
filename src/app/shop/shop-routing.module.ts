@@ -63,7 +63,7 @@ const routes: Routes = [
           ]
       },
       {
-        path: 'ProductItem/:ProductId', canActivate: [SellerJustGuard], component: ProductItemComponent, children:
+        path: 'ProductItem', canActivate: [SellerJustGuard], component: ProductItemComponent, children:
           [
             {path: 'ProductItemMain', component: ProductItemMainComponent},
             {path: '', redirectTo: 'ProductItemMain', pathMatch: 'full'},
@@ -76,6 +76,7 @@ const routes: Routes = [
             {path: 'TypeMain', component: TypeMainComponent},
             {path: '', redirectTo: 'TypeMain', pathMatch: 'full'},
             {path: 'TypeAdd', component: TypeAddComponent},
+            {path: 'TypeAdd/:TypeId', component: TypeAddComponent},
             {path: 'TypeEdit/:id', component: TypeEditComponent},
           ]
       },
@@ -107,7 +108,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'TypePicture/:TypeId', component: TypePictureComponent, children:
+        path: 'TypePicture/:TypeId', canActivate: [AdminGuard], component: TypePictureComponent, children:
           [
             {path: 'TypePictureMain', component: TypePictureMainComponent},
             {path: '', redirectTo: 'TypePictureMain', pathMatch: 'full'},
@@ -116,7 +117,7 @@ const routes: Routes = [
           ]
       },
       {
-        path: 'ProductPicture', component: ProductPictureComponent, children:
+        path: 'ProductPicture', canActivate: [SellerJustGuard], component: ProductPictureComponent, children:
           [
             {path: 'ProductPictureMain', component: ProductPictureMainComponent},
             {path: '', redirectTo: 'ProductPictureMain', pathMatch: 'full'},

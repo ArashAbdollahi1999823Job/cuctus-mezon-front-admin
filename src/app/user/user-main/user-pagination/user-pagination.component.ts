@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {UserParamDto} from "../../../shared/dto/user/userParamDto";
+import {UserSearchDto} from "../../../shared/dto/user/userSearchDto";
 import {UserService} from "../../user-service/user.service";
 @Component({
   selector: 'user-pagination',
@@ -9,7 +9,7 @@ import {UserService} from "../../user-service/user.service";
 
 export class UserPaginationComponent implements OnChanges,OnInit {
   @Output() userUpdate=new EventEmitter<boolean>();
-  public userParamDto: UserParamDto;
+  public userParamDto: UserSearchDto;
   @Input() size: number;
   @Input() index: number;
   @Input() count: number;
@@ -17,14 +17,14 @@ export class UserPaginationComponent implements OnChanges,OnInit {
 
   constructor(private userService: UserService) {  }
   ngOnInit() {
-    this.userParamDto = this.userService.userGetParams();
+    this.userParamDto = this.userService.userSearchDtoGet();
   }
   ngOnChanges(changes: SimpleChanges): void {
         this.countItems = Array.from({length:Math.ceil((Number(this.count) / Number(this.size)))},(v,k)=>k+1);
   }
   changeIndex($event: any) {
     this.userParamDto.pageIndex=Number($event.srcElement.id);
-    this.userService.userSetParam(this.userParamDto);
+    this.userService.userSearchDtoSet(this.userParamDto);
     this.userUpdate.emit(true);
   }
 }

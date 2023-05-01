@@ -51,7 +51,7 @@ export class ProductAddOffComponent implements OnInit {
   }
 
 
-  productAddOff(offId: number) {
+  productAddOff(offId: string) {
     var productEditDto=new ProductEditDto();
     productEditDto.id=this.productDto.id.toString();
     productEditDto.name=this.productDto.name;

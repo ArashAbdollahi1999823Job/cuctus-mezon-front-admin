@@ -3,7 +3,7 @@ import {ProductPictureDto} from "../productPicture/productPictureDto";
 import {ColorDto} from "../color/colorDto";
 
 export class ProductDto {
-  id: number
+  id: string
   name: string
   slug: string
   description: string
@@ -15,12 +15,12 @@ export class ProductDto {
   isActive: boolean
   store: string
   type: string
-  typeId:number
+  typeId:string
   brand: string
   inventory: string
-  inventoryId:number
+  inventoryId:string
   off: OffDto
-  offId:number
+  offId:string
   productPictureDtos:ProductPictureDto[];
   colorDtos:ColorDto[];
 }

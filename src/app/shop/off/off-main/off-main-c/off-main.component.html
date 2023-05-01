@@ -1,1 +1,33 @@
-<off-result [offsDto]="offDto" (offUpdate)="offUpdate($event)"></off-result>
+<div style="overflow-y: auto">
+  <table>
+    <thead>
+    <tr>
+      <th>نام</th>
+      <th>عملیات</th>
+      <th>درصد</th>
+      <th>شروع</th>
+      <th>زمان مانده</th>
+      <th>پایان</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let off of offDtos">
+      <td>{{off.name}}</td>
+      <td>
+        <div class="container-btn">
+          <button class="btn-remove" (click)="offDelete(off.id)" >حذف<i class="fa-solid fa-trash"></i></button>
+
+          <a routerLink="/Shop/Off/OffEdit/{{off.id}}">
+            <button class="btn-edit">اپدیت<i class="fa-solid fa-pen"></i></button>
+          </a>
+        </div>
+      </td>
+      <td>{{off.offPercent}}%</td>
+      <td>{{off.startDate}}</td>
+      <td id="{{off.id}}"></td>
+      <td>{{off.endDate}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -1,5 +1,5 @@
 export class ProductItemDto {
-  id: number;
+  id: string;
   value:string;
   name:string;
 }

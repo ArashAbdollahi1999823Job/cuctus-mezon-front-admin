@@ -14,7 +14,7 @@ export class InventoryOperationResultComponent implements OnDestroy {
   public subscription:Subscription;
   @Output() inventoryOperationUpdate=new EventEmitter<boolean>();
   constructor(private inventoryOperationService:InventoryOperationService, private toastService: ToastrService) {}
-  inventoryOperationDelete(id: number) {
+  inventoryOperationDelete(id: string) {
     if(confirm("ایا از گزارش مغازه مطمعن هستید؟")){
       this.subscription=  this.inventoryOperationService.inventoryOperationDelete(id).subscribe((res: boolean) => {
         if (res == true) {

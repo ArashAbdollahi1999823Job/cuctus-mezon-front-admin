@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {Observable} from "rxjs/internal/Observable";
-import {StoreParamDto} from "../../shared/dto/store/storeParamDto";
+import {StoreSearchDto} from "../../shared/dto/store/storeُSearchDto";
 import {StoreEditDto} from "../../shared/dto/store/storeEditDto";
 import {StoreAddDto} from "../../shared/dto/store/storeAddDto";
 import {StoreDto} from "../../shared/dto/store/storeDto";
@@ -13,9 +13,8 @@ import {StoreDto} from "../../shared/dto/store/storeDto";
 
 export class StoreService {
   private backendUrlAdmin = environment.backendUrlAdmin;
-  public storeParamDto = new StoreParamDto();
+  public storeSearchDto = new StoreSearchDto();
   public storeId:string;
-
   public constructor(private http: HttpClient) {}
   public storeEdit(storeEditDto:StoreEditDto):Observable<boolean>{
     return this.http.put<boolean>(`${this.backendUrlAdmin}/StoreAdmin/StoreEdit`,storeEditDto);
@@ -29,29 +28,24 @@ export class StoreService {
   }
   private generateStoreParam() {
     let requestStoreParam = new HttpParams();
-    if (this.storeParamDto.mobileNumber) requestStoreParam = requestStoreParam.append("mobileNumber", this.storeParamDto.mobileNumber);
-    if (this.storeParamDto.phoneNumber) requestStoreParam = requestStoreParam.append("phoneNumber", this.storeParamDto.phoneNumber);
-    if (this.storeParamDto.name) requestStoreParam = requestStoreParam.append("name", this.storeParamDto.name);
-    if (this.storeParamDto.userId) requestStoreParam = requestStoreParam.append("userId", this.storeParamDto.userId);
-    if (this.storeParamDto.id) requestStoreParam=requestStoreParam.append('id',this.storeParamDto.id);
-    requestStoreParam = requestStoreParam.append('pageIndex', this.storeParamDto.pageIndex);
-    requestStoreParam = requestStoreParam.append('pageSize', this.storeParamDto.pageSize);
-    requestStoreParam = requestStoreParam.append('activeType', this.storeParamDto.activeType);
-    requestStoreParam=requestStoreParam.append('sortType',this.storeParamDto.sortType);
+    if (this.storeSearchDto.mobileNumber) requestStoreParam = requestStoreParam.append("mobileNumber", this.storeSearchDto.mobileNumber);
+    if (this.storeSearchDto.phoneNumber) requestStoreParam = requestStoreParam.append("phoneNumber", this.storeSearchDto.phoneNumber);
+    if (this.storeSearchDto.name) requestStoreParam = requestStoreParam.append("name", this.storeSearchDto.name);
+    if (this.storeSearchDto.userId) requestStoreParam = requestStoreParam.append("userId", this.storeSearchDto.userId);
+    if (this.storeSearchDto.id) requestStoreParam=requestStoreParam.append('id',this.storeSearchDto.id);
+    requestStoreParam = requestStoreParam.append('pageIndex', this.storeSearchDto.pageIndex);
+    requestStoreParam = requestStoreParam.append('pageSize', this.storeSearchDto.pageSize);
+    requestStoreParam = requestStoreParam.append('activeType', this.storeSearchDto.activeType);
+    requestStoreParam=requestStoreParam.append('sortType',this.storeSearchDto.sortType);
     return requestStoreParam;
   }
-  public storeDelete(id:number):Observable<boolean>{
+  public storeDelete(id:string):Observable<boolean>{
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/StoreAdmin/StoreDelete/${id}`);
   }
-  public storeGetById(id:string): Observable<PaginationDto<StoreDto>> {
-    let requestStoreParam = new HttpParams();
-    requestStoreParam=requestStoreParam.append('id',id);
-    return this.http.get<PaginationDto<StoreDto>>(`${this.backendUrlAdmin}/StoreAdmin/StoreGetAll`,{params: requestStoreParam});
+  public storeSearchDtoGet() {
+    return this.storeSearchDto;
   }
-  public storeGetParam() {
-    return this.storeParamDto;
-  }
-  public storeSetParam(storeParamDto: StoreParamDto) {
-    this.storeParamDto = storeParamDto;
+  public storeSearchDtoSet(storeSearchDto: StoreSearchDto) {
+    this.storeSearchDto = storeSearchDto;
   }
 }

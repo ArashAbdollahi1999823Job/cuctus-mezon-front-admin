@@ -1,6 +1,6 @@
 export class TypeAddDto {
   slug: string
-  parentTypeId: number;
+  parentTypeId: string;
   name: string;
   description: string;
   metaDescription: string;

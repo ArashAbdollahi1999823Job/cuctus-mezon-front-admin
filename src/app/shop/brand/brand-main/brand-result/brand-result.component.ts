@@ -13,7 +13,7 @@ export class BrandResultComponent implements OnDestroy{
   @Output() brandUpdate=new EventEmitter<boolean>();
   public subscription:Subscription;
   constructor(private brandService:BrandService, private toastService: ToastrService) {}
-  brandDelete(id: number) {
+  brandDelete(id: string) {
     if(confirm("ایا از حذف برند مطمعن هستید؟")){
       this.subscription=  this.brandService.brandDelete(id).subscribe((res: boolean) => {
         if (res == true) {

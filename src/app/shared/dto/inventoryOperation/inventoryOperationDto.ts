@@ -1,12 +1,12 @@
 import {InventoryOperationType} from "../../enums/inventoryOperationType";
 
 export class InventoryOperationDto {
-  id: number;
+  id: string;
   description: string;
   price: number;
   count: number;
   inventoryOperationType: InventoryOperationType;
   inventory: string;
   product: string;
-  productId: number;
+  productId: string;
 }

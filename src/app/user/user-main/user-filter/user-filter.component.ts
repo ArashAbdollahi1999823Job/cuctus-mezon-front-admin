@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {UserParamDto} from "../../../shared/dto/user/userParamDto";
+import {UserSearchDto} from "../../../shared/dto/user/userSearchDto";
 import {UserService} from "../../user-service/user.service";
 @Component({
   selector: 'user-filter',
@@ -7,12 +7,12 @@ import {UserService} from "../../user-service/user.service";
   styleUrls: ['./user-filter.component.scss']
 })
 export class UserFilterComponent implements OnInit{
-  public userParamDto:UserParamDto;
+  public userParamDto:UserSearchDto;
   @ViewChild("searchPhoneNumber",{static:false}) searchPhoneNumber:ElementRef;
   @ViewChild("searchUserName",{static:false}) searchUserName:ElementRef;
   @Output() userUpdate=new EventEmitter<boolean>();
   constructor(private ef:ElementRef,private userService:UserService) {}
-  ngOnInit(): void {this.userParamDto=this.userService.userGetParams();}
+  ngOnInit(): void {this.userParamDto=this.userService.userSearchDtoGet();}
   roleType=[
     {key:1,title:'مدیر'},
     {key:2,title:'پشتیبان'},
@@ -29,27 +29,27 @@ export class UserFilterComponent implements OnInit{
   ];
   changePhoneSearch() {
     this.userParamDto.searchPhoneNumber=this.searchPhoneNumber?.nativeElement?.value;
-    this.userService.userSetParam(this.userParamDto);
+    this.userService.userSearchDtoSet(this.userParamDto);
     this.userUpdate.emit(true)
   }
   changeUserNameSearch() {
     this.userParamDto.searchUserName=this.searchUserName?.nativeElement?.value
-    this.userService.userSetParam(this.userParamDto);
+    this.userService.userSearchDtoSet(this.userParamDto);
     this.userUpdate.emit(true)
   }
   onChangeRoleType(roleId:any) {
     this.userParamDto.roleType=roleId;
-    this.userService.userSetParam(this.userParamDto);
+    this.userService.userSearchDtoSet(this.userParamDto);
     this.userUpdate.emit(true)
   }
   onChangeSortType(sortType: any) {
     this.userParamDto.sortType=sortType;
-    this.userService.userSetParam(this.userParamDto);
+    this.userService.userSearchDtoSet(this.userParamDto);
     this.userUpdate.emit(true)
   }
   onChangeConfirmedType(confirmedType: any) {
     this.userParamDto.phoneNumberConfirmed=confirmedType;
-    this.userService.userSetParam(this.userParamDto);
+    this.userService.userSearchDtoSet(this.userParamDto);
     this.userUpdate.emit(true)
   }
 }

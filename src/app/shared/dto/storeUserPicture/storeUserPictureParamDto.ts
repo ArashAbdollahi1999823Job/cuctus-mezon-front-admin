@@ -1,4 +1,4 @@
 export class StoreUserPictureParamDto {
-  id:number;
+  id:string;
   storeId: string;
 }

@@ -16,7 +16,6 @@ import {environment} from "../../../../../environments/environment";
 import {ProductPictureService} from "../../../product-picture/product-picture-service/product-picture.service";
 import {ProductPictureSearchDto} from "../../../../shared/dto/productPicture/productPictureSearchDto";
 import {ProductPictureDto} from "../../../../shared/dto/productPicture/productPictureDto";
-
 @Component({
   selector: 'product-result',
   templateUrl: './product-result.component.html',
@@ -26,24 +25,21 @@ export class ProductResultComponent implements OnDestroy, OnChanges {
   @Input("productDtos") productDtos: ProductDto[];
   public backendUrlPicture = environment.backendUrlPicture;
   @Output() productUpdate = new EventEmitter<boolean>();
-  public subscription: Subscription;
-
+  private subscription: Subscription;
   constructor(private productService: ProductService, private toastService: ToastrService, private productPictureService: ProductPictureService) {
   }
-
-  public productDelete(id: number) {
-    if (confirm("ایا از حذف محصول مطمعن هستید؟")) {
+  public productDelete(id: string):void {
+    if (confirm(environment.messages.product.productDoYouWantDelete)){
       this.subscription = this.productService.productDelete(id).subscribe((res: boolean) => {
         if (res == true) {
-          this.toastService.success(`محصول با موفقیت حذف شد.`)
+          this.toastService.success(environment.messages.product.productDeleteSuccess)
           this.productUpdate.emit(true)
         }
       })
     }
   }
-
-  public productOffDelete(id: number) {
-    if (confirm("ایا از کنسل تخفیف  مطمعن هستید؟")) {
+  public productOffDelete(id: string):void {
+    if (confirm(environment.messages.off.offDoYouWantToCancel)) {
       var productDto = this.productDtos.find(x => x.id == id);
       var productEditDto = new ProductEditDto();
       productEditDto.id = productDto.id.toString();
@@ -56,23 +52,21 @@ export class ProductResultComponent implements OnDestroy, OnChanges {
       productEditDto.isActive = productDto.isActive;
       productEditDto.typeId = productDto.typeId;
       productEditDto.inventoryId = productDto.inventoryId;
-      productEditDto.offId = 0;
+      productEditDto.offId ="00000000-0000-0000-0000-000000000000";
       this.subscription = this.productService.productEdit(productEditDto).subscribe((res: boolean) => {
         if (res == true) {
-          this.toastService.success(` تخفیف محصول باموفقیت حذف شد.`);
+          this.toastService.success(environment.messages.off.offProductDeleteSuccess);
           this.productUpdate.emit(true)
         }
       })
     }
   }
-
-  public productPictureGetThumbnail() {
+  public productPictureGetThumbnail():void {
     this.productDtos?.forEach(x => {
       this.productPictureGet(x.id.toString(), environment.productSetting.thumbnail)
     })
   }
-
-  public productPictureGet(productId: string, sort: number) {
+  public productPictureGet(productId: string, sort: number) :void {
     let productPictureSearchDto = new ProductPictureSearchDto();
     productPictureSearchDto.productId = productId;
     productPictureSearchDto.sort = sort;
@@ -88,24 +82,18 @@ export class ProductResultComponent implements OnDestroy, OnChanges {
       }
     })
   }
-
-
-
   public ngOnChanges(changes: SimpleChanges): void {
     this.productPictureGetThumbnail();
   }
-
-  setData(typeId: number, productPicture: string) {
-    localStorage.setItem(environment.typeId, typeId.toString())
-    localStorage.setItem(environment.productPicture, productPicture)
+  setDataForProductItemMain(productId :string,typeId: string, productPicture: string) :void {
+    localStorage.setItem(environment.productIdForProductItemMain,productId);
+    localStorage.setItem(environment.typeIdForProductItemMain, typeId);
+    localStorage.setItem(environment.productPictureForProductItemMain, productPicture);
   }
-  setProductId(id: number) {
-    localStorage.setItem(environment.productIdForProductPictureMain,id.toString());
+  setProductId(id: string):void {
+    localStorage.setItem(environment.productIdForProductPictureMain,id);
   }
-
   public ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    if (this.subscription)this.subscription.unsubscribe();
   }
 }

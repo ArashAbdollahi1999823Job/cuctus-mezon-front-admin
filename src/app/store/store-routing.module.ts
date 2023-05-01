@@ -4,15 +4,13 @@ import {StoreMainComponent} from "./store-main/store-main-c/store-main.component
 import {StoreAddComponent} from "./store-add/store-add.component";
 import {StoreEditComponent} from "./store-main/store-edit/store-edit.component";
 import {StoreComponent} from "./store-c/store.component";
-
-
 const routes: Routes = [
   {
     path: '', component: StoreComponent, children: [
       {path:'StoreMain',component:StoreMainComponent},
       { path:'', redirectTo:'StoreMain',pathMatch:'full'},
       { path:'StoreAdd', component:StoreAddComponent},
-      { path:'StoreMain/StoreEdit/:id', component:StoreEditComponent},
+      { path:'StoreEdit/:StoreId', component:StoreEditComponent},
     ]
   }
 ];

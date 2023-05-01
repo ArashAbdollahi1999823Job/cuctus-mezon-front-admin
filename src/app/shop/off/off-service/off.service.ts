@@ -47,7 +47,7 @@ export class OffService {
     return this.http.get<OffDto[]>(`${this.backendUrlAdmin}/OffAdmin/OffGetAll`, {params: requestBrandParam});
   }
 
-  public offDelete(id: number): Observable<boolean> {
+  public offDelete(id: string): Observable<boolean> {
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/OffAdmin/OffDelete/${id}`);
   }
 }

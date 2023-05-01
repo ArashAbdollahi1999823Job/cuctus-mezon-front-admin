@@ -1,5 +1,5 @@
 export class StoreUserPictureDto {
-  id: number
+  id: string
   pictureTitle: any
   pictureAlt: string
   pictureUrl: string

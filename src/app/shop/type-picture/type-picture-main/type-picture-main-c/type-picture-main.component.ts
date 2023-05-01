@@ -26,7 +26,7 @@ export class TypePictureMainComponent implements OnInit,OnDestroy{
     });
   }
 
-  typePictureDelete(id: number) {
+  typePictureDelete(id: string) {
     if(confirm("ایا از حذف فیزیکی عکس دسته مطمعن هستید؟")){
      this.subscription= this.typePictureService.typePictureDelete(id).subscribe((res:boolean)=>{
         if(res==true){

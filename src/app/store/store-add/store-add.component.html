@@ -3,7 +3,9 @@
     <div class="body-form">
       <div class="body-input">
         <label for="user">انتخاب فروشنده</label>
-        <select name="User" formControlName="userId" id="user">
+        <select name="User" class="select-list" formControlName="userId" id="user"
+                [ngClass]="storeAddForm.controls.userId.errors?.required
+                     ? 'input-error' :'input-success'">
           <option [ngValue]="null" disabled>انتخاب فروشنده</option>
           <option *ngFor="let item of usersDto" value="{{item.id}}" >{{item.username}}</option>
         </select>
@@ -106,7 +108,7 @@
       <div>
 
       </div>
-      <button type="submit" class="btn" [disabled]="!storeAddForm.valid"   [ngClass]="!storeAddForm.valid ? 'disable':''">ثبت فروشگاه</button>
+      <button type="submit" class="btn" [disabled]="!storeAddForm.valid"   [ngClass]="!storeAddForm.valid ? 'disable':''">ثبت مغازه</button>
     </div>
 
   </form>

@@ -1,14 +1,8 @@
 <div class="body-paging">
-  <span class="item-paging ">
-      <i class="fa fa-arrow-alt-circle-right"></i>
-  </span>
   <span class="containerItem">
     <ng-container *ngFor="let item of countItems">
     <span class="item-paging " [ngClass]="item==index ? 'active' : '' " id="{{item}}" (click)="changeIndex($event)" >{{item}}</span>
     </ng-container>
-  </span>
-  <span class="item-paging " >
-    <i class="fa fa-arrow-alt-circle-left"></i>
   </span>
 </div>
 

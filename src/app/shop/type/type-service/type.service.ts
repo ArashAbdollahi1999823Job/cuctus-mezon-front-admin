@@ -50,6 +50,7 @@ export class TypeService {
     return this.http.post<boolean>(`${this.backendUrlAdmin}/TypeAdmin/TypeAdd`, typeAddDto);
   }
   public typeEdit(typeEditDto:TypeEditDto):Observable<boolean> {
+    console.log(typeEditDto)
     return this.http.put<boolean>(`${this.backendUrlAdmin}/TypeAdmin/TypeEdit`, typeEditDto);
   }
   public typeGetById(id:string): Observable<PaginationDto<TypeDto>> {
@@ -61,7 +62,7 @@ export class TypeService {
       requestTypeParam=requestTypeParam.append('id',id);
       return requestTypeParam;
     }
-  public typeDelete(id:number):Observable<boolean>{
+  public typeDelete(id:string):Observable<boolean>{
     return this.http.delete<boolean>(`${this.backendUrlAdmin}/TypeAdmin/TypeDelete/${id}`);
   }
 }

@@ -18,7 +18,6 @@ export class ProductPictureEditComponent implements OnInit{
   public productPictureId:string;
   public subscription:Subscription;
   public backendUrlPicture = environment.backendUrlPicture;
-
   public productPictureEditForm=new FormGroup({
     pictureAlt: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
     pictureTitle: new FormControl(null , [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
@@ -27,22 +26,20 @@ export class ProductPictureEditComponent implements OnInit{
   });
   constructor(private productPictureService: ProductPictureService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router) {}
   ngOnInit(): void {
-    this.productPictureId = this.activatedRoute.snapshot.paramMap.get('ProductPictureId');
+    this.productPictureId=this.activatedRoute.snapshot.paramMap.get('ProductPictureId');
     this.productPictureGetById(this.productPictureId)
   }
   public productPictureGetById(id: string) {
     this.subscription= this.productPictureService.productPictureGetById(id).subscribe((res:ProductPictureDto[]) => {
       this.productPicturesDto = res[0];
-      this.productPicturesDto.pictureUrl=this.backendUrlPicture+"/"+res[0].pictureUrl
       this.title.setTitle("در حال اپدیت عکس" +res[0].pictureTitle  + " هستید ");
-
       this.productPictureEditForm.controls["pictureAlt"].setValue(this.productPicturesDto.pictureAlt);
       this.productPictureEditForm.controls["pictureTitle"].setValue(this.productPicturesDto.pictureTitle);
       this.productPictureEditForm.controls["sort"].setValue(this.productPicturesDto.sort.toString());
       this.productPictureEditForm.controls["isActive"].setValue(this.productPicturesDto.isActive);
     })
   }
-  productPictureEdit() {
+  public productPictureEdit() {
     let productPictureEditDto=new ProductPictureEditDto();
     productPictureEditDto.id =this.productPictureId;
     productPictureEditDto.pictureTitle= this.productPictureEditForm.controls['pictureTitle'].value;
@@ -51,8 +48,8 @@ export class ProductPictureEditComponent implements OnInit{
     productPictureEditDto.isActive= this.productPictureEditForm.controls['isActive'].value;
     this.subscription= this.productPictureService.productPictureEdit(productPictureEditDto).subscribe((res:boolean)=>{
       if(res==true){
-        this.toastService.success(` عکس محصول باموفقیت اپدیت شد.`);
-        this.router.navigateByUrl("/ProductPicture/"+this.productPictureService.getProductId()+"/ProductPictureMain")
+        this.toastService.success(environment.messages.productPicture.productPictureEditSuccess);
+        this.router.navigateByUrl("/ProductPicture/ProductPictureMain")
       }
     })
   }

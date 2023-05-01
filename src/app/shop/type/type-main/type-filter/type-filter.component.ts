@@ -13,10 +13,8 @@ export class TypeFilterComponent {
   @Output() typeUpdate=new EventEmitter<boolean>();
   public typeParam=new TypeParamDto;
   public typesDto:TypeDto[];
- // public allProductType:ProductTypeDto[];
   constructor(private ef:ElementRef,private typeService: TypeService){}
   ngOnInit(): void {
-   // this.getProductType();
     this.typeGet();
     this.typeParam=this.typeService.typeGetParam();
   }
@@ -33,12 +31,6 @@ export class TypeFilterComponent {
       this.typesDto = res.data;
     });
   }
-/*  getProductType() {
-    this.productTypeService.setProductTypeParams(this.productTypeParams);
-    this.productTypeService.getProductType().subscribe((res) => {
-      this.productType = res.data;
-    });
-  }*/
   onChangeActiveType(activeType:any) {
     this.typeParam.activeType=activeType;
     this.typeService.typeSetParam(this.typeParam);

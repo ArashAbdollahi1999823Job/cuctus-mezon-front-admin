@@ -19,7 +19,6 @@
         </div>
         <div class="error" *ngIf=" userEditForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
       </div>
-
       <div class="body-input">
         <label for="userName">نام کاربری </label>
         <input type="text" placeholder="نام کاربری ..." id="userName" formControlName="userName" [ngClass]="
@@ -38,7 +37,7 @@
         </div>
       </div>
       <div class="body-input">
-        <label for="password">گذر واژه </label>
+        <label for="password">گذرواژه</label>
         <input type="text" placeholder="پسوورد ..." id="password" formControlName="password" [ngClass]="
                      userEditForm.controls.password.touched && userEditForm.controls.password.errors?.required
                      || userEditForm.controls.password.errors?.maxlength ||
@@ -59,10 +58,9 @@
         <label for="phoneNumberConfirmed">تایید شماره تلفن</label>
         <input type="checkbox" id="phoneNumberConfirmed" formControlName="phoneNumberConfirmed">
       </div>
-
       <div class="body-input-role">
         <label>نقش کاریر</label>
-        <div formGroupName="roles"  class="body-nested-role">
+        <div formGroupName="roles"  class="body-role">
           <div  class="body-input-role">
             <label class="label-role" for="boss" >مدیر</label>
             <input type="checkbox" id="boss" formControlName="boss">

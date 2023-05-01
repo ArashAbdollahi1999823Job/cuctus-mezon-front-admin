@@ -1,4 +1,4 @@
 export class TypeItemDto {
-  id: number;
+  id: string;
   name:string;
 }

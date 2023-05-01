@@ -9,9 +9,9 @@ export class ProductSearchDto {
   public name: string;
   public slug: string;
   public price: number;
-  public inventoryId: number;
-  public typeId: number;
-  public brandId: number;
+  public inventoryId: string;
+  public typeId: string;
+  public brandId: string;
   public off: number;
   public sortType: SortType=SortType.desc;
   public storeId: string;

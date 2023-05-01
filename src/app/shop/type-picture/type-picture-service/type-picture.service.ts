@@ -44,7 +44,7 @@ export class TypePictureService {
     if (this.typePictureParam.id) requestParams=requestParams.append('id',this.typePictureParam.id);
     return requestParams;
   }
-  public typePictureDelete(id:number){
+  public typePictureDelete(id:string){
     return this.http.delete(`${this.backendUrlAdmin}/TypePictureAdmin/TypePictureDelete/${id}`);
   }
   public typePictureGetById(id:string):Observable<TypePictureDto[]>{

@@ -13,7 +13,7 @@ export class InventoryResultComponent implements OnDestroy{
   @Output() inventoryUpdate=new EventEmitter<boolean>();
   public subscription:Subscription;
   constructor(private inventoryService:InventoryService, private toastService: ToastrService) {}
-  inventoryDelete(id: number) {
+  inventoryDelete(id: string) {
     if(confirm("ایا از حذف انبار مطمعن هستید؟")){
       this.subscription=  this.inventoryService.inventoryDelete(id).subscribe((res: boolean) => {
         if (res == true) {

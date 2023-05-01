@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Subscription} from "rxjs/internal/Subscription";
@@ -15,7 +15,7 @@ import {environment} from "../../../../environments/environment";
 export class TypeItemAddComponent implements OnDestroy{
   public subscription:Subscription;
   public typeItemAddForm: FormGroup = new FormGroup({
-    name: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
+    name: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(2)]),
   })
   constructor(private typeItemService: TypeItemService, private toast: ToastrService, private router:Router) {}
   typeItemAdd() {

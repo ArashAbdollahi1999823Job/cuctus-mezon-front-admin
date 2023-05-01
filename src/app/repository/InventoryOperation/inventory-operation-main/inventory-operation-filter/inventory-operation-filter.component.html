@@ -10,22 +10,18 @@
     </div>
   </div>
   <div class="select-filters">
-    <div class="select-right-filters">
       <select (change)="onChangeInventoryOperationType($any($event.target)?.value)">
         <option class="option" value="0">نوع گزارش؟</option>
         <option [selected]="item.key=== inventoryOperationParamDto?.inventoryOperationType" class="option" *ngFor="let item of inventoryOperationType" [value]="item?.key">{{item?.title}}</option>
       </select>
-    </div>
-    <div class="select-left-filters">
+
       <select (change)="onChangeSortType($any($event.target)?.value)">
         <option [selected]="item.key=== inventoryOperationParamDto?.sortType" class="option" *ngFor="let item of sortType" [value]="item?.key">{{item?.title}}</option>
       </select>
-    </div>
-    <div class="select-left-filters">
+
       <select (change)="onChangeInventory($any($event.target)?.value)">
         <option class="option" value="">انبار؟</option>
         <option [selected]="item.id=== inventoryOperationParamDto?.inventoryId" class="option" *ngFor="let item of inventoriesDto" [value]="item?.id">{{item?.name}}</option>
       </select>
-    </div>
   </div>
 </div>

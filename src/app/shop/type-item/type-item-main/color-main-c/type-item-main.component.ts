@@ -30,8 +30,8 @@ export class TypeItemMainComponent implements OnDestroy{
       this.typeItemsDto=res;
     });
   }
-  public typeItemDelete(id: number) {
-    if(confirm(environment.messages.typeItem.doYouWantDeleteTypeItem)){
+  public typeItemDelete(id: string) {
+    if(confirm(environment.messages.typeItem.typeItemDoYouWantDelete)){
       this.subscription=this.typeItemService.typeItemDelete(id).subscribe((res:boolean)=>{
         if(res==true){
           this.toastService.success(environment.messages.typeItem.typeItemDeleteSuccess);

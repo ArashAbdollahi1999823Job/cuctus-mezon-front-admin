@@ -1,5 +1,5 @@
 export class ColorDto {
-  id: number;
+  id: string;
   name:string;
   value:string;
 }

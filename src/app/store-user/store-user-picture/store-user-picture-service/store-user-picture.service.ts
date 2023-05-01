@@ -7,7 +7,7 @@ import {StoreUserPictureParamDto} from "../../../shared/dto/storeUserPicture/sto
 import {StoreUserPictureDto} from "../../../shared/dto/storeUserPicture/storeUserPictureDto";
 import {TypePictureEditDto} from "../../../shared/dto/typePicture/typePictureEditDto";
 import {StoreUserPictureEditDto} from "../../../shared/dto/storeUserPicture/storeUserPictureEditDto";
-import {StoreParamDto} from "../../../shared/dto/store/storeParamDto";
+import {StoreSearchDto} from "../../../shared/dto/store/storeُSearchDto";
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +26,7 @@ export class StoreUserPictureService {
     if (this.storeUserPictureParamDto.id) storeUserPictureParam=storeUserPictureParam.append('id',this.storeUserPictureParamDto.id);
     return this.http.get<StoreUserPictureDto[]>(`${this.backendUrlAdmin}/StoreUserPictureAdmin/StoreUserPictureGetAll`, {params: storeUserPictureParam});
   }
-  public storeUserPictureDelete(id:number){
+  public storeUserPictureDelete(id:string){
     return this.http.delete(`${this.backendUrlAdmin}/StoreUserPictureAdmin/StoreUserPictureDelete/${id}`);
   }
   public storeUserPictureGetById(id:string):Observable<StoreUserPictureDto[]>{

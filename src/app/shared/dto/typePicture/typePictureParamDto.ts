@@ -1,4 +1,4 @@
 export class TypePictureParamDto {
-  id:number;
-  typeId: number;
+  id:string;
+  typeId: string;
 }

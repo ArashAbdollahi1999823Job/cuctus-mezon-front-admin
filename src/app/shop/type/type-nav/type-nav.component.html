@@ -1,15 +1,17 @@
 <nav class="nav">
   <ul class="nav-ul">
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="./TypeMain" routerLinkActive="active">
-        <i class="fa-solid fa-border-all nav-ul-li-i" aria-hidden="true">
+    <a routerLink="./TypeMain">
+      <li class="nav-ul-li" routerLinkActive="active">
+        <i class="fa-solid fa-border-all nav-ul-li-i">
         </i>
-        دسته ها</a>
-    </li>
-
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="./TypeAdd"><i class="fa-solid fa-book-medical nav-ul-li-i" aria-hidden="true">
-      </i>افزودن دسته</a>
-    </li>
+        دسته ها
+      </li>
+    </a>
+    <a routerLink="./TypeAdd">
+      <li class="nav-ul-li" routerLinkActive="active">
+        <i class="fa-solid fa-book-medical nav-ul-li-i">
+        </i>افزودن دسته
+      </li>
+    </a>
   </ul>
 </nav>

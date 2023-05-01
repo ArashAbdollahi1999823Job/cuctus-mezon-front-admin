@@ -1,15 +1,18 @@
 <nav class="nav">
   <ul class="nav-ul">
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="./OffMain" routerLinkActive="active">
+    <a routerLink="./OffMain">
+      <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <i class="fa-solid fa-money-bills nav-ul-li-i" aria-hidden="true">
         </i>
-        تخفیف ها </a>
-    </li>
+        تخفیف ها
+      </li>
+    </a>
+    <a routerLink="./OffAdd">
+      <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
 
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="./OffAdd"><i class="fa-solid fa-money-bill-1 nav-ul-li-i" aria-hidden="true">
-      </i>افزودن تخفیف</a>
-    </li>
+        <i class="fa-solid fa-money-bill-1 nav-ul-li-i" aria-hidden="true">
+        </i>افزودن تخفیف
+      </li>
+    </a>
   </ul>
 </nav>

@@ -4,10 +4,10 @@
     <tr>
       <th>توضیحات</th>
       <th>محصول</th>
+      <th>عملیات</th>
       <th>قیمت واحد</th>
       <th>تعداد</th>
       <th>نوع گزارش</th>
-      <th>عملیات</th>
       <th>انبار</th>
     </tr>
     </thead>
@@ -19,6 +19,11 @@
     ]">
       <td>{{item.description}}</td>
       <td>{{item.product}}</td>
+      <td>
+        <div class="container-btn">
+          <button class="btn-remove" (click)="inventoryOperationDelete(item.id)" >حذف<i class="fa-solid fa-trash"></i></button>
+        </div>
+      </td>
       <td>{{item.price}}</td>
       <td>{{item.count}}</td>
       <td>
@@ -27,11 +32,7 @@
         <ng-container *ngIf="item.inventoryOperationType.toString()=='3'">فروش</ng-container>
         <ng-container *ngIf="item.inventoryOperationType.toString()=='4'">خرید</ng-container>
       </td>
-      <td>
-        <div class="container-btn">
-          <button class="btn-remove" (click)="inventoryOperationDelete(item.id)" ><i class="fa-solid fa-trash"></i></button>
-        </div>
-      </td>
+
       <td>{{item.inventory}}</td>
 
     </tr>

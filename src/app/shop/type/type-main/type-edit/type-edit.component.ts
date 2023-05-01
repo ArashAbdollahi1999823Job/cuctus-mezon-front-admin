@@ -16,7 +16,6 @@ import {Subscription} from "rxjs/internal/Subscription";
 })
 export class TypeEditComponent implements OnDestroy {
   public typesDto:TypeDto[];
-
   public id: string;
   public subscription:Subscription;
   public typeEditForm: FormGroup = new FormGroup({
@@ -40,7 +39,7 @@ export class TypeEditComponent implements OnDestroy {
     this.subscription= this.typeService.typeGetById(id).subscribe((res:PaginationDto<TypeDto>) => {
       if(res){
         this.typeDto = res.data[0];
-        if(this.typeDto.parentTypeId==null)this.typeDto.parentTypeId=0;
+        if(this.typeDto.parentTypeId==null)this.typeDto.parentTypeId="00000000-0000-0000-0000-000000000000";
         this.title.setTitle(" در حال اپدیت دسته " +res.data[0].name  + " هستید ");
         this.typeEditForm.controls["name"].setValue(this.typeDto.name);
         this.typeEditForm.controls["slug"].setValue(this.typeDto.slug);

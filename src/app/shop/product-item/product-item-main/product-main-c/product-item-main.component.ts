@@ -9,7 +9,7 @@ import {ToastrService} from "ngx-toastr";
 import {TypeItemSearchDto} from "../../../../shared/dto/typeItem/typeItemSearchDto";
 import {TypeItemService} from "../../../type-item/type-item-service/type-item.service";
 import {TypeItemDto} from "../../../../shared/dto/typeItem/typeItemDto";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 @Component({
   selector: 'product-item-main',
   templateUrl: './product-item-main.component.html',
@@ -18,52 +18,61 @@ import {Router} from "@angular/router";
 
 export class ProductItemMainComponent implements OnDestroy{
   public backendUrlPicture=environment.backendUrlPicture;
-  public productItemsDto:ProductItemDto[];
-  public typeItemsDto:TypeItemDto[];
-  public subscription:Subscription;
+  public productPictureUrl:string;
+  public productItemDtos:ProductItemDto[];
+  public typeItemDtos:TypeItemDto[];
   public productId:string;
+  public typeId:string;
   public typeItemToDelete:TypeItemDto[]=[];
   public index:number;
-
-  public productPictureUrl:string;
-  constructor(private productItemService:ProductItemService, private title:Title, private toastService:ToastrService,private typeItemService:TypeItemService,private router:Router) {}
+  public subscription:Subscription;
+  constructor(private productItemService:ProductItemService, private title:Title,private activatedRoute:ActivatedRoute,private router:Router
+             , private toastService:ToastrService,private typeItemService:TypeItemService) {}
   ngOnInit(): void {
-    this.productItemGetAll();
+    this.typeId=localStorage.getItem(environment.typeIdForProductItemMain);
+    this.productId=localStorage.getItem(environment.productIdForProductItemMain);
+    this.productPictureUrl=localStorage.getItem(environment.productPictureForProductItemMain);
     this.title.setTitle(environment.titlePages.productItem.productItemMain);
-    this.productPictureUrl=localStorage.getItem(environment.productPicture)
-    this.productId=localStorage.getItem(environment.productId)
+    this.productItemGetAll();
+    this.checkStorage();
+  }
+  private checkStorage() {
+    window.addEventListener('storage', (e) => {
+      if (this.productId != localStorage.getItem(environment.productIdForProductItemMain)
+      ||this.typeId != localStorage.getItem(environment.typeIdForProductItemMain))
+       {
+        this.router.navigateByUrl('/Shop')
+      }
+    })
   }
   private productItemGetAll(){
     let productItemSearchDto=new ProductItemSearchDto();
-    productItemSearchDto.productId=localStorage.getItem(environment.productId);
+    productItemSearchDto.productId=this.productId;
     this.productItemService.productItemSearchDtoSet(productItemSearchDto);
     this.subscription= this.productItemService.productItemGetAll().subscribe((res:ProductItemDto[])=>{
-      this.productItemsDto=res;
+      this.productItemDtos=res;
       this.typeItemGetAll();
     });
   }
   private typeItemGetAll(){
     let typeItemSearchDto=new TypeItemSearchDto();
-    typeItemSearchDto.typeId=localStorage.getItem(environment.typeId);
+    typeItemSearchDto.typeId=this.typeId;
     this.typeItemService.typeItemSearchDtoSet(typeItemSearchDto);
     this.subscription= this.typeItemService.typeItemGetAll().subscribe((res:TypeItemDto[])=>{
-      this.typeItemsDto=res;
-      this.one();
+      this.typeItemDtos=res;
+      this.typeItemCalculateDelete();
     });
   }
-
-  public one(){
-    this.productItemsDto.forEach(product=>{
-      this.typeItemsDto.forEach(typeItem=>{
+  public typeItemCalculateDelete(){
+    this.productItemDtos.forEach(product=>{
+      this.typeItemDtos.forEach(typeItem=>{
         if(typeItem.name==product.name)this.typeItemToDelete.push(typeItem)
       })
     })
-   this.typeItemsDto= this.typeItemsDto.filter(x=>this.typeItemToDelete.indexOf(x) <0)
+   this.typeItemDtos= this.typeItemDtos.filter(x=>this.typeItemToDelete.indexOf(x) <0)
   }
-
-
-  public productItemDelete(id: number) {
-    if(confirm(environment.messages.productItem.doYouWantDeleteProductItem)){
+  public productItemDelete(id: string) {
+    if(confirm(environment.messages.productItem.productItemDoYouWantDelete)){
       this.subscription=this.productItemService.productItemDelete(id).subscribe((res:boolean)=>{
         if(res==true){
           this.toastService.success(environment.messages.productItem.productItemDeleteSuccess);
@@ -72,11 +81,10 @@ export class ProductItemMainComponent implements OnDestroy{
       })
     }
   }
-  ngOnDestroy(): void {
-    if(this.subscription){this.subscription.unsubscribe();}
-  }
-
-  setNameToAdd(name: string) {
+  public setNameToAdd(name: string) {
     localStorage.setItem(environment.typeItemName,name);
+  }
+  ngOnDestroy(): void {
+    if(this.subscription)this.subscription.unsubscribe();
   }
 }
