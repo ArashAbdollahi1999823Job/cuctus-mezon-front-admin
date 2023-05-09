@@ -9,6 +9,7 @@ import {UserService} from "../../user-service/user.service";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {Subscription} from "rxjs/internal/Subscription";
 import {UserSearchDto} from "../../../shared/dto/user/userSearchDto";
+import {environment} from "../../../../environments/environment";
 @Component({
   selector: 'user-edit',
   templateUrl: './user-edit.component.html',
@@ -16,6 +17,7 @@ import {UserSearchDto} from "../../../shared/dto/user/userSearchDto";
 })
 
 export class UserEditComponent implements OnInit , OnDestroy{
+  public backendUrlPicture=environment.backendUrlPicture;
   public userId: string;
   public userDto: UserDto;
   public subscription:Subscription;
@@ -31,6 +33,10 @@ export class UserEditComponent implements OnInit , OnDestroy{
       user:new FormControl(),
     })
   });
+  public userPictureAddForm=new FormGroup({
+    file: new FormControl('', [Validators.required]),
+    fileSource: new FormControl('')
+  });
   constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router) {}
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.paramMap.get('UserId');
@@ -38,6 +44,8 @@ export class UserEditComponent implements OnInit , OnDestroy{
   }
   public userGetById() {
     let userSearchDto=new UserSearchDto();
+    userSearchDto.id=this.userId;
+    this.userService.userSearchDtoSet(userSearchDto);
     return this.userService.userGetAll().subscribe((res:PaginationDto<UserDto>) => {
       this.userDto = res.data[0];
       this.title.setTitle("در حال اپدیت کاربر" + this.userDto.username + "هستید");
@@ -53,7 +61,7 @@ export class UserEditComponent implements OnInit , OnDestroy{
       })
     })
   }
-  userEdit() {
+  public userEdit() {
     let userEditDto=new UserEditDto;
     userEditDto.id =this.userId;
     userEditDto.password=this.userEditForm.controls.password.value;
@@ -73,6 +81,35 @@ export class UserEditComponent implements OnInit , OnDestroy{
 
       }
     })
+  }
+  public onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.userPictureAddForm.patchValue({
+        fileSource: file,
+      })
+    }
+  }
+  public userPictureAdd () {
+    const formData = new FormData();
+    formData.append('pictureUrl', this.userPictureAddForm.get("fileSource").value);
+    formData.append('userId', this.userId);
+    this.userService.userPictureAdd(formData).subscribe((res:boolean)=>{
+      if (res==true){
+        this.toastService.success(`عکس باموفقیت اپلود شد. `);
+       this.userGetById();
+      }
+    })
+  }
+  public userPictureDelete(id: string) {
+    if (confirm("ایا از فیزیکی عکس مطمعن هستید؟")) {
+      this.subscription = this.userService.userPictureDelete(id).subscribe((res: boolean) => {
+        if (res == true) {
+          this.toastService.success(`عکس با موفقیت حذف شد.`);
+          this.userGetById();
+        }
+      })
+    }
   }
   ngOnDestroy(): void {
     if(this.subscription){this.subscription.unsubscribe();}

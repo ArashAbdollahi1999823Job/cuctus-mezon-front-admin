@@ -2,6 +2,7 @@
   <table>
     <thead>
     <tr>
+      <th>عکس</th>
       <th>تایید؟</th>
       <th>نام</th>
       <th *appPermissionRole="['Boss']">عملیات</th>
@@ -12,6 +13,10 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of paginationUser?.data">
+      <th>
+        <img *ngIf="!item.userPictureDto" src="assets/images/userIcon.png" alt="" width="100px" height="100px">
+        <img  *ngIf="item.userPictureDto" src="{{backendUrlPicture}}/{{item?.userPictureDto?.pictureUrl}}" alt="" width="100px" height="100px">
+      </th>
       <td>
         <i style="color:green" class="fa-solid fa-check" *ngIf="item.phoneNumberConfirmed"></i>
         <i style="color:red" class="fa-solid fa-xmark" *ngIf="!item.phoneNumberConfirmed"></i>

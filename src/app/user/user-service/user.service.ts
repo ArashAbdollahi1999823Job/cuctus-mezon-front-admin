@@ -15,6 +15,12 @@ export class UserService {
   private backendUrlAdmin = environment.backendUrlAdmin;
   public userSearchDto = new UserSearchDto();
   constructor(private readonly http: HttpClient) {}
+  public userPictureAdd(formData:FormData){
+    return  this.http.post(`${this.backendUrlAdmin}/UserPictureAdmin/UserPictureAdd`,formData)
+  }
+  public userPictureDelete(id:string){
+    return this.http.delete(`${this.backendUrlAdmin}/UserPictureAdmin/UserPictureDelete/${id}`);
+  }
   public userEdit(userEditDto:UserEditDto):Observable<boolean>{
     return this.http.put<boolean>(`${this.backendUrlAdmin}/UserAdmin/UserEdit`,userEditDto);
   }

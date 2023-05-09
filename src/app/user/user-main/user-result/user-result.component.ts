@@ -4,12 +4,14 @@ import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {ToastrService} from "ngx-toastr";
 import {UserService} from "../../user-service/user.service";
 import {Subscription} from "rxjs/internal/Subscription";
+import {environment} from "../../../../environments/environment";
 @Component({
   selector: 'user-result',
   templateUrl: './user-result.component.html',
   styleUrls: ['./user-result.component.scss'],
 })
 export class UserResultComponent implements OnDestroy {
+  public backendUrlPicture=environment.backendUrlPicture;
   @Input("paginationUser") paginationUser: PaginationDto<UserDto>;
   public subscription:Subscription;
   @Output() userUpdate=new EventEmitter<boolean>();
