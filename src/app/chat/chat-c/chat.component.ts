@@ -1,12 +1,20 @@
-import { Component } from '@angular/core';
-import {allPageAnimation} from "../../shared/animations/allPageAnimation";
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChatService} from "../chat-service/chat.service";
+import {AuthService} from "../../auth/services/auth.service";
+import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
 @Component({
-  selector: 'app-chat-c',
+  selector: 'chat-c',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
-  animations:[allPageAnimation]
 })
-export class ChatComponent {
-
+export class ChatComponent implements OnInit,OnDestroy{
+  private userAuthorizeDto:UserAuthorizeDto;
+  constructor(private chatService:ChatService,private authService:AuthService) {}
+  ngOnInit(): void {
+    this.authService.currentUser$.subscribe((res:UserAuthorizeDto)=>{if(res){this.userAuthorizeDto= res}});
+    this.chatService.chatHubCreate(this.userAuthorizeDto.token);
+  }
+  ngOnDestroy(): void {
+    this.chatService.chatHubStop();
+  }
 }

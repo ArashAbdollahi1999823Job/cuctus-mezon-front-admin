@@ -3,6 +3,7 @@ import {allPageAnimation} from "../shared/animations/allPageAnimation";
 import {AuthService} from "../auth/services/auth.service";
 import {UserAuthorizeDto} from "../shared/dto/identity/userAuthorizeDto";
 import {environment} from "../../environments/environment";
+import {PresenceService} from "../shared/services/presence.service";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import {environment} from "../../environments/environment";
 export class AppComponent implements OnInit {
   title = 'مدیریت فروشگاه بزرگ کاکتوس';
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,private presenceService:PresenceService) {
   }
 
   ngOnInit(): void {
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
     const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
     if (user) {
       this.authService.setCurrentUser(user)
+      this.presenceService.presenceHubCreate(user);
     }
   }
 }

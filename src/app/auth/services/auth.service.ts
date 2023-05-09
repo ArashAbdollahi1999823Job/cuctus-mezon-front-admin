@@ -12,6 +12,7 @@ import {StoreUserService} from "../../store-user/store-user-service/store-user.s
 import {StoreSearchDto} from "../../shared/dto/store/storeُSearchDto";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {StoreDto} from "../../shared/dto/store/storeDto";
+import {PresenceService} from "../../shared/services/presence.service";
 @Injectable({
   providedIn: 'root'
 })
@@ -20,11 +21,13 @@ export class AuthService {
   private currentUser = new BehaviorSubject<UserAuthorizeDto>(null);
   public currentUser$ = this.currentUser.asObservable();
   public storeParamDto=new StoreSearchDto();
-  constructor(private http: HttpClient, private router: Router,private storeService:StoreService,private storeUserService: StoreUserService) {}
+  constructor(private http: HttpClient, private router: Router
+              ,private storeService:StoreService,private presenceService:PresenceService) {}
   public login(loginDto: LoginDto): Observable<UserAuthorizeDto> {
     return this.http.put<UserAuthorizeDto>(`${this.backendUrlAdmin}/AccountAdmin/UserLogin`, loginDto).pipe(map((res:UserAuthorizeDto)=> {
         if (res) {
           this.setCurrentUser(res);
+          this.presenceService.presenceHubCreate(res);
           this.storeParamDto=this.storeService.storeSearchDtoGet();
           this.storeParamDto.userId=this.decodeToken(this.getToken()).Id;
           this.currentUser$.subscribe((res:UserAuthorizeDto)=>{
@@ -73,5 +76,9 @@ export class AuthService {
   }
   public decodeToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]))
+  }
+
+  public getPhoneNumber():string  {
+    return  this.decodeToken(this.getToken())?.PhoneNumber;
   }
 }

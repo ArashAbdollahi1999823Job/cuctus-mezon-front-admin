@@ -1,0 +1,20 @@
+<div class="chat-body">
+  <div class="chat-header">
+    <div class="image-header">
+      <img src="" alt="">
+    </div>
+    <div class="content-header">
+      <div class="name">{{userDtoResponder?.username}}</div>
+
+    </div>
+  </div>
+
+{{responderPhoneNumber}}
+  <div *ngFor="let message of chatService.messageDtos$ | async">{{message.content}}/{{message.isRead}}</div>
+  <div class="send-message">
+    <form  [formGroup]="messageAddForm" (ngSubmit)="messageAdd()">
+      <input type="text" formControlName="content">
+      <button type="submit">ارسال</button>
+    </form>
+  </div>
+</div>

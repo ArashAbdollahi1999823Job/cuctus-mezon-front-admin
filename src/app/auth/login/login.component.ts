@@ -5,6 +5,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
+import {PresenceService} from "../../shared/services/presence.service";
 
 @Component({
   selector: 'app-login',
@@ -29,7 +31,7 @@ export class LoginComponent {
     }
     this.authService.login(<LoginDto>this.loginForm.value).subscribe((res: UserAuthorizeDto) => {
       if (res) {
-        this.toast.success("ورود با موفقیت انجام شد", res.username);
+        this.toast.success(environment.messages.common.enterSuccessful, res.username);
       }
     });
   }

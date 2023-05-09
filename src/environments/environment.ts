@@ -3,6 +3,7 @@ export const environment = {
   backendUrlAdmin: 'http://localhost:9001/Api/Admin',
   backendUrlUser: 'http://localhost:9001/Api/User',
   backendUrlPicture: 'http://localhost:9001',
+  hubUrl:"http://localhost:9001/hubs",
   keyBasketLocalStorage: "customerBasketId",
   keyUserToken: "userToken",
   storeId: "storeId",
@@ -11,15 +12,23 @@ export const environment = {
   typeIdForProductItemMain:"typeIdForProductItemMain",
   productPictureForProductItemMain:"productPictureForProductItemMain",
   productIdForProductItemMain:"productIdForProductItemMain",
+  hubChatUrl:"http://localhost:9001/hubs/chat",
   typeId: "typeId",
   productPicture:"productPicture",
   typeItemName:"typeItemName",
+  storage:{
+    otherUserPhoneNumberForChat:"otherUserPhoneNumberForChat"
+  },
   productSetting:{
     thumbnail:1,
     sliderStart:2,
     sliderEnd:10,
   },
   messages: {
+    common:{
+      enterSuccessful:"ورود با موفقیت انجام شد.",
+      failedConnectionChatHub:"ارتباط برای چت برقرار نشد"
+    },
     color: {
       colorDeleteSuccess: "حذف رنگ با موفقیت انجام شد.",
       doYouWantDeleteColor: "ایا از حذف رنگ مطمعن هستید؟"

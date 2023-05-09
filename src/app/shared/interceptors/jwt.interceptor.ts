@@ -13,7 +13,6 @@ import {ToastrService} from "ngx-toastr";
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-
   constructor(private authService:AuthService,private toastService:ToastrService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

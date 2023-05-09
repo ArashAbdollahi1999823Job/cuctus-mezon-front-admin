@@ -18,7 +18,6 @@ import {environment} from "../../../../environments/environment";
   templateUrl: './product-add.component.html',
   styleUrls: ['./product-add.component.scss']
 })
-
 export class ProductAddComponent implements OnInit, OnDestroy {
   public typesDto: TypeDto[];
   public inventoriesDto: InventoryDto[];
@@ -37,7 +36,6 @@ export class ProductAddComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.typeGet();
     this.inventoryGet();
-
   }
   typeGet() {
     this.subscription = this.typeService.typeGet().subscribe((res: PaginationDto<TypeDto>) => {

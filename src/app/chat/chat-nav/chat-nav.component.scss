@@ -1,0 +1,49 @@
+.nav {
+  background-color: rgba(255, 255, 255, .8);
+  width: 130px;
+  height: 100vh;
+  .logo-container {
+    width: 200px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 5px;
+      background-color: black;
+      margin-right: 7px;
+    }
+  }
+  .user-container {
+    width: 200px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    .user-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 5px;
+      background-color: saddlebrown;
+      margin-right: 7px;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+.online {
+  animation-name: online-animate;
+  animation-duration:1s ;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+@keyframes online-animate {
+  0%{
+    background-color: rgba(0,255,0,.1);
+  }
+ 100% {
+   background-color: rgba(0,255,0,.3);
+ }
+}
