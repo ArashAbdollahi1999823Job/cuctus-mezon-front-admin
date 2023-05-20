@@ -22,6 +22,7 @@ export class UserEditComponent implements OnInit , OnDestroy{
   public userDto: UserDto;
   public subscription:Subscription;
   public userEditForm = new FormGroup({
+    description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     userName: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
     phoneNumber: new FormControl(null, [Validators.pattern("^[0-9]*$"),Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     password: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(8)]),
@@ -52,6 +53,7 @@ export class UserEditComponent implements OnInit , OnDestroy{
       this.userEditForm.controls.userName.setValue(this.userDto.username);
       this.userEditForm.controls.phoneNumber.setValue(this.userDto.phoneNumber);
       this.userEditForm.controls.password.setValue(this.userDto.password);
+      this.userEditForm.controls.description.setValue(this.userDto.description);
       this.userEditForm.controls.phoneNumberConfirmed.setValue(this.userDto.phoneNumberConfirmed);
       this.userDto.roles.forEach(value => {
         if(value.name=="Boss")this.userEditForm.controls.roles.controls.boss.setValue(true);
@@ -67,6 +69,7 @@ export class UserEditComponent implements OnInit , OnDestroy{
     userEditDto.password=this.userEditForm.controls.password.value;
     userEditDto.phoneNumber=this.userEditForm.controls.phoneNumber.value;
     userEditDto.username=this.userEditForm.controls.userName.value;
+    userEditDto.description= this.userEditForm.controls.description.value;
     userEditDto.phoneNumberConfirmed=this.userEditForm.controls.phoneNumberConfirmed.value;
     let roles:string[]=[];
     if(this.userEditForm.controls.roles.controls.boss.value==true)roles.push("Boss");

@@ -15,6 +15,7 @@ export class UserAddComponent implements OnDestroy {
   public id: string;
   public subscription:Subscription;
   public userAddForm = new FormGroup({
+    description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     userName: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
     phoneNumber: new FormControl(null, [Validators.pattern("^[0-9]*$"),Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     password: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(8)]),
@@ -32,6 +33,7 @@ export class UserAddComponent implements OnDestroy {
     userAddDto.password=this.userAddForm.controls.password.value;
     userAddDto.phoneNumber=this.userAddForm.controls.phoneNumber.value;
     userAddDto.username=this.userAddForm.controls.userName.value;
+    userAddDto.description=this.userAddForm.controls.description.value;
     userAddDto.phoneNumberConfirmed=this.userAddForm.controls.phoneNumberConfirmed.value;
     let roles:string[]=[];
     if(this.userAddForm.controls.roles.controls.boss.value==true)roles.push("Boss");

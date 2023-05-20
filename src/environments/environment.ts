@@ -12,12 +12,14 @@ export const environment = {
   typeIdForProductItemMain:"typeIdForProductItemMain",
   productPictureForProductItemMain:"productPictureForProductItemMain",
   productIdForProductItemMain:"productIdForProductItemMain",
-  hubChatUrl:"http://localhost:9001/hubs/chat",
+  chatHubUrl:"http://localhost:9001/hubs/chat",
   typeId: "typeId",
   productPicture:"productPicture",
   typeItemName:"typeItemName",
   storage:{
-    otherUserPhoneNumberForChat:"otherUserPhoneNumberForChat"
+    otherUserPhoneNumberForChat:"otherUserPhoneNumberForChat",
+    groupName:"groupName",
+    myPhoneNumber:"myPhoneNumber",
   },
   productSetting:{
     thumbnail:1,

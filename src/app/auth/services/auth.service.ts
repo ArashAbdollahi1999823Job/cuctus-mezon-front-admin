@@ -8,7 +8,6 @@ import {UserAuthorizeDto} from 'src/app/shared/dto/identity/userAuthorizeDto';
 import {map} from "rxjs/internal/operators/map";
 import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
 import {StoreService} from "../../store/store-service/store.service";
-import {StoreUserService} from "../../store-user/store-user-service/store-user.service";
 import {StoreSearchDto} from "../../shared/dto/store/storeُSearchDto";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {StoreDto} from "../../shared/dto/store/storeDto";
@@ -28,6 +27,7 @@ export class AuthService {
         if (res) {
           this.setCurrentUser(res);
           this.presenceService.presenceHubCreate(res);
+          localStorage.setItem(environment.storage.myPhoneNumber,this.getPhoneNumber());
           this.storeParamDto=this.storeService.storeSearchDtoGet();
           this.storeParamDto.userId=this.decodeToken(this.getToken()).Id;
           this.currentUser$.subscribe((res:UserAuthorizeDto)=>{
@@ -77,7 +77,6 @@ export class AuthService {
   public decodeToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]))
   }
-
   public getPhoneNumber():string  {
     return  this.decodeToken(this.getToken())?.PhoneNumber;
   }

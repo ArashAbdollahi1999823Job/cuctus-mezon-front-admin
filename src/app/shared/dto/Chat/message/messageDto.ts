@@ -1,11 +1,11 @@
 export class MessageDto {
   id: string
   isRead: boolean
-  senderPhoneNumber: string
-  receiverPhoneNumber: string
+  askerPhoneNumber: string
+  responderPhoneNumber: string
   content: string
   pictureUrl: string
   creationDate: Date
-  senderId: string
-  receiverId: string
+  askerId: string
+  responderId: string
 }

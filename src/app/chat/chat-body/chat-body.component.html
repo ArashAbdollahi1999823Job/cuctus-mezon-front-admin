@@ -1,20 +1,40 @@
-<div class="chat-body">
-  <div class="chat-header">
-    <div class="image-header">
-      <img src="" alt="">
-    </div>
-    <div class="content-header">
-      <div class="name">{{userDtoResponder?.username}}</div>
 
+  <div class="header-chat">
+    <div class="information">
+      <div class="name">{{userDtoResponder?.username}}</div>
+      <div class="user-role">{{userDtoResponder?.description}}</div>
+    </div>
+    <div class="image" *ngIf="userDtoResponder?.userPictureDto">
+      <img src="{{backendUrlPicture}}/{{userDtoResponder?.userPictureDto?.pictureUrl}}" alt="">
+      <span class="show-online-user" [class.display-block]="(presenceService.usersOnline$ | async).includes(userDtoResponder.phoneNumber)"></span>
     </div>
   </div>
 
-{{responderPhoneNumber}}
-  <div *ngFor="let message of chatService.messageDtos$ | async">{{message.content}}/{{message.isRead}}</div>
+  <div class="show-message">
+    <div class="message-container" *ngFor="let message of chatService.messageDtos$ | async">
+
+      <div class="message-float" [style.background-color]="message.responderPhoneNumber!=userDtoResponder?.phoneNumber ? 'lightgreen':''">
+        <div class="right" *ngIf="message.responderPhoneNumber!=userDtoResponder?.phoneNumber"  [style.border-left-color]="message.responderPhoneNumber!=userDtoResponder?.phoneNumber ? 'lightgreen':''"></div>
+        <div class="left" *ngIf="message.responderPhoneNumber==userDtoResponder?.phoneNumber"></div>
+        <div class="message">
+          <div class="message-picture" *ngIf="message.pictureUrl">
+            <img src="{{backendUrlPicture}}/{{message.pictureUrl}}" alt="" width="250px" height="250px">
+          </div>
+          {{message.content}}
+        </div>
+        <div class="read">
+          <i *ngIf="message.isRead==false" class="fa-solid fa-check" style="color: rgba(100,100,100,.7)"></i>
+          <i *ngIf="message.isRead==true" class="fa-solid fa-check" style="color: green"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="send-message">
     <form  [formGroup]="messageAddForm" (ngSubmit)="messageAdd()">
-      <input type="text" formControlName="content">
-      <button type="submit">ارسال</button>
+      <button type="submit" class="btn-send"><i class="fa fa-play"></i></button>
+      <input type="text" class="input-text" formControlName="content">
+      <input type="file" class="input-picture" (change)="onFileChange($event)">
+    <span  class="btn-picture" (click)="showFile()"><i class="fa fa-paperclip"></i></span>
     </form>
   </div>
-</div>

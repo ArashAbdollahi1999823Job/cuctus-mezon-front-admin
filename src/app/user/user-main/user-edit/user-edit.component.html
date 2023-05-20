@@ -22,6 +22,23 @@
           </div>
         </div>
         <div class="body-input">
+          <label for="description">توضیحات</label>
+          <input type="text" placeholder="توضیحات..." id="description" formControlName="description" [ngClass]="
+                     userEditForm.controls.description.touched && userEditForm.controls.description.errors?.required
+                     || userEditForm.controls.description.errors?.maxlength ||
+                     userEditForm.controls.description.errors?.minlength ? 'input-error' :'input-success'">
+          <div class="error"
+               *ngIf="userEditForm.controls.description.errors?.required &&userEditForm.controls.description.touched">
+            لطفا توضیحات را وارد کنید !
+          </div>
+          <div class="error" *ngIf=" userEditForm.controls.description.hasError('maxlength')">تعداد
+            کاراکتر ها نمیتواند بیشتر از 500 باشد !
+          </div>
+          <div class="error" *ngIf=" userEditForm.controls.description.hasError('minlength')">تعداد
+            کاراکتر ها نمیتواند کمتر از 10 باشد !
+          </div>
+        </div>
+        <div class="body-input">
           <label for="userName">نام کاربری </label>
           <input type="text" placeholder="نام کاربری ..." id="userName" formControlName="userName" [ngClass]="
                      userEditForm.controls.userName.touched && userEditForm.controls.userName.errors?.required

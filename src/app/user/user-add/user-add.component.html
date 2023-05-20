@@ -19,7 +19,23 @@
         </div>
         <div class="error" *ngIf=" userAddForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
       </div>
-
+      <div class="body-input">
+        <label for="description">توضیحات</label>
+        <input type="text" placeholder="توضیحات..." id="description" formControlName="description" [ngClass]="
+                     userAddForm.controls.description.touched && userAddForm.controls.description.errors?.required
+                     || userAddForm.controls.description.errors?.maxlength ||
+                     userAddForm.controls.description.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="userAddForm.controls.description.errors?.required &&userAddForm.controls.description.touched">
+          لطفا توضیحات را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" userAddForm.controls.description.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+        </div>
+        <div class="error" *ngIf=" userAddForm.controls.description.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 10 باشد !
+        </div>
+      </div>
       <div class="body-input">
         <label for="userName">نام کاربری </label>
         <input type="text" placeholder="نام کاربری ..." id="userName" formControlName="userName" [ngClass]="
