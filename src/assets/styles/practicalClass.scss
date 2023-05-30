@@ -12,10 +12,6 @@
 }.bg-green-a4{
   background-color: rgba(0,255,0,.4);
 }
-
-
-
-
 .input-success{
   border: 1px solid green !important;
 }
@@ -29,8 +25,12 @@
   color: red;
   margin: 10px 0;
 }
-
-
 .text-green{
   color: green;
+}
+.displayNone{
+  display: none;
+}
+.displayBlock{
+  display: block !important;
 }

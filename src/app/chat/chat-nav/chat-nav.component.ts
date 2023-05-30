@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {UserService} from "../../user/user-service/user.service";
@@ -15,20 +15,42 @@ import {HasMessageType} from "../../shared/enums/hasMessageType";
 })
 export class ChatNavComponent implements OnInit {
   public backendUrlPicture = environment.backendUrlPicture;
-  constructor(private userService: UserService, public presenceService: PresenceService, public router: Router, private authService: AuthService, public chatService: ChatService) {
+  public expand: boolean = false;
+  public navEl: Element;
+  public logoEl: Element;
+
+  constructor(private userService: UserService, public presenceService: PresenceService, public router: Router,
+              private authService: AuthService, public chatService: ChatService, private ef: ElementRef) {
   }
+
   ngOnInit(): void {
     this.GroupGetAll();
   }
-  public GroupGetAll() {
+  public GroupGetAll(): void {
     let groupSearchDto = new GroupSearchDto();
     groupSearchDto.name = this.authService.getPhoneNumber();
-    groupSearchDto.hasMessage=HasMessageType.HaveMessage;
+    groupSearchDto.hasMessage = HasMessageType.HaveMessage;
     this.chatService.groupSearchDtoSet(groupSearchDto);
     this.chatService.groupGetAll().subscribe((groupDtosRes: GroupDto[]) => {
       if (groupDtosRes) {
         this.chatService.groupDtos.next(groupDtosRes);
       }
     })
+  }
+  public toggleExpand(): void {
+    this.expand = !this.expand;
+    this.navEl = this.ef.nativeElement.getElementsByClassName('nav')[0];
+    this.logoEl = this.ef.nativeElement.getElementsByClassName('logo')[0];
+    if (this.expand) {
+      this.navEl.classList.add('width200');
+      this.navEl.classList.remove('width75');
+      this.logoEl.classList.add('animateRight');
+      this.logoEl.classList.remove('animateLeft');
+    } else {
+      this.navEl.classList.add('width75');
+      this.navEl.classList.remove('width200');
+      this.logoEl.classList.remove('animateRight');
+      this.logoEl.classList.add('animateLeft');
+    }
   }
 }

@@ -28,8 +28,10 @@ export const environment = {
   },
   messages: {
     common:{
+      messageEmpty:"پیام شما خالی است ",
       enterSuccessful:"ورود با موفقیت انجام شد.",
-      failedConnectionChatHub:"ارتباط برای چت برقرار نشد"
+      failedConnectionChatHub:"ارتباط برای چت برقرار نشد",
+      doYouWantToCancelSendThisPicture:"ایا میخاهید فرستادن این عکس را کنسل کنید؟"
     },
     color: {
       colorDeleteSuccess: "حذف رنگ با موفقیت انجام شد.",

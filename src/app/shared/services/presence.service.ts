@@ -30,19 +30,9 @@ export class PresenceService {
     this.presenceHub.start().catch((err)=>{
       this.toastService.error("err.message()")
     })
-
-    this.presenceHub.on("UserIsOnline",(userName:string)=>{
-      this.toastService.info(userName+"is online")
-    });
-    this.presenceHub.on("UserIsOffline",(userName:string)=>{
-      this.toastService.error(userName+"is offline")
-    });
     this.presenceHub.on("UsersOnlineGet",(users:string[])=>{
       this.usersOnline.next(users);
     });
-    this.presenceHub.on("PresenceMessageUpdate", () => {
-      this.toastService.info('شما پیام جدید دارید')
-    })
     this.presenceHub.on("MessageUnReadUpdate", () => {
       let messageSearchDto=new MessageSearchDto();
       messageSearchDto.isRead=IsReadType.UnRead;

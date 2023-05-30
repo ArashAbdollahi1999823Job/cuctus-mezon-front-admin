@@ -9,18 +9,20 @@
       <span class="show-online-user" [class.display-block]="(presenceService.usersOnline$ | async).includes(userDtoResponder.phoneNumber)"></span>
     </div>
   </div>
-
   <div class="show-message">
     <div class="message-container" *ngFor="let message of chatService.messageDtos$ | async">
+      <div class="message-float"
+           [style.background-color]="message.responderPhoneNumber!=userDtoResponder?.phoneNumber ? 'lightgreen':''">
+        <div class="right" *ngIf="message.responderPhoneNumber!=userDtoResponder?.phoneNumber"
+             [style.border-left-color]="message.responderPhoneNumber!=userDtoResponder?.phoneNumber ? 'lightgreen':''"
 
-      <div class="message-float" [style.background-color]="message.responderPhoneNumber!=userDtoResponder?.phoneNumber ? 'lightgreen':''">
-        <div class="right" *ngIf="message.responderPhoneNumber!=userDtoResponder?.phoneNumber"  [style.border-left-color]="message.responderPhoneNumber!=userDtoResponder?.phoneNumber ? 'lightgreen':''"></div>
+        ></div>
         <div class="left" *ngIf="message.responderPhoneNumber==userDtoResponder?.phoneNumber"></div>
         <div class="message">
           <div class="message-picture" *ngIf="message.pictureUrl">
             <img src="{{backendUrlPicture}}/{{message.pictureUrl}}" alt="" width="250px" height="250px">
           </div>
-          {{message.content}}
+          {{message.content != null && message.content != "null" ?  message.content :""}}
         </div>
         <div class="read">
           <i *ngIf="message.isRead==false" class="fa-solid fa-check" style="color: rgba(100,100,100,.7)"></i>
@@ -29,12 +31,17 @@
       </div>
     </div>
   </div>
-
   <div class="send-message">
-    <form  [formGroup]="messageAddForm" (ngSubmit)="messageAdd()">
+    <form [formGroup]="messageAddForm" (ngSubmit)="messageAdd()">
       <button type="submit" class="btn-send"><i class="fa fa-play"></i></button>
       <input type="text" class="input-text" formControlName="content">
-      <input type="file" class="input-picture" (change)="onFileChange($event)">
-    <span  class="btn-picture" (click)="showFile()"><i class="fa fa-paperclip"></i></span>
+      <input type="file" class="input-picture" id="" (change)="onFileChange($event)">
+      <span class="btn-picture" (click)="showFile()">
+      <i class="fa fa-paperclip"></i>
+    </span>
+      <span class="urlPicture">
+        <img src="{{urlPicture}}" alt="">
+      <i class="fa fa-minus-circle" (click)="urlPictureDelete();"></i>
+      </span>
     </form>
   </div>
