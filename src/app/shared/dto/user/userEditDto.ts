@@ -7,5 +7,6 @@ export class UserEditDto {
   phoneNumberConfirmed: boolean
   password: string
   roles: string[]
+  name:string;
 }
 

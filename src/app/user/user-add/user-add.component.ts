@@ -17,6 +17,7 @@ export class UserAddComponent implements OnDestroy {
   public userAddForm = new FormGroup({
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     userName: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
+    name: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
     phoneNumber: new FormControl(null, [Validators.pattern("^[0-9]*$"),Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     password: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(8)]),
     phoneNumberConfirmed: new FormControl(),
@@ -28,13 +29,14 @@ export class UserAddComponent implements OnDestroy {
     })
   });
   constructor(private userService: UserService,private title: Title,private toastService:ToastrService,private router:Router) {}
-  userAdd() {
+  userAdd():void {
     let userAddDto=new UserAddDto();
     userAddDto.password=this.userAddForm.controls.password.value;
     userAddDto.phoneNumber=this.userAddForm.controls.phoneNumber.value;
     userAddDto.username=this.userAddForm.controls.userName.value;
     userAddDto.description=this.userAddForm.controls.description.value;
     userAddDto.phoneNumberConfirmed=this.userAddForm.controls.phoneNumberConfirmed.value;
+    userAddDto.name=this.userAddForm.controls.name.value;
     let roles:string[]=[];
     if(this.userAddForm.controls.roles.controls.boss.value==true)roles.push("Boss");
     if(this.userAddForm.controls.roles.controls.admin.value==true)roles.push("Admin");

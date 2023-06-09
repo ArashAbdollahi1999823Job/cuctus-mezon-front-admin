@@ -105,4 +105,7 @@ export class ChatService {
   public groupSearchDtoSet(groupSearchDto: GroupSearchDto) {
     this.groupSearchDto = groupSearchDto;
   }
+  public groupDelete(groupName:string):Observable<boolean>{
+    return this.http.delete<boolean>(`${this.backendUrlUser}/GroupUser/GroupDelete/${groupName}`)
+  }
 }

@@ -8,6 +8,8 @@ import {AuthService} from "../../auth/services/auth.service";
 import {ChatService} from "../chat-service/chat.service";
 import {GroupDto} from "../../shared/dto/Chat/Group/GroupDto";
 import {HasMessageType} from "../../shared/enums/hasMessageType";
+import {ToastrService} from "ngx-toastr";
+
 @Component({
   selector: 'chat-nav',
   templateUrl: './chat-nav.component.html',
@@ -20,13 +22,14 @@ export class ChatNavComponent implements OnInit {
   public logoEl: Element;
 
   constructor(private userService: UserService, public presenceService: PresenceService, public router: Router,
-              private authService: AuthService, public chatService: ChatService, private ef: ElementRef) {
+              private authService: AuthService, public chatService: ChatService, private ef: ElementRef, private toastService: ToastrService) {
   }
 
   ngOnInit(): void {
-    this.GroupGetAll();
+    this.groupGetAll();
   }
-  public GroupGetAll(): void {
+
+  public groupGetAll(): void {
     let groupSearchDto = new GroupSearchDto();
     groupSearchDto.name = this.authService.getPhoneNumber();
     groupSearchDto.hasMessage = HasMessageType.HaveMessage;
@@ -37,6 +40,7 @@ export class ChatNavComponent implements OnInit {
       }
     })
   }
+
   public toggleExpand(): void {
     this.expand = !this.expand;
     this.navEl = this.ef.nativeElement.getElementsByClassName('nav')[0];
@@ -52,5 +56,15 @@ export class ChatNavComponent implements OnInit {
       this.logoEl.classList.remove('animateRight');
       this.logoEl.classList.add('animateLeft');
     }
+  }
+
+  public groupDelete(groupName: string): void {
+    if (confirm(environment.messages.common.doYouWantToDeleteGroup)){
+      this.chatService.groupDelete(groupName).subscribe((res: boolean) => {
+        if (res == true) this.toastService.success(environment.messages.common.groupDeleteSuccess);
+        this.groupGetAll();
+      })
+    }
+    this.router.navigateByUrl('Chat')
   }
 }

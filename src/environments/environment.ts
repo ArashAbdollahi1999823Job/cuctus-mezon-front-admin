@@ -31,7 +31,9 @@ export const environment = {
       messageEmpty:"پیام شما خالی است ",
       enterSuccessful:"ورود با موفقیت انجام شد.",
       failedConnectionChatHub:"ارتباط برای چت برقرار نشد",
-      doYouWantToCancelSendThisPicture:"ایا میخاهید فرستادن این عکس را کنسل کنید؟"
+      doYouWantToCancelSendThisPicture:"ایا میخاهید فرستادن این عکس را کنسل کنید؟",
+      doYouWantToDeleteGroup:"ایا میخاهید این گروه را حذف کنید؟",
+      groupDeleteSuccess:"گروه با موفقیت حذف شد",
     },
     color: {
       colorDeleteSuccess: "حذف رنگ با موفقیت انجام شد.",
@@ -82,6 +84,9 @@ export const environment = {
       productDoYouWantDelete: "ایا از حذف عکس محصول مطمعن هستید؟",
       productAddSuccess: "عکس محصول با موفقیت ثبت شد.",
     },
+    user:{
+      userPictureAddSuccess:"عکس باموفقیت اپلود شد.",
+    }
   },
   titlePages:{
     color:{

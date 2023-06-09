@@ -56,6 +56,23 @@
           </div>
         </div>
         <div class="body-input">
+          <label for="name">نام و نام خانوادگی </label>
+          <input type="text" placeholder="نام و نام خانوادگی ..." id="name" formControlName="name" [ngClass]="
+                     userEditForm.controls.name.touched && userEditForm.controls.name.errors?.required
+                     || userEditForm.controls.name.errors?.maxlength ||
+                     userEditForm.controls.name.errors?.minlength ? 'input-error' :'input-success'">
+          <div class="error"
+               *ngIf="userEditForm.controls.name.errors?.required &&userEditForm.controls.name.touched">
+            لطفا نام و نام خانوادگی را وارد کنید !
+          </div>
+          <div class="error" *ngIf=" userEditForm.controls.name.hasError('maxlength')">تعداد
+            کاراکتر ها نمیتواند بیشتر از 30 باشد !
+          </div>
+          <div class="error" *ngIf=" userEditForm.controls.name.hasError('minlength')">تعداد
+            کاراکتر ها نمیتواند کمتر از38 باشد !
+          </div>
+        </div>
+        <div class="body-input">
           <label for="password">گذرواژه</label>
           <input type="text" placeholder="پسوورد ..." id="password" formControlName="password" [ngClass]="
                      userEditForm.controls.password.touched && userEditForm.controls.password.errors?.required

@@ -12,7 +12,6 @@ const routes: Routes = [
   {path:"Store",canActivate:[AuthorizeGuard,AdminGuard],loadChildren:()=>import('./store/store.module').then(x=>x.StoreModule)},
   {path:"StoreUser",canActivate:[AuthorizeGuard,SellerJustGuard],loadChildren:()=>import('./store-user/store-user.module').then(x=>x.StoreUserModule)},
   {path:"Shop",canActivate:[AuthorizeGuard,SellerGuard],loadChildren:()=>import('./shop/shop.module').then(x=>x.ShopModule)},
-  {path:"Commenting",canActivate:[AuthorizeGuard,SellerGuard],loadChildren:()=>import('./commenting/commenting.module').then(x=>x.CommentingModule)},
   {path:"Repository",canActivate:[AuthorizeGuard,SellerGuard],loadChildren:()=>import('./repository/repository.module').then(x=>x.RepositoryModule)},
   {path:"Auth",loadChildren:()=>import('./auth/auth.module').then(x=>x.AuthModule)},
 ];

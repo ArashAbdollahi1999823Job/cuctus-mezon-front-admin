@@ -7,4 +7,5 @@ export class UserAddDto {
   phoneNumberConfirmed: boolean
   password: string
   roles: string[]
+  name:string;
 }

@@ -5,11 +5,13 @@
     </div>
     <div class="logo-text"></div>
   </div>
-  <a [routerLink]="groupDto.askerPhoneNumber" *ngFor="let groupDto of chatService.groupDtos$ | async">
+  <ng-container *ngFor="let groupDto of chatService.groupDtos$ | async">
     <div class="user-container ">
-      <div class="user-img">
+      <a [routerLink]="groupDto.askerPhoneNumber">
+      <div class="user-img" >
         <img src="assets/images/userIcon.png">
       </div>
+      </a>
       <span class="show-online-user"
             [class.display-block]="(presenceService.usersOnline$ | async).includes(groupDto.askerPhoneNumber)"></span>
       <ng-container *ngIf="(presenceService.messageUnReadDtos$ | async) as unReadMessage">
@@ -21,7 +23,8 @@
       </ng-container>
       <div class="information">
         <div class="name">{{groupDto.asker}}</div>
+        <div class="delete-group"  (click)="groupDelete(groupDto.name)"><i class="fa fa-trash-restore-alt"></i></div>
       </div>
     </div>
-  </a>
+  </ng-container>
 </div>

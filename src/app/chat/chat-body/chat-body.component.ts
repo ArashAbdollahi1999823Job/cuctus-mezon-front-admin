@@ -15,7 +15,6 @@ import {MessageSearchDto} from "../../shared/dto/Chat/message/messageSearchDto";
 import {MessageDto} from "../../shared/dto/Chat/message/messageDto";
 import {IsReadType} from "../../shared/enums/isReadType";
 import {ToastrService} from "ngx-toastr";
-
 @Component({
   selector: 'chat-body',
   templateUrl: './chat-body.component.html',
