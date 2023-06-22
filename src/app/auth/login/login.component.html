@@ -37,9 +37,9 @@
           کاراکتر ها نمیتواند کمتر از 8 باشد !
         </div>
       </div>
-      <div class="check-box">
-        <label for="show-password">نمایش رمز</label>
-        <input type="checkbox" id="show-password" (change)="togglePassword()">
+      <div class="check">
+        نمایش رمز
+        <input type="checkbox" (change)="togglePassword()">
       </div>
       <button type="submit" [disabled]="!loginForm.valid" [ngClass]="!loginForm.valid ? 'disable':''">ورورد</button>
     </form>

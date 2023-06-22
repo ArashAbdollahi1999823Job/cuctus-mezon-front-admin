@@ -11,7 +11,7 @@ import {InventoryEditDto} from "../../../shared/dto/inventory/inventoryEditDto";
 })
 
 export class InventoryService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public inventoryParamDto = new InventoryParamDto();
   public constructor(private http: HttpClient) {}
   public inventoryGetParam() {

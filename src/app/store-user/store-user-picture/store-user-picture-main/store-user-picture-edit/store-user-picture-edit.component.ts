@@ -17,7 +17,7 @@ export class StoreUserPictureEditComponent implements OnInit{
   public storeUserPicturesDto:StoreUserPictureDto;
   public storeUserPictureId:string;
   public subscription:Subscription;
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
 
   public storeUserPictureEditForm=new FormGroup({
     pictureAlt: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),

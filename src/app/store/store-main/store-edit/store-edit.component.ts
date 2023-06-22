@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
@@ -18,8 +18,11 @@ import {environment} from "../../../../environments/environment";
   templateUrl: './store-edit.component.html',
   styleUrls: ['./store-edit.component.scss']
 })
-export class StoreEditComponent implements OnInit, OnDestroy {
-  constructor(private storeService: StoreService, private activatedRoute: ActivatedRoute, private title: Title, private toastService: ToastrService, private userService: UserService, private router: Router) {
+export class StoreEditComponent implements OnInit, OnDestroy,AfterViewInit {
+  constructor(private storeService: StoreService,private ef:ElementRef,private renderer: Renderer2, private activatedRoute: ActivatedRoute, private title: Title, private toastService: ToastrService, private userService: UserService, private router: Router) {
+  }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-120+ "px");
   }
   public storeId: string;
   public userDtos: UserDto[];

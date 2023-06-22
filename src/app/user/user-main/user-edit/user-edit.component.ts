@@ -17,7 +17,7 @@ import {environment} from "../../../../environments/environment";
 })
 
 export class UserEditComponent implements OnInit , OnDestroy{
-  public backendUrlPicture=environment.backendUrlPicture;
+  public backendUrlPicture=environment.setting.url.backendUrlPicture;
   public userId: string;
   public userDto: UserDto;
   public subscription:Subscription;

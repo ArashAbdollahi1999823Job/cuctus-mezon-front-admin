@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 
 export class ProductPictureService {
   public productId;
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public productPictureParam = new ProductPictureSearchDto();
   public constructor(private http: HttpClient) {}
 

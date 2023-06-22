@@ -12,7 +12,7 @@ import {StoreDto} from "../../shared/dto/store/storeDto";
 })
 
 export class StoreService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public storeSearchDto = new StoreSearchDto();
   public storeId:string;
   public constructor(private http: HttpClient) {}

@@ -20,7 +20,7 @@ export class TypeItemAddComponent implements OnDestroy{
   constructor(private typeItemService: TypeItemService, private toast: ToastrService, private router:Router) {}
   typeItemAdd() {
     let typeItemAddDto: TypeItemAddDto = this.typeItemAddForm.value;
-    typeItemAddDto.typeId=localStorage.getItem(environment.typeId)
+    typeItemAddDto.typeId=localStorage.getItem(environment.storage.typeId)
     this.subscription= this.typeItemService.typeItemAdd(typeItemAddDto).subscribe((res: boolean) => {
       if (res==true) {
         this.toast.success(environment.messages.typeItem.typeItemAddSuccess);

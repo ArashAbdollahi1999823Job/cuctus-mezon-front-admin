@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2} from '@angular/core';
 import {Subscription} from "rxjs";
 import {Title} from "@angular/platform-browser";
 import {ProductItemService} from "../../product-item-service/product-item.service";
@@ -16,8 +16,8 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./product-item-main.component.scss']
 })
 
-export class ProductItemMainComponent implements OnDestroy{
-  public backendUrlPicture=environment.backendUrlPicture;
+export class ProductItemMainComponent implements OnDestroy,AfterViewInit{
+  public backendUrlPicture=environment.setting.url.backendUrlPicture;
   public productPictureUrl:string;
   public productItemDtos:ProductItemDto[];
   public typeItemDtos:TypeItemDto[];
@@ -27,19 +27,22 @@ export class ProductItemMainComponent implements OnDestroy{
   public index:number;
   public subscription:Subscription;
   constructor(private productItemService:ProductItemService, private title:Title,private activatedRoute:ActivatedRoute,private router:Router
-             , private toastService:ToastrService,private typeItemService:TypeItemService) {}
+             , private toastService:ToastrService,private typeItemService:TypeItemService,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit(): void {
-    this.typeId=localStorage.getItem(environment.typeIdForProductItemMain);
-    this.productId=localStorage.getItem(environment.productIdForProductItemMain);
-    this.productPictureUrl=localStorage.getItem(environment.productPictureForProductItemMain);
+    this.typeId=localStorage.getItem(environment.storage.typeIdForProductItemMain);
+    this.productId=localStorage.getItem(environment.storage.productIdForProductItemMain);
+    this.productPictureUrl=localStorage.getItem(environment.storage.productPictureForProductItemMain);
     this.title.setTitle(environment.titlePages.productItem.productItemMain);
     this.productItemGetAll();
     this.checkStorage();
   }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.result'), 'height', window.innerHeight-150+ "px");
+  }
   private checkStorage() {
     window.addEventListener('storage', (e) => {
-      if (this.productId != localStorage.getItem(environment.productIdForProductItemMain)
-      ||this.typeId != localStorage.getItem(environment.typeIdForProductItemMain))
+      if (this.productId != localStorage.getItem(environment.storage.productIdForProductItemMain)
+      ||this.typeId != localStorage.getItem(environment.storage.typeIdForProductItemMain))
        {
         this.router.navigateByUrl('/Shop')
       }
@@ -82,7 +85,7 @@ export class ProductItemMainComponent implements OnDestroy{
     }
   }
   public setNameToAdd(name: string) {
-    localStorage.setItem(environment.typeItemName,name);
+    localStorage.setItem(environment.storage.typeItemName,name);
   }
   ngOnDestroy(): void {
     if(this.subscription)this.subscription.unsubscribe();

@@ -1,4 +1,8 @@
 @import "../../../../assets/styles/practicalValue";
+.body{
+  width: 100%;
+  overflow: scroll;
+}
 .body-form {
   width: 80%;
   margin: 0 auto;
@@ -35,4 +39,10 @@
       font-size: 20px;
     }
   }
+}
+.notif{
+  background-color: cornflowerblue;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
 }

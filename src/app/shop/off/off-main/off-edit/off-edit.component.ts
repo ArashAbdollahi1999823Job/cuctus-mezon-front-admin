@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
@@ -12,7 +12,7 @@ import {OffEditDto} from "../../../../shared/dto/off/offEditDto";
   templateUrl: './off-edit.component.html',
   styleUrls: ['./off-edit.component.scss']
 })
-export class OffEditComponent implements OnDestroy {
+export class OffEditComponent implements OnDestroy,AfterViewInit {
   public offId: string;
   public offDto: OffDto;
 
@@ -24,10 +24,13 @@ export class OffEditComponent implements OnDestroy {
     startDate: new FormControl(null, [Validators.required]),
     endDate: new FormControl(null, [Validators.required]),
   })
-  constructor(private offService: OffService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router) {}
+  constructor(private offService: OffService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit(): void {
     this.offId = this.activatedRoute.snapshot.paramMap.get('OffId');
     this.offGetById(this.offId);
+  }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-150+ "px");
   }
   public offGetById(id: string) {
     this.subscription= this.offService.offGetById(id).subscribe((res:OffDto[]) => {

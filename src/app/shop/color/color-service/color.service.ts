@@ -11,7 +11,7 @@ import {ColorEditDto} from "../../../shared/dto/color/colorEditDto";
 })
 
 export class ColorService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public colorSearchDto = new ColorSearchDto();
   public constructor(private http: HttpClient) {}
   public colorSearchDtoGet() {

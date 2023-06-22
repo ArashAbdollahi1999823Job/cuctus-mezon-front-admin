@@ -1,4 +1,4 @@
-<div style="overflow-y: auto">
+<div style="overflow-y: auto" class="result">
 
   <div class="title-image" *ngIf="productPictureDto">
     <img src="{{backendPictureUrl}}/{{productPictureDto?.pictureUrl}}" width="200px" height="200px">
@@ -17,7 +17,7 @@
       <td style="background-color:{{color.value}}"></td>
       <td>
         <div class="container-btn">
-          <button class="btn-remove" (click)="productPictureDelete(color.id)">حذف<i class="fa-solid fa-trash"></i></button>
+          <button class="btn-remove" (click)="colorDelete(color.id)">حذف<i class="fa-solid fa-trash"></i></button>
         </div>
       </td>
     </tr>

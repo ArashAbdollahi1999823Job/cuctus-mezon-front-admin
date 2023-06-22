@@ -1,9 +1,9 @@
 
-<div class="body-component">
+<div class="body">
   <form [formGroup]="productPictureEditForm" (ngSubmit)="productPictureEdit()">
     <div class="body-form">
       <div>
-        <img src="{{backendUrlPicture}}/{{productPicturesDto?.pictureUrl}}" width="150px" height="150px" alt="{{productPicturesDto?.pictureAlt}}" title="{{productPicturesDto?.pictureTitle}}">
+        <img src="{{backendUrlPicture}}{{productPicturesDto?.pictureUrl}}" width="150px" height="150px" alt="{{productPicturesDto?.pictureAlt}}" title="{{productPicturesDto?.pictureTitle}}">
       </div>
       <div class="body-input">
         <label for="pictureAlt">pictureAlt</label>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, Renderer2} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 
 import {Subscription} from "rxjs/internal/Subscription";
@@ -9,11 +9,14 @@ import {InventoryOperationService} from "../../inventory-operation-service/inven
   templateUrl: './inventory-operation-result.component.html',
   styleUrls: ['./inventory-operation-result.component.scss']
 })
-export class InventoryOperationResultComponent implements OnDestroy {
+export class InventoryOperationResultComponent implements OnDestroy,AfterViewInit {
   @Input("inventoryOperationsDto") inventoryOperationsDto:InventoryOperationDto[];
   public subscription:Subscription;
   @Output() inventoryOperationUpdate=new EventEmitter<boolean>();
-  constructor(private inventoryOperationService:InventoryOperationService, private toastService: ToastrService) {}
+  constructor(private inventoryOperationService:InventoryOperationService, private toastService: ToastrService,private ef:ElementRef,private renderer: Renderer2) {}
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.result'), 'height', window.innerHeight-250+ "px");
+  }
   inventoryOperationDelete(id: string) {
     if(confirm("ایا از گزارش مغازه مطمعن هستید؟")){
       this.subscription=  this.inventoryOperationService.inventoryOperationDelete(id).subscribe((res: boolean) => {

@@ -10,7 +10,7 @@ import {ProductItemAddDto} from "../../../shared/dto/productItem/productItemAddD
 })
 
 export class ProductItemService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public productItemSearchDto = new ProductItemSearchDto();
   public constructor(private http: HttpClient) {}
   public productItemSearchDtoGet() {

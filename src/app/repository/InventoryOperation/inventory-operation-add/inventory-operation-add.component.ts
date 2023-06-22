@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,8 +11,8 @@ import {InventoryOperationAddDto} from "../../../shared/dto/inventoryOperation/i
   templateUrl: './inventory-operation-add.component.html',
   styleUrls: ['./inventory-operation-add.component.scss']
 })
-export class InventoryOperationAddComponent implements OnInit,OnDestroy {
-  constructor(private inventoryOperationService: InventoryOperationService, private toast: ToastrService,private router:Router, private activatedRoute: ActivatedRoute, private title: Title) {}
+export class InventoryOperationAddComponent implements OnInit,OnDestroy,AfterViewInit {
+  constructor(private inventoryOperationService: InventoryOperationService, private toast: ToastrService,private router:Router, private activatedRoute: ActivatedRoute,private ef:ElementRef,private renderer: Renderer2) {}
   public productId:string;
   public subscription:Subscription;
   public inventoryOperationAddForm: FormGroup = new FormGroup({
@@ -29,6 +29,9 @@ export class InventoryOperationAddComponent implements OnInit,OnDestroy {
   ];
   ngOnInit(): void {
     this.productId = this.activatedRoute.snapshot.paramMap.get('ProductId');
+  }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-120+ "px");
   }
  public inventoryOperationAdd() {
     let inventoryOperationAddDto: InventoryOperationAddDto = this.inventoryOperationAddForm.value;

@@ -16,7 +16,7 @@ import {PresenceService} from "../../shared/services/presence.service";
   providedIn: 'root'
 })
 export class AuthService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   private currentUser = new BehaviorSubject<UserAuthorizeDto>(null);
   public currentUser$ = this.currentUser.asObservable();
   public storeParamDto=new StoreSearchDto();
@@ -34,7 +34,7 @@ export class AuthService {
             if(res.roles.includes('Seller')){
               this.storeService.storeGetAll().subscribe((res:PaginationDto<StoreDto>)=>{
                 if(res){
-                  localStorage.setItem(environment.storeId,res.data[0].id.toString())
+                  localStorage.setItem(environment.storage.storeId,res.data[0].id.toString())
                   this.router.navigateByUrl('/Shop').then(() => {window.location.reload();})
                 }
               })
@@ -49,8 +49,8 @@ export class AuthService {
     );
   }
   public logout() {
-    localStorage.removeItem(environment.keyUserToken);
-    localStorage.removeItem(environment.storeId);
+    localStorage.removeItem(environment.storage.adminToken);
+    localStorage.removeItem(environment.storage.storeId);
     this.currentUser.next(null);
     window.location.reload();
   }
@@ -64,11 +64,11 @@ export class AuthService {
         user.roles.push(roles);
       }
     }
-    localStorage.setItem(environment.keyUserToken, JSON.stringify(user))
+    localStorage.setItem(environment.storage.adminToken, JSON.stringify(user))
     this.currentUser.next(user);
   }
   public getToken() {
-    const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
+    const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.storage.adminToken))
     if (user) {
       return user.token;
     }

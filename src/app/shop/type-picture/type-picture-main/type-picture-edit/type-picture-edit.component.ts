@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {TypePictureService} from "../../type-picture-service/type-picture.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
@@ -13,11 +13,11 @@ import {TypePictureEditDto} from "../../../../shared/dto/typePicture/typePicture
   templateUrl: './type-picture-edit.component.html',
   styleUrls: ['./type-picture-edit.component.scss']
 })
-export class TypePictureEditComponent implements OnInit{
+export class TypePictureEditComponent implements OnInit,AfterViewInit{
   public typePicturesDto:TypePictureDto;
   public typePictureId:string;
   public subscription:Subscription;
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
 
   public typePictureEditForm=new FormGroup({
     pictureAlt: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
@@ -25,7 +25,10 @@ export class TypePictureEditComponent implements OnInit{
     sort: new FormControl('', [Validators.min(0), Validators.max(100)]),
     isActive: new FormControl(null),
   });
-  constructor(private typePictureService: TypePictureService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router) {}
+  constructor(private typePictureService: TypePictureService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-200+ "px");
+  }
   ngOnInit(): void {
     this.typePictureId = this.activatedRoute.snapshot.paramMap.get('TypePictureId');
     this.typePictureGetById(this.typePictureId)

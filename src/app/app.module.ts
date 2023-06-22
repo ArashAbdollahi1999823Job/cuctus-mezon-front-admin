@@ -14,8 +14,8 @@ import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorHandlingInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
-    {provide: HTTP_INTERCEPTORS,  useClass: JwtInterceptor, multi: true,
-  }],
+    {provide: HTTP_INTERCEPTORS,  useClass: JwtInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

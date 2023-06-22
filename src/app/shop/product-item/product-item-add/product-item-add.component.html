@@ -1,5 +1,6 @@
+<div class="body">
 <div class="title-image">
-  <img src="{{backendUrlPicture}}/{{productPictureUrl}}" width="200px" height="200px">
+  <img src="{{backendUrlPicture}}{{productPictureUrl}}" width="200px" height="200px">
 </div>
 <form [formGroup]="productItemAddForm" (ngSubmit)="productItemAdd()">
   <div class="body-form">
@@ -42,3 +43,4 @@
     </button>
   </div>
 </form>
+</div>

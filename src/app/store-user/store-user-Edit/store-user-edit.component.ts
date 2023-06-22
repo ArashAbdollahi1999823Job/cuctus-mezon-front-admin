@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {StoreUserService} from "../store-user-service/store-user.service";
 import {StoreUserDto} from "../../shared/dto/storeUser/storeUserDto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./store-user-Edit.component.scss']
 })
 
-export class StoreUserEditComponent implements OnInit , OnDestroy {
+export class StoreUserEditComponent implements OnInit , OnDestroy,AfterViewInit {
   public subscription:Subscription;
   public storeUserDto:StoreUserDto;
   public storeUserEditForm=new FormGroup({
@@ -23,9 +23,12 @@ export class StoreUserEditComponent implements OnInit , OnDestroy {
     mobileNumber: new FormControl(null, [Validators.pattern("^[0-9]*$"), Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
   })
-  constructor(private storeUserService:StoreUserService, private title: Title,private toastService:ToastrService,private router:Router) {}
+  constructor(private storeUserService:StoreUserService, private title: Title,private toastService:ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit() {
     this.storeUserGet();
+  }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.result'), 'height', window.innerHeight-120+ "px");
   }
   storeUserGet(){
     this.subscription= this.storeUserService.storeUserGet().subscribe((res:StoreUserDto)=>{

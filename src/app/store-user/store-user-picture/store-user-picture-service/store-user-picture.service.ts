@@ -12,7 +12,7 @@ import {StoreSearchDto} from "../../../shared/dto/store/storeُSearchDto";
   providedIn: 'root'
 })
 export class StoreUserPictureService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public storeUserPictureParamDto = new StoreUserPictureParamDto();
 
   constructor(private http: HttpClient) { }

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
@@ -11,7 +11,7 @@ import {Subscription} from "rxjs/internal/Subscription";
   templateUrl: './user-add.component.html',
   styleUrls: ['./user-add.component.scss']
 })
-export class UserAddComponent implements OnDestroy {
+export class UserAddComponent implements OnDestroy,AfterViewInit {
   public id: string;
   public subscription:Subscription;
   public userAddForm = new FormGroup({
@@ -28,7 +28,10 @@ export class UserAddComponent implements OnDestroy {
       user:new FormControl(),
     })
   });
-  constructor(private userService: UserService,private title: Title,private toastService:ToastrService,private router:Router) {}
+  constructor(private userService: UserService,private title: Title,private toastService:ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-110+ "px");
+  }
   userAdd():void {
     let userAddDto=new UserAddDto();
     userAddDto.password=this.userAddForm.controls.password.value;

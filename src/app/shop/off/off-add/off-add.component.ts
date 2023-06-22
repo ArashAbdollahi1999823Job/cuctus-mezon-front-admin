@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Subscription} from "rxjs/internal/Subscription";
@@ -11,7 +11,7 @@ import {OffAddDto} from "../../../shared/dto/off/offAddDto";
   styleUrls: ['./off-add.component.scss']
 })
 
-export class OffAddComponent implements OnInit , OnDestroy{
+export class OffAddComponent implements OnInit , OnDestroy,AfterViewInit{
   public subscription:Subscription;
   public offAddForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
@@ -20,7 +20,10 @@ export class OffAddComponent implements OnInit , OnDestroy{
     startDate: new FormControl(null, [Validators.required]),
     endDate: new FormControl(null, [Validators.required]),
   })
-  constructor(private offService: OffService, private toast: ToastrService,private router:Router) {}
+  constructor(private offService: OffService, private toast: ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-150+ "px");
+  }
   ngOnInit(): void {}
   brandAdd() {
     let offAddDto: OffAddDto = this.offAddForm.value;

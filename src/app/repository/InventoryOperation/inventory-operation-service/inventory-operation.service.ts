@@ -13,7 +13,7 @@ import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 })
 
 export class InventoryOperationService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public inventoryOperationParamDto = new InventoryOperationParamDto();
   public constructor(private http: HttpClient) {}
   public inventoryOperationAdd(inventoryOperationAddDto: InventoryOperationAddDto):Observable<boolean> {

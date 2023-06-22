@@ -14,7 +14,7 @@ import {TypePictureDto} from "../../../shared/dto/typePicture/typePictureDto";
 
 export class TypePictureService {
   public typeId;
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public typePictureParam = new TypePictureParamDto();
   public constructor(private http: HttpClient) {}
 

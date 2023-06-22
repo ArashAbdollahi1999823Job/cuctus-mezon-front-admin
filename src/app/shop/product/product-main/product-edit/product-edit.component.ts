@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
@@ -19,7 +19,7 @@ import { slugify } from 'src/app/shared/tool/slugify';
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.scss']
 })
-export class ProductEditComponent implements OnDestroy,OnInit {
+export class ProductEditComponent implements OnDestroy,OnInit,AfterViewInit {
   public inventoryParamDto:InventoryParamDto;
   public typesDto: TypeDto[];
   public inventoriesDto: InventoryDto[];
@@ -38,7 +38,7 @@ export class ProductEditComponent implements OnDestroy,OnInit {
   })
   public productDto: ProductDto;
   constructor(private typeService: TypeService, private activatedRoute: ActivatedRoute, private title: Title,
-              private toastService:ToastrService,private router:Router,private inventoryService:InventoryService,private productService:ProductService) {}
+              private toastService:ToastrService,private router:Router,private inventoryService:InventoryService,private productService:ProductService,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit(): void {
     this.inventoryParamDto=this.inventoryService.inventoryGetParam();
     this.productId = this.activatedRoute.snapshot.paramMap.get('ProductId');
@@ -46,6 +46,9 @@ export class ProductEditComponent implements OnDestroy,OnInit {
     this.productGetById(this.productId);
     this.inventoryGet();
 
+  }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-150+ "px");
   }
   inventoryGet() {
     this.inventoryParamDto.storeId=localStorage.getItem('storeId');

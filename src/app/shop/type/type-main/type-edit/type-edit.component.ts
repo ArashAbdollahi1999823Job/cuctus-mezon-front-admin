@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2} from '@angular/core';
 import {slugify} from "../../../../shared/tool/slugify";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
@@ -14,7 +14,7 @@ import {Subscription} from "rxjs/internal/Subscription";
   templateUrl: './type-edit.component.html',
   styleUrls: ['./type-edit.component.scss']
 })
-export class TypeEditComponent implements OnDestroy {
+export class TypeEditComponent implements OnDestroy,AfterViewInit {
   public typesDto:TypeDto[];
   public id: string;
   public subscription:Subscription;
@@ -29,7 +29,10 @@ export class TypeEditComponent implements OnDestroy {
     isDelete: new FormControl(),
   })
   public typeDto: TypeDto;
-  constructor(private typeService: TypeService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router) {}
+  constructor(private typeService: TypeService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-120+ "px");
+  }
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.typeGet();

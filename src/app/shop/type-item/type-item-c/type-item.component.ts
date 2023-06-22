@@ -13,11 +13,11 @@ export class TypeItemComponent implements OnInit,OnDestroy{
   ngAfterViewChecked(): void { this.changeRef.detectChanges(); }
 
   ngOnInit(): void {
-    localStorage.setItem(environment.typeId,this.activatedRoute.snapshot.paramMap.get('TypeId'));
+    localStorage.setItem(environment.storage.typeId,this.activatedRoute.snapshot.paramMap.get('TypeId'));
   }
 
   ngOnDestroy(): void {
-    localStorage.removeItem(environment.typeId);
+    localStorage.removeItem(environment.storage.typeId);
   }
 
 }

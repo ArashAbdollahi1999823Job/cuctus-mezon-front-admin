@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
@@ -12,7 +12,7 @@ import {InventoryEditDto} from "../../../../shared/dto/inventory/inventoryEditDt
   templateUrl: './inventory-edit.component.html',
   styleUrls: ['./inventory-edit.component.scss']
 })
-export class InventoryEditComponent implements OnDestroy {
+export class InventoryEditComponent implements OnDestroy,AfterViewInit {
   public id: string;
   public inventoryDto: InventoryDto;
 
@@ -21,7 +21,10 @@ export class InventoryEditComponent implements OnDestroy {
     name: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
     isActive: new FormControl(),
   })
-  constructor(private inventoryService: InventoryService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router) {}
+  constructor(private inventoryService: InventoryService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.result'), 'height', window.innerHeight-150+ "px");
+  }
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.inventoryGetById(this.id);

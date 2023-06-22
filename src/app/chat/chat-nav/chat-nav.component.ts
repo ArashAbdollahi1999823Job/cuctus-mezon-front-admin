@@ -16,7 +16,7 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./chat-nav.component.scss']
 })
 export class ChatNavComponent implements OnInit {
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
   public expand: boolean = false;
   public navEl: Element;
   public logoEl: Element;

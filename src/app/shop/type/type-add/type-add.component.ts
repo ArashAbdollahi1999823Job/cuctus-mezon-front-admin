@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {slugify} from "../../../shared/tool/slugify";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './type-add.component.html',
   styleUrls: ['./type-add.component.scss']
 })
-export class TypeAddComponent implements OnInit , OnDestroy{
+export class TypeAddComponent implements OnInit , OnDestroy,AfterViewInit{
   public typeDtos:TypeDto[];
   public subscription:Subscription;
   public typeId;
@@ -25,12 +25,15 @@ export class TypeAddComponent implements OnInit , OnDestroy{
     summary: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     parentTypeId: new FormControl(null, [Validators.required]),
   })
-  constructor(private typeService: TypeService, private toast: ToastrService,private router:Router,private activatedRoute:ActivatedRoute) {}
+  constructor(private typeService: TypeService, private toast: ToastrService,private router:Router,private activatedRoute:ActivatedRoute,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit(): void {
     this.typeGetAll();
     this.typeId=this.activatedRoute.snapshot.paramMap.get('TypeId');
     if(this.typeId){
       this.typeAddForm.controls['parentTypeId'].setValue(this.typeId)}
+  }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-140+ "px");
   }
   typeGetAll() {
     this.subscription= this.typeService.typeGet().subscribe((res:PaginationDto<TypeDto>) => {

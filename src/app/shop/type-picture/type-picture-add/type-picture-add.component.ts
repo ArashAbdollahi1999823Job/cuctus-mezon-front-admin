@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
@@ -8,7 +8,7 @@ import {TypePictureService} from "../type-picture-service/type-picture.service";
   templateUrl: './type-picture-add.component.html',
   styleUrls: ['./type-picture-add.component.scss']
 })
-export class TypePictureAddComponent implements OnInit{
+export class TypePictureAddComponent implements OnInit,AfterViewInit{
   public typePictureAddForm=new FormGroup({
     pictureAlt: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
     pictureTitle: new FormControl(null , [Validators.required, Validators.maxLength(30), Validators.minLength(3)]),
@@ -17,7 +17,10 @@ export class TypePictureAddComponent implements OnInit{
     fileSource: new FormControl('')
   });
   public typeId: string;
-  constructor(private activatedRoute: ActivatedRoute,private typePictureService:TypePictureService,private toastService:ToastrService,private router:Router) {}
+  constructor(private activatedRoute: ActivatedRoute,private typePictureService:TypePictureService,private toastService:ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-140+ "px");
+  }
   ngOnInit(): void {this.typeId=this.typePictureService.getTypeId()}
   onFileChange(event: any) {
     if (event.target.files.length > 0) {

@@ -9,11 +9,11 @@ import {StoreUserEditDto} from "../../shared/dto/storeUser/storeUserEditDto";
   providedIn: 'root'
 })
 export class StoreUserService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   constructor( private http: HttpClient) {}
   public storeUserGet(): Observable<StoreUserDto> {
     let storeUserGetParam = new HttpParams();
-    storeUserGetParam=storeUserGetParam.append('id',localStorage.getItem(environment.storeId));
+    storeUserGetParam=storeUserGetParam.append('id',localStorage.getItem(environment.storage.storeId));
     return this.http.get<StoreUserDto>(`${this.backendUrlAdmin}/StoreUserAdmin/StoreUserGet`,{params:storeUserGetParam})
   }
   public storeUserEdit(storeUserEditDto:StoreUserEditDto):Observable<boolean>{

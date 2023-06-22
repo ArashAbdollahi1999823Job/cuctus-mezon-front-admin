@@ -15,7 +15,7 @@ import {PaginationDto} from "../dto/base/paginationDto";
 })
 
 export class PresenceService {
-  private hubUrl=environment.hubUrl;
+  private hubUrl=environment.setting.url.presenceHubUrl;
   private presenceHub:HubConnection;
   private usersOnline=new BehaviorSubject<string[]>([]);
   public messageUnReadDtos = new BehaviorSubject<MessageDto[]>(null);

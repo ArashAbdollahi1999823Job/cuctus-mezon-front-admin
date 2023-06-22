@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   }
 
   private authorizeUser() {
-    const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
+    const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.storage.adminToken))
     if (user) {
       this.authService.setCurrentUser(user)
       this.presenceService.presenceHubCreate(user);

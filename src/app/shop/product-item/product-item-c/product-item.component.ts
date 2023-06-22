@@ -13,13 +13,13 @@ export class ProductItemComponent implements OnInit,OnDestroy{
   ngAfterViewChecked(): void { this.changeRef.detectChanges(); }
 
   ngOnInit(): void {
-    localStorage.setItem(environment.productId,this.activatedRoute.snapshot.paramMap.get('ProductId'));
+    localStorage.setItem(environment.storage.productId,this.activatedRoute.snapshot.paramMap.get('ProductId'));
   }
 
   ngOnDestroy(): void {
-    localStorage.removeItem(environment.productId);
-    localStorage.removeItem(environment.typeId);
-    localStorage.removeItem(environment.productPicture);
+    localStorage.removeItem(environment.storage.productId);
+    localStorage.removeItem(environment.storage.typeId);
+    localStorage.removeItem(environment.storage.productPicture);
   }
 
 }

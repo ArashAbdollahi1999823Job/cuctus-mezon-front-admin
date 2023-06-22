@@ -124,7 +124,7 @@
 
   <div>
     <div class="image">
-      <img *ngIf="userDto?.userPictureDto" src="{{backendUrlPicture}}/{{userDto?.userPictureDto?.pictureUrl}}" width="300px"
+      <img *ngIf="userDto?.userPictureDto" src="{{backendUrlPicture}}{{userDto?.userPictureDto?.pictureUrl}}" width="300px"
            height="300px">
     </div>
 

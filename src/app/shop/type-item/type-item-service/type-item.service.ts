@@ -10,7 +10,7 @@ import {TypeItemAddDto} from "../../../shared/dto/typeItem/typeItemAddDto";
 })
 
 export class TypeItemService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public typeItemSearchDto = new TypeItemSearchDto();
   public constructor(private http: HttpClient) {}
   public typeItemSearchDtoGet() {

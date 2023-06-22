@@ -22,7 +22,7 @@ export class InventoryMainComponent implements OnDestroy{
     this.inventoryParamDto=this.inventoryService.inventoryGetParam();
   }
   public inventoryGetAll(){
-    this.inventoryParamDto.storeId=localStorage.getItem(environment.storeId);
+    this.inventoryParamDto.storeId=localStorage.getItem(environment.storage.storeId);
     this.inventoryService.inventorySetParam(this.inventoryParamDto);
     this.subscription= this.inventoryService.inventoryGetAll().subscribe((res:InventoryDto[])=>{
       this.inventoriesDto=res;

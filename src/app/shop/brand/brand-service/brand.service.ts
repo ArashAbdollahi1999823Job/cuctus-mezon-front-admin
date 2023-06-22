@@ -12,7 +12,7 @@ import {BrandEditDto} from "../../../shared/dto/brand/brandEditDto";
   providedIn: 'root'
 })
 export class BrandService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public brandParamDto = new BrandSearchDto();
   public constructor(private http: HttpClient) {}
   public brandSearchDtoGet():BrandSearchDto {

@@ -5,8 +5,6 @@ import {NavComponent} from "./components/nav/nav.component";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {ToastrModule} from "ngx-toastr";
 import {PermissionRoleDirective} from './directives/permission-role.directive';
-
-
 @NgModule({
   declarations: [NavComponent, PermissionRoleDirective],
   imports: [CommonModule, SharedRoutingModule, NgxSpinnerModule.forRoot({type: 'line-scale-pulse-out'}),
@@ -18,7 +16,7 @@ import {PermissionRoleDirective} from './directives/permission-role.directive';
       preventDuplicates: true,
       closeButton: false
     })],
-  exports: [NavComponent, NgxSpinnerModule, ToastrModule, PermissionRoleDirective]
+    exports: [NavComponent, NgxSpinnerModule, ToastrModule, PermissionRoleDirective]
 })
 export class SharedModule {
 }

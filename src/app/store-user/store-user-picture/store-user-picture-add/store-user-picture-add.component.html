@@ -1,5 +1,5 @@
 
-<div class="body-component">
+<div class="body">
   <form [formGroup]="typePictureAddForm" (ngSubmit)="typePictureAdd()">
     <div class="body-form">
       <div class="body-input">
@@ -37,11 +37,21 @@
         </div>
       </div>
       <div class="body-input">
+
         <label for="sort">ترتیب</label>
         <input type="number" placeholder="ترتیب" id="sort" formControlName="sort" [ngClass]="
                      typePictureAddForm.controls.sort.touched && typePictureAddForm.controls.sort.errors?.required
                      || typePictureAddForm.controls.sort.errors?.maxlength ||
                      typePictureAddForm.controls.sort.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="notif">
+          قوانین ترتیب:
+          <br>
+          1 به معنی عکس اصلی thumbnail است
+          <br>
+          2 تا 10 به معنی اسلایدر هست
+          <br>
+          ترتیب مهم است
+        </div>
         <div class="error"
              *ngIf="typePictureAddForm.controls.sort.errors?.required &&typePictureAddForm.controls.sort.touched">
           لطفا ترتیب را وارد کنید !
@@ -55,11 +65,15 @@
       </div>
       <div class="body-input">
         <label for="file">جستجوی عکس</label>
-        <input type="file" placeholder="file" id="file" formControlName="file" accept="image/png, image/gif, image/jpeg" (change)="onFileChange($event)" [ngClass]="
+        <input type="file" placeholder="file" class="file" id="file" formControlName="file" accept="image/png, image/gif, image/jpeg" (change)="onFileChange($event)" [ngClass]="
                      typePictureAddForm.controls.file.touched && typePictureAddForm.controls.file.errors?.required ? 'input-error' :'input-success'">
         <div class="error"
              *ngIf="typePictureAddForm.controls.file.errors?.required &&typePictureAddForm.controls.file.touched">
           لطفا عکس را وارد کنید !
+        </div>
+        <div class="error"
+             *ngIf="typePictureAddForm.hasError('pictureMaxSize') &&typePictureAddForm.controls.file.touched">
+          {{typePictureAddForm.errors['pictureMaxSize']}}
         </div>
       </div>
 

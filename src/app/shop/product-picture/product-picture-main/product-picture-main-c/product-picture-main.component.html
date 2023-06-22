@@ -1,4 +1,4 @@
-<div style="overflow-y: auto">
+<div style="overflow-y: auto" class="result">
 
   <div class="title-type">
     <ng-container
@@ -23,7 +23,7 @@
         <i style="color:red" class="fa-solid fa-xmark" *ngIf="!item.isActive"></i>
       </td>
       <td>
-        <img class="picture" src="{{backendUrlPicture}}/{{item.pictureUrl}}" alt="{{item.pictureAlt}}" title="{{item.pictureTitle}}" width="100px" height="100px">
+        <img class="picture" src="{{backendUrlPicture}}{{item.pictureUrl}}" alt="{{item.pictureAlt}}" title="{{item.pictureTitle}}" width="100px" height="100px">
       </td>
       <td>
         <div class="container-btn">

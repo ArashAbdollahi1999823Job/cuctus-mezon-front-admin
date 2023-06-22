@@ -1,4 +1,4 @@
-<div style="overflow-y: auto">
+<div style="overflow-y: auto" class="result">
 
   <div class="title-type" >
     <ng-container *ngFor="let item of typePicturesDto;let index=index;">{{index == 0 ? item.type: ""}}</ng-container>
@@ -20,7 +20,7 @@
         <i style="color:green" class="fa-solid fa-check" *ngIf="item.isActive"></i>
         <i style="color:red" class="fa-solid fa-xmark" *ngIf="!item.isActive"></i>
       </td>
-      <td class="picture"><img src="{{backendUrlPicture}}/{{item.pictureUrl}}" width="100px" height="100px"
+      <td class="picture"><img src="{{backendUrlPicture}}{{item.pictureUrl}}" width="100px" height="100px"
                                alt="{{item.pictureAlt}}" title="{{item.pictureTitle}}"></td>
       <td>{{item.sort}}</td>
       <td>{{item.pictureTitle}}</td>

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2} from '@angular/core';
 import {Subscription} from "rxjs";
 import {Title} from "@angular/platform-browser";
 import {environment} from "../../../../../environments/environment";
@@ -11,11 +11,11 @@ import {ToastrService} from "ngx-toastr";
   templateUrl: './off-main.component.html',
   styleUrls: ['./off-main.component.scss']
 })
-export class OffMainComponent implements OnDestroy{
+export class OffMainComponent implements OnDestroy,AfterViewInit{
   public offDtos:OffDto[];
   public subscription:Subscription;
   public intervalChangeTime:any;
-  constructor(private offService:OffService,private title:Title,private toastService:ToastrService) {}
+  constructor(private offService:OffService,private title:Title,private toastService:ToastrService,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit(): void {
     this.offGetAll();
     this.title.setTitle("مدیریت تخفیف فروشگاه بزرگ کاکتوس.");
@@ -25,9 +25,12 @@ export class OffMainComponent implements OnDestroy{
         })
       },1000)
   }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.result'), 'height', window.innerHeight-150+ "px");
+  }
   public offGetAll(){
     let offSearchDto=new OffParamDto();
-    offSearchDto.storeId=localStorage.getItem(environment.storeId);
+    offSearchDto.storeId=localStorage.getItem(environment.storage.storeId);
     this.offService.offSetParam(offSearchDto);
     this.subscription= this.offService.offGetAll().subscribe((res:OffDto[])=>{
       this.offDtos=res;

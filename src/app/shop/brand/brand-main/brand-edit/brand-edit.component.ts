@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {ToastrService} from "ngx-toastr";
@@ -14,7 +14,7 @@ import {BrandSearchDto} from "../../../../shared/dto/brand/brandSearchDto";
   templateUrl: './brand-edit.component.html',
   styleUrls: ['./brand-edit.component.scss']
 })
-export class BrandEditComponent implements OnDestroy {
+export class BrandEditComponent implements OnDestroy,AfterViewInit {
   public brandId: string;
   public subscription: Subscription;
   public brandEditForm: FormGroup = new FormGroup({
@@ -25,7 +25,10 @@ export class BrandEditComponent implements OnDestroy {
   })
   public brandDto: BrandDto;
   constructor(private brandService: BrandService, private activatedRoute: ActivatedRoute, private title: Title,
-              private toastService: ToastrService, private router: Router) {
+              private toastService: ToastrService, private router: Router,private ef:ElementRef,private renderer: Renderer2) {
+  }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-120+ "px");
   }
   ngOnInit(): void {
     this.brandId = this.activatedRoute.snapshot.paramMap.get('BrandId');

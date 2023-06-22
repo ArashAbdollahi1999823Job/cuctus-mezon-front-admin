@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserDto} from "../../shared/dto/user/userDto";
 import {UserSearchDto} from "../../shared/dto/user/userSearchDto";
@@ -15,8 +15,11 @@ import {Subscription} from "rxjs/internal/Subscription";
   styleUrls: ['./store-add.component.scss']
 })
 
-export class StoreAddComponent implements OnInit,OnDestroy {
-  constructor(private userService: UserService, private storeService: StoreService, private toast: ToastrService,private router:Router) {}
+export class StoreAddComponent implements OnInit,OnDestroy,AfterViewInit {
+  constructor(private userService: UserService, private storeService: StoreService, private toast: ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-120+ "px");
+  }
   public usersDto: UserDto[];
   public subscription:Subscription;
   public storeAddForm: FormGroup = new FormGroup({

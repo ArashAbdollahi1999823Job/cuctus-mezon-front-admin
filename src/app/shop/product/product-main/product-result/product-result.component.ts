@@ -1,10 +1,11 @@
 import {
-  Component,
+  AfterViewInit,
+  Component, ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
-  Output,
+  Output, Renderer2,
   SimpleChanges
 } from '@angular/core';
 import {Subscription} from "rxjs/internal/Subscription";
@@ -21,12 +22,15 @@ import {ProductPictureDto} from "../../../../shared/dto/productPicture/productPi
   templateUrl: './product-result.component.html',
   styleUrls: ['./product-result.component.scss']
 })
-export class ProductResultComponent implements OnDestroy, OnChanges {
+export class ProductResultComponent implements OnDestroy, OnChanges,AfterViewInit {
   @Input("productDtos") productDtos: ProductDto[];
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
   @Output() productUpdate = new EventEmitter<boolean>();
   private subscription: Subscription;
-  constructor(private productService: ProductService, private toastService: ToastrService, private productPictureService: ProductPictureService) {
+  constructor(private productService: ProductService, private toastService: ToastrService, private productPictureService: ProductPictureService,private ef:ElementRef,private renderer: Renderer2) {
+  }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.result'), 'height', window.innerHeight-280+ "px");
   }
   public productDelete(id: string):void {
     if (confirm(environment.messages.product.productDoYouWantDelete)){
@@ -63,7 +67,7 @@ export class ProductResultComponent implements OnDestroy, OnChanges {
   }
   public productPictureGetThumbnail():void {
     this.productDtos?.forEach(x => {
-      this.productPictureGet(x.id.toString(), environment.productSetting.thumbnail)
+      this.productPictureGet(x.id.toString(), environment.role.product.thumbnail)
     })
   }
   public productPictureGet(productId: string, sort: number) :void {
@@ -86,12 +90,12 @@ export class ProductResultComponent implements OnDestroy, OnChanges {
     this.productPictureGetThumbnail();
   }
   setDataForProductItemMain(productId :string,typeId: string, productPicture: string) :void {
-    localStorage.setItem(environment.productIdForProductItemMain,productId);
-    localStorage.setItem(environment.typeIdForProductItemMain, typeId);
-    localStorage.setItem(environment.productPictureForProductItemMain, productPicture);
+    localStorage.setItem(environment.storage.productIdForProductItemMain,productId);
+    localStorage.setItem(environment.storage.typeIdForProductItemMain, typeId);
+    localStorage.setItem(environment.storage.productPictureForProductItemMain, productPicture);
   }
   setProductId(id: string):void {
-    localStorage.setItem(environment.productIdForProductPictureMain,id);
+    localStorage.setItem(environment.storage.productIdForProductPictureMain,id);
   }
   public ngOnDestroy(): void {
     if (this.subscription)this.subscription.unsubscribe();

@@ -1,5 +1,5 @@
 
-<div class="body-component">
+<div class="body">
   <form [formGroup]="productPictureAddForm" (ngSubmit)="productPictureAdd()">
     <div class="body-form">
       <div class="body-input">
@@ -55,11 +55,24 @@
       </div>
       <div class="body-input">
         <label for="file">جستجوی عکس</label>
-        <input type="file" placeholder="file" id="file" formControlName="file" accept="image/png, image/gif, image/jpeg" (change)="onFileChange($event)" [ngClass]="
+        <input type="file" placeholder="file" id="file" class="file" formControlName="file" accept="image/png, image/gif, image/jpeg" (change)="onFileChange($event)" [ngClass]="
                      productPictureAddForm.controls.file.touched && productPictureAddForm.controls.file.errors?.required ? 'input-error' :'input-success'">
+        <div class="notif">
+          قوانین ترتیب:
+          <br>
+          1 به معنی عکس اصلی thumbnail است
+          <br>
+          2 تا 10 به معنی اسلایدر هست
+          <br>
+          ترتیب مهم است
+        </div>
         <div class="error"
              *ngIf="productPictureAddForm.controls.file.errors?.required &&productPictureAddForm.controls.file.touched">
           لطفا عکس را وارد کنید !
+        </div>
+        <div class="error"
+             *ngIf="productPictureAddForm.hasError('pictureMaxSize') &&productPictureAddForm.controls.file.touched">
+        {{productPictureAddForm.errors['pictureMaxSize']}}
         </div>
       </div>
 

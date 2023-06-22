@@ -1,8 +1,7 @@
-.body-component {
+.body{
   width: 100%;
-  margin-top: 50px;
-  height: 87vh;
-
+  overflow: scroll;
+}
   .body-form {
     height: 86vh;
     width: 100%;
@@ -89,7 +88,6 @@
       }
     }
   }
-}
 input {
   background: black;
   padding-right: 10px;

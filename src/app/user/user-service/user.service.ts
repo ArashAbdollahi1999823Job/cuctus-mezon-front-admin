@@ -12,7 +12,7 @@ import {UserAddDto} from "../../shared/dto/user/userAddDto";
 })
 
 export class UserService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public userSearchDto = new UserSearchDto();
   constructor(private readonly http: HttpClient) {}
   public userPictureAdd(formData:FormData){

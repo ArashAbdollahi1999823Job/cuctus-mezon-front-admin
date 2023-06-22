@@ -12,7 +12,7 @@ import {OffEditDto} from "../../../shared/dto/off/offEditDto";
 })
 
 export class OffService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public offParamDto = new OffParamDto();
 
   public constructor(private http: HttpClient) {

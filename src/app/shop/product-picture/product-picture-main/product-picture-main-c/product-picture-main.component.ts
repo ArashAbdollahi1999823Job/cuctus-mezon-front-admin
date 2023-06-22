@@ -1,31 +1,34 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {environment} from "../../../../../environments/environment";
 import {Subscription} from "rxjs/internal/Subscription";
 import {ToastrService} from "ngx-toastr";
 import {ProductPictureDto} from "../../../../shared/dto/productPicture/productPictureDto";
 import {ProductPictureService} from "../../product-picture-service/product-picture.service";
 import {ProductPictureSearchDto} from "../../../../shared/dto/productPicture/productPictureSearchDto";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ProductDto} from "../../../../shared/dto/product/productDto";
+import {Router} from "@angular/router";
+
 @Component({
   selector: 'product-picture-main',
   templateUrl: './product-picture-main.component.html',
   styleUrls: ['./product-picture-main.component.scss']
 })
-export class ProductPictureMainComponent implements OnInit,OnDestroy{
+export class ProductPictureMainComponent implements OnInit,OnDestroy,AfterViewInit{
   public productPicturesDto:ProductPictureDto[];
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
   public subscription:Subscription;
   productId:string;
-  constructor(private productPictureService:ProductPictureService,private toastService: ToastrService,private router:Router) {}
+  constructor(private productPictureService:ProductPictureService,private toastService: ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit(): void {
     this.checkStorage();
     this.getProductPicture();
   }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.result'), 'height', window.innerHeight-150+ "px");
+  }
   private checkStorage() {
-    this.productId = localStorage.getItem(environment.productIdForProductPictureMain);
+    this.productId = localStorage.getItem(environment.storage.productIdForProductPictureMain);
     window.addEventListener('storage', (e) => {
-      if (this.productId != localStorage.getItem(environment.productIdForProductPictureMain)) {
+      if (this.productId != localStorage.getItem(environment.storage.productIdForProductPictureMain)) {
         this.router.navigateByUrl('/Shop')
       }
     })

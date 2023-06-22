@@ -1,4 +1,4 @@
-<div style="overflow-y: auto">
+<div style="overflow-y: auto" class="result">
   <table>
     <thead>
     <tr>
@@ -23,7 +23,7 @@
       <td>{{product.name}}</td>
       <td class="picture">
         <ng-container *ngFor="let productPicture of product.productPictureDtos;let index=index">
-          <img *ngIf="index==0" src="{{backendUrlPicture}}/{{productPicture.pictureUrl}}" width="100px" height="100px" alt="{{productPicture.pictureAlt}}" title="{{productPicture.pictureTitle}}">
+          <img *ngIf="index==0" src="{{backendUrlPicture}}{{productPicture.pictureUrl}}" width="100px" height="100px" alt="{{productPicture.pictureAlt}}" title="{{productPicture.pictureTitle}}">
         </ng-container>
       </td>
       <td>

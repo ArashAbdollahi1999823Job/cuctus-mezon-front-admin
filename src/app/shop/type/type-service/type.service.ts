@@ -12,7 +12,7 @@ import {TypeEditDto} from "../../../shared/dto/type/typeEditDto";
 })
 
 export class TypeService {
-  private backendUrlAdmin = environment.backendUrlAdmin;
+  private backendUrlAdmin = environment.setting.url.backendUrlAdmin;
   public typeParamDto = new TypeParamDto();
   public constructor(private http: HttpClient) {}
   public typeGetParam() {

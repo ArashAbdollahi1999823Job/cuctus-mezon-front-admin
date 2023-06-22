@@ -1,30 +1,20 @@
 export const environment = {
   production: false,
-  backendUrlAdmin: 'http://localhost:9001/Api/Admin',
-  backendUrlUser: 'http://localhost:9001/Api/User',
-  backendUrlPicture: 'http://localhost:9001',
-  hubUrl:"http://localhost:9001/hubs",
-  keyBasketLocalStorage: "customerBasketId",
-  keyUserToken: "userToken",
-  storeId: "storeId",
-  productId: "productId",
-  productIdForProductPictureMain: "productIdForProductPictureMain",
-  typeIdForProductItemMain:"typeIdForProductItemMain",
-  productPictureForProductItemMain:"productPictureForProductItemMain",
-  productIdForProductItemMain:"productIdForProductItemMain",
-  chatHubUrl:"http://localhost:9001/hubs/chat",
-  typeId: "typeId",
-  productPicture:"productPicture",
-  typeItemName:"typeItemName",
   storage:{
+    adminToken: "adminToken",
     otherUserPhoneNumberForChat:"otherUserPhoneNumberForChat",
     groupName:"groupName",
     myPhoneNumber:"myPhoneNumber",
-  },
-  productSetting:{
-    thumbnail:1,
-    sliderStart:2,
-    sliderEnd:10,
+    productIdForColor:"productIdForColor",
+    storeId: "storeId",
+    productId: "productId",
+    productIdForProductPictureMain: "productIdForProductPictureMain",
+    typeIdForProductItemMain:"typeIdForProductItemMain",
+    productPictureForProductItemMain:"productPictureForProductItemMain",
+    productIdForProductItemMain:"productIdForProductItemMain",
+    typeId: "typeId",
+    productPicture:"productPicture",
+    typeItemName:"typeItemName",
   },
   messages: {
     common:{
@@ -37,7 +27,8 @@ export const environment = {
     },
     color: {
       colorDeleteSuccess: "حذف رنگ با موفقیت انجام شد.",
-      doYouWantDeleteColor: "ایا از حذف رنگ مطمعن هستید؟"
+      doYouWantDeleteColor: "ایا از حذف رنگ مطمعن هستید؟",
+      colorAddSuccess:"رنگ با موفقیت ثبت شد"
     },
     off:  {
       offDeleteSuccess: "حذف تخفیف با موفقیت انجام شد.",
@@ -79,10 +70,10 @@ export const environment = {
       storePictureAddSuccess: "عکس مغازه با موفقیت ثبت شد.",
     },
     product: {
-      productDeleteSuccess: "حذف عکس محصول با موفقیت انجام شد.",
-      productEditSuccess: "اپدیت عکس محصول با موفقیت انجام شد.",
-      productDoYouWantDelete: "ایا از حذف عکس محصول مطمعن هستید؟",
-      productAddSuccess: "عکس محصول با موفقیت ثبت شد.",
+      productDeleteSuccess: "حذف  محصول با موفقیت انجام شد.",
+      productEditSuccess: "اپدیت  محصول با موفقیت انجام شد.",
+      productDoYouWantDelete: "ایا از حذف  محصول مطمعن هستید؟",
+      productAddSuccess: " محصول با موفقیت ثبت شد.",
     },
     user:{
       userPictureAddSuccess:"عکس باموفقیت اپلود شد.",
@@ -98,5 +89,25 @@ export const environment = {
     productItem:{
       productItemMain:"مدیریت ایتم فروشگاه بزرگ کاکتوس.",
     },
+  },
+  setting:{
+    picture:{
+      pictureMaxSize:"100000",
+      pictureMaxSizeShow:"100",
+    },
+    url:{
+      backendUrlAdmin: 'http://localhost:9001/Api/Admin',
+      backendUrlUser: 'http://localhost:9001/Api/User',
+      backendUrlPicture: 'http://localhost:9001/',
+      presenceHubUrl:"http://localhost:9001/hubs",
+      chatHubUrl:"http://localhost:9001/hubs/chat",
+    }
+  },
+  role:{
+    product:{
+      thumbnail:1,
+      sliderStart:2,
+      sliderEnd:10,
+    }
   }
 }

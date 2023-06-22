@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {Subscription} from "rxjs/internal/Subscription";
 import {TypeDto} from "../../../shared/dto/type/typeDto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -18,7 +18,7 @@ import {environment} from "../../../../environments/environment";
   templateUrl: './product-add.component.html',
   styleUrls: ['./product-add.component.scss']
 })
-export class ProductAddComponent implements OnInit, OnDestroy {
+export class ProductAddComponent implements OnInit, OnDestroy,AfterViewInit {
   public typesDto: TypeDto[];
   public inventoriesDto: InventoryDto[];
   public subscription: Subscription;
@@ -32,10 +32,13 @@ export class ProductAddComponent implements OnInit, OnDestroy {
     inventoryId: new FormControl(null, [Validators.required]),
     typeId: new FormControl(null, [Validators.required]),
   })
-  constructor(private typeService: TypeService, private toast: ToastrService, private router: Router, private inventoryService: InventoryService,private productService:ProductService) {}
+  constructor(private typeService: TypeService, private toast: ToastrService, private router: Router, private inventoryService: InventoryService,private productService:ProductService,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit(): void {
     this.typeGet();
     this.inventoryGet();
+  }
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.body'), 'height', window.innerHeight-150+ "px");
   }
   typeGet() {
     this.subscription = this.typeService.typeGet().subscribe((res: PaginationDto<TypeDto>) => {
@@ -44,7 +47,7 @@ export class ProductAddComponent implements OnInit, OnDestroy {
   }
   inventoryGet() {
     let inventorySearchDto=new InventoryParamDto();
-    inventorySearchDto.storeId=localStorage.getItem(environment.storeId);
+    inventorySearchDto.storeId=localStorage.getItem(environment.storage.storeId);
     this.inventoryService.inventorySetParam(inventorySearchDto);
     this.subscription = this.inventoryService.inventoryGetAll().subscribe((res: InventoryDto[]) => {
       this.inventoriesDto = res;

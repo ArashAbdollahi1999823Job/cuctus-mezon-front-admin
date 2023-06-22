@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {ChatService} from "../chat-service/chat.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserDto} from "../../shared/dto/user/userDto";
 import {UserSearchDto} from "../../shared/dto/user/userSearchDto";
@@ -15,6 +15,7 @@ import {MessageSearchDto} from "../../shared/dto/Chat/message/messageSearchDto";
 import {MessageDto} from "../../shared/dto/Chat/message/messageDto";
 import {IsReadType} from "../../shared/enums/isReadType";
 import {ToastrService} from "ngx-toastr";
+
 @Component({
   selector: 'chat-body',
   templateUrl: './chat-body.component.html',
@@ -23,7 +24,7 @@ import {ToastrService} from "ngx-toastr";
 export class ChatBodyComponent implements OnInit, OnDestroy {
   public responderPhoneNumber: string;
   private subscription: Subscription;
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
   public userDtoResponder: UserDto;
   public intervalReloadGroup;
   public urlPicture;
@@ -33,22 +34,27 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
     file: new FormControl('', [Validators.required]),
     fileSource: new FormControl('', [Validators.required])
   })
+
   constructor(public chatService: ChatService, private activatedRoute: ActivatedRoute, private router: Router,
-              private userService: UserService, public presenceService: PresenceService, private ef: ElementRef,private toastService: ToastrService) {
+              private userService: UserService, public presenceService: PresenceService, private ef: ElementRef, private toastService: ToastrService) {
   }
+
   ngOnInit(): void {
     this.handleChangeRoute();
     this.responderPhoneNumber = this.activatedRoute.snapshot.paramMap.get('PhoneNumber');
     this.GroupAdd();
     this.userResponderGet();
   }
-  onFileChange(event: any):void {
+
+ public onFileChange(event: any):void {
     let reader = new FileReader();
     if (event.target.files.length > 0) {
       let file = null;
       file = event.target.files[0];
-      this.messageAddForm.patchValue({
-        fileSource: file,
+      this.compress(file,800,800).subscribe((res)=>{
+        this.messageAddForm.patchValue({
+          fileSource: res,
+        })
       })
       reader.readAsDataURL(file);
       reader.onload = () => {
@@ -57,20 +63,85 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
     }
     this.pictureShowDelete();
   }
-  private GroupAdd():void {
+
+  public compress(file: File, maxHeight: number, maxWidth: number): Observable<File> {
+    const imageType = file.type || 'image/jpeg'
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    return Observable.create(observer => {
+      reader.onload = ev => {
+        const img = this.createImage(ev)
+        setTimeout(() => {
+          const canvas = document.createElement('canvas')
+          if (img.height < img.width) {
+            if (maxWidth) {
+              canvas.width = img.width > maxWidth ? maxWidth : img.width
+            } else {
+              canvas.width = img.width
+            }
+            if (maxHeight) {
+              canvas.height = img.height > maxHeight ? maxHeight : img.height
+            } else {
+              canvas.height = img.height
+            }
+          } else {
+            if (maxHeight) {
+              canvas.height = img.height > maxHeight ? maxHeight : img.height
+            } else {
+              canvas.height = img.height
+            }
+            if (maxWidth) {
+              canvas.width = canvas.height * 50 / 100
+            } else {
+              canvas.width = canvas.width
+            }
+          }
+          const canvasCtx = <CanvasRenderingContext2D>canvas.getContext('2d')
+          canvasCtx.drawImage(img, 0, 0, canvas.width, canvas.height)
+          canvasCtx.canvas.toBlob(
+            blob => {
+              observer.next(
+                new File([blob], file.name, {
+                  type: imageType,
+                  lastModified: Date.now(),
+                }),
+              )
+            },
+            imageType,
+          )
+        })
+      }
+      reader.onerror = error => observer.error(error)
+    })
+  }
+
+  private createImage(ev) {
+
+    const imageContent = ev.target.result
+
+    const img = new Image()
+
+    img.src = imageContent
+
+    return img
+
+  }
+
+  private GroupAdd(): void {
     this.intervalReloadGroup = setInterval(() => {
       if (this.chatService.chatHub.state == HubConnectionState.Connected) {
         this.chatService.groupAdd(this.responderPhoneNumber).subscribe((groupDtoRes: GroupDto) => {
-          if(groupDtoRes){
-            localStorage.setItem(environment.storage.groupName,groupDtoRes.name)
-            if(groupDtoRes)clearInterval(this.intervalReloadGroup);
+          if (groupDtoRes) {
+            localStorage.setItem(environment.storage.groupName, groupDtoRes.name)
+            if (groupDtoRes) clearInterval(this.intervalReloadGroup);
             this.messageGetAll();
           }
         })
       }
     }, 500)
   }
-  public userResponderGet():void {
+
+  public userResponderGet(): void {
     let userSearchDto = new UserSearchDto();
     userSearchDto.searchPhoneNumber = this.responderPhoneNumber;
     this.userService.userSearchDtoSet(userSearchDto);
@@ -78,7 +149,8 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
       this.userDtoResponder = res.data[0];
     })
   }
-  private handleChangeRoute():void {
+
+  private handleChangeRoute(): void {
     if (this.subscription) this.subscription.unsubscribe();
     this.subscription = this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
@@ -86,41 +158,45 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
       }
     })
   }
-  public messageAdd():void {
+
+  public messageAdd(): void {
     if (this.messageAddForm.controls['fileSource'].errors && this.messageAddForm.controls['content'].errors) {
       this.toastService.error(environment.messages.common.messageEmpty);
       return;
     }
-      const formData = new FormData();
-      formData.append('picture', this.messageAddForm.get("fileSource").value);
-      formData.append('content', this.messageAddForm.get("content").value);
-      formData.append('responderPhoneNumber', this.responderPhoneNumber);
-      formData.append('groupName', localStorage.getItem(environment.storage.groupName));
-     this.chatService.messageAdd(formData).subscribe();
+    const formData = new FormData();
+    formData.append('picture', this.messageAddForm.get("fileSource").value);
+    formData.append('content', this.messageAddForm.get("content").value);
+    formData.append('responderPhoneNumber', this.responderPhoneNumber);
+    formData.append('groupName', localStorage.getItem(environment.storage.groupName));
+    this.chatService.messageAdd(formData).subscribe();
     this.messageAddForm.reset();
     this.pictureDontShowDelete();
     this.messageAddForm.controls['fileSource'].reset();
     this.messageAddForm.controls['file'].reset();
     this.urlPicture = null;
-    let inputPictureEl:HTMLInputElement=this.ef.nativeElement.getElementsByClassName("input-picture")[0];
-    inputPictureEl.value=null;
+    let inputPictureEl: HTMLInputElement = this.ef.nativeElement.getElementsByClassName("input-picture")[0];
+    inputPictureEl.value = null;
   }
-  public showFile():void {
-     this.ef.nativeElement.getElementsByClassName('input-picture')[0].click();
+
+  public showFile(): void {
+    this.ef.nativeElement.getElementsByClassName('input-picture')[0].click();
   }
-  public messageGetAll():void{
-    let messageSearchDto=new MessageSearchDto();
-    messageSearchDto.groupName=localStorage.getItem(environment.storage.groupName);
-    messageSearchDto.isRead=IsReadType.notImportant;
+
+  public messageGetAll(): void {
+    let messageSearchDto = new MessageSearchDto();
+    messageSearchDto.groupName = localStorage.getItem(environment.storage.groupName);
+    messageSearchDto.isRead = IsReadType.notImportant;
     this.chatService.messageSearchDtoSet(messageSearchDto);
-    this.chatService.messageGetAll().subscribe((paginationMessageDtoRes:PaginationDto<MessageDto>)=>{
-      if(paginationMessageDtoRes){
+    this.chatService.messageGetAll().subscribe((paginationMessageDtoRes: PaginationDto<MessageDto>) => {
+      if (paginationMessageDtoRes) {
         this.chatService.messageDtos.next(paginationMessageDtoRes.data);
         this.scrollToEnd();
       }
     })
   }
-  private pictureShowDelete():void {
+
+  private pictureShowDelete(): void {
     let showFileEl: Element;
     showFileEl = this.ef.nativeElement.getElementsByClassName('btn-picture')[0];
     showFileEl.classList.add('displayNone');
@@ -131,7 +207,8 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
     urlPictureEl.classList.add('displayBlock');
     urlPictureEl.classList.remove('DisplayNone');
   }
-  private pictureDontShowDelete():void {
+
+  private pictureDontShowDelete(): void {
     let showFileEl: Element;
     showFileEl = this.ef.nativeElement.getElementsByClassName('btn-picture')[0];
     showFileEl.classList.add('displayBlock');
@@ -142,23 +219,25 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
     urlPictureEl.classList.add('displayNone');
     urlPictureEl.classList.remove('displayBlock');
   }
-  public urlPictureDelete():void {
-    if(confirm(environment.messages.common.doYouWantToCancelSendThisPicture))
-    {
+
+  public urlPictureDelete(): void {
+    if (confirm(environment.messages.common.doYouWantToCancelSendThisPicture)) {
       this.pictureDontShowDelete();
       this.messageAddForm.controls['fileSource'].reset();
       this.messageAddForm.controls['file'].reset();
       this.urlPicture = null
-      let inputPictureEl:HTMLInputElement=this.ef.nativeElement.getElementsByClassName("input-picture")[0];
+      let inputPictureEl: HTMLInputElement = this.ef.nativeElement.getElementsByClassName("input-picture")[0];
       inputPictureEl.value = null;
     }
   }
+
   public scrollToEnd(): void {
     this.divShowMessage = this.ef.nativeElement.getElementsByClassName('show-message')[0];
     setTimeout(() => {
       this.divShowMessage.scroll({top: this.divShowMessage.scrollHeight, behavior: 'smooth'})
     })
   }
+
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();
   }

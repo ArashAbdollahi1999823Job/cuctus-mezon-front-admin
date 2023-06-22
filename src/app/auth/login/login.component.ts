@@ -4,9 +4,7 @@ import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {ToastrService} from "ngx-toastr";
-import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
-import {PresenceService} from "../../shared/services/presence.service";
 
 @Component({
   selector: 'app-login',
@@ -22,10 +20,10 @@ export class LoginComponent {
     password: new FormControl("", [Validators.required, Validators.maxLength(30), Validators.minLength(8)])
   })
 
-  constructor(private authService: AuthService, private toast: ToastrService, private router: Router) {
+  constructor(private authService: AuthService, private toast: ToastrService) {
   }
 
-  login() {
+ public login() :void{
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     }
@@ -36,7 +34,7 @@ export class LoginComponent {
     });
   }
 
-  togglePassword() {
+ public togglePassword():void {
     this.toggle = !this.toggle;
     if (this.toggle == true) this.password.nativeElement.type = 'text';
     if (this.toggle != true) this.password.nativeElement.type = 'password';

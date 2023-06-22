@@ -1,8 +1,12 @@
+@import "src/assets/styles/practicalValue";
 .chat{
   display: flex;
+  background: $color-white-a7;
+  width: 100%;
+  overflow: hidden;
   .chat-body {
     width: 100% ;
-    height: calc(100vh - 70px);
+    height: 100%;
     overflow: hidden;
   }
 }

@@ -5,7 +5,7 @@
       <div class="user-role">{{userDtoResponder?.description}}</div>
     </div>
     <div class="image" *ngIf="userDtoResponder?.userPictureDto">
-      <img src="{{backendUrlPicture}}/{{userDtoResponder?.userPictureDto?.pictureUrl}}" alt="">
+      <img src="{{backendUrlPicture}}{{userDtoResponder?.userPictureDto?.pictureUrl}}" alt="">
       <span class="show-online-user" [class.display-block]="(presenceService.usersOnline$ | async).includes(userDtoResponder.phoneNumber)"></span>
     </div>
   </div>
@@ -20,7 +20,7 @@
         <div class="left" *ngIf="message.responderPhoneNumber==userDtoResponder?.phoneNumber"></div>
         <div class="message">
           <div class="message-picture" *ngIf="message.pictureUrl">
-            <img src="{{backendUrlPicture}}/{{message.pictureUrl}}" alt="" width="250px" height="250px">
+            <img src="{{backendUrlPicture}}{{message.pictureUrl}}" alt="" width="200px" height="200px">
           </div>
           {{message.content != null && message.content != "null" ?  message.content :""}}
         </div>
