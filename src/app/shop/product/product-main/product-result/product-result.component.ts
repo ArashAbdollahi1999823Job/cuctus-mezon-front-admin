@@ -94,6 +94,11 @@ export class ProductResultComponent implements OnDestroy, OnChanges,AfterViewIni
     localStorage.setItem(environment.storage.typeIdForProductItemMain, typeId);
     localStorage.setItem(environment.storage.productPictureForProductItemMain, productPicture);
   }
+
+  setDataForProductColorMain(productId :string, productPicture: string) :void {
+    localStorage.setItem(environment.storage.productIdForProductColorMain,productId);
+    localStorage.setItem(environment.storage.productPictureForProductColorMain, productPicture);
+  }
   setProductId(id: string):void {
     localStorage.setItem(environment.storage.productIdForProductPictureMain,id);
   }

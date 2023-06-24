@@ -12,6 +12,8 @@ export const environment={
     typeIdForProductItemMain:"typeIdForProductItemMain",
     productPictureForProductItemMain:"productPictureForProductItemMain",
     productIdForProductItemMain:"productIdForProductItemMain",
+    productIdForProductColorMain:"productIdForProductColorMain",
+    productPictureForProductColorMain:"productPictureForProductColorMain",
     typeId: "typeId",
     productPicture:"productPicture",
     typeItemName:"typeItemName",

@@ -16,7 +16,8 @@ import {ProductPictureService} from "../../../product-picture/product-picture-se
 })
 
 export class ColorMainComponent implements OnDestroy,AfterViewInit{
-  public backendPictureUrl=environment.setting.url.backendUrlPicture;
+  public backendUrlPicture=environment.setting.url.backendUrlPicture;
+  public productPictureUrl:string;
   public colorsDto:ColorDto[];
   public subscription:Subscription;
   public productPictureDto:ProductPictureDto;
@@ -25,6 +26,7 @@ export class ColorMainComponent implements OnDestroy,AfterViewInit{
     this.colorGetAll();
     this.title.setTitle(environment.titlePages.color.colorMain);
     this.productPictureGetByProductId(localStorage.getItem(environment.storage.productId));
+    this.productPictureUrl=localStorage.getItem(environment.storage.productPictureForProductColorMain);
   }
   ngAfterViewInit() {
     this.renderer.setStyle(this.ef.nativeElement.querySelector('.result'), 'height', window.innerHeight-150+ "px");

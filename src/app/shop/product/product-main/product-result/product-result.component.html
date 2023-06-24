@@ -44,7 +44,7 @@
           <a routerLink="/Repository/InventoryOperation/InventoryOperationAdd/{{product.id}}">
             <button class="btn-edit">دادن گزارش انبار<i class="fa-solid fa-list"></i></button>
           </a>
-          <a routerLink="/Shop/Color/{{product.id}}">
+          <a routerLink="/Shop/Color/{{product.id}}" (click)="setDataForProductColorMain(product.id,product.productPictureDtos[0].pictureUrl)">
             <button class="btn-edit">رنگ بندی<i class="fa-solid fa-palette"></i></button>
           </a>
           <a routerLink="/Shop/ProductItem/ProductItemMain"
