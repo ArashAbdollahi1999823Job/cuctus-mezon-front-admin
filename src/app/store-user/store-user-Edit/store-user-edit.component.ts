@@ -7,6 +7,7 @@ import {Subscription} from "rxjs/internal/Subscription";
 import {StoreUserEditDto} from "../../shared/dto/storeUser/storeUserEditDto";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import { slugify } from 'src/app/shared/tool/slugify';
 @Component({
   selector: 'store-user-Edit',
   templateUrl: './store-user-Edit.component.html',
@@ -22,6 +23,7 @@ export class StoreUserEditComponent implements OnInit , OnDestroy,AfterViewInit 
     phoneNumber: new FormControl(null, [Validators.pattern("^[0-9]*$"), Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     mobileNumber: new FormControl(null, [Validators.pattern("^[0-9]*$"), Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
+    slug: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.minLength(3)]),
   })
   constructor(private storeUserService:StoreUserService, private title: Title,private toastService:ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit() {
@@ -39,6 +41,7 @@ export class StoreUserEditComponent implements OnInit , OnDestroy,AfterViewInit 
         this.storeUserEditForm.controls.phoneNumber.setValue(this.storeUserDto.phoneNumber);
         this.storeUserEditForm.controls.mobileNumber.setValue(this.storeUserDto.mobileNumber);
         this.storeUserEditForm.controls.address.setValue(this.storeUserDto.address);
+        this.storeUserEditForm.controls.slug.setValue(this.storeUserDto.slug);
         this.storeUserEditForm.controls.description.setValue(this.storeUserDto.description);
       }
     });
@@ -51,6 +54,7 @@ export class StoreUserEditComponent implements OnInit , OnDestroy,AfterViewInit 
     storeUserEditDto.mobileNumber=this.storeUserEditForm.controls.mobileNumber.value;
     storeUserEditDto.description=this.storeUserEditForm.controls.description.value;
     storeUserEditDto.address=this.storeUserEditForm.controls.address.value;
+    storeUserEditDto.slug=this.storeUserEditForm.controls.slug.value;
 
     this.subscription= this.storeUserService.storeUserEdit(storeUserEditDto).subscribe((res:boolean)=>{
       if(res==true){
@@ -58,6 +62,9 @@ export class StoreUserEditComponent implements OnInit , OnDestroy,AfterViewInit 
         this.router.navigateByUrl("/StoreUser/StoreUserPicture/StoreUserPictureMain");
       }
     })
+  }
+  slugify() {
+    this.storeUserEditForm.controls['slug'].setValue(slugify(this.storeUserEditForm.controls['name'].value+"-"+Math.floor((Math.random() * 1000) + 1)));
   }
   ngOnDestroy(): void {
     if(this.subscription){this.subscription.unsubscribe();}

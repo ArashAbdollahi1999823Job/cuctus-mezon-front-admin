@@ -17,6 +17,7 @@ export class ProductDto {
   type: string
   typeId:string
   brand: string
+  brandId:string
   inventory: string
   inventoryId:string
   off: OffDto

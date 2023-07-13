@@ -8,7 +8,7 @@ import {UserAuthorizeDto} from 'src/app/shared/dto/identity/userAuthorizeDto';
 import {map} from "rxjs/internal/operators/map";
 import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
 import {StoreService} from "../../store/store-service/store.service";
-import {StoreSearchDto} from "../../shared/dto/store/storeُSearchDto";
+import {StoreSearchDto} from "../../shared/dto/store/storeSearchDto";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {StoreDto} from "../../shared/dto/store/storeDto";
 import {PresenceService} from "../../shared/services/presence.service";

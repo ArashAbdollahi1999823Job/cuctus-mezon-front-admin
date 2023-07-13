@@ -2,6 +2,7 @@ import {SortType} from "../../enums/sortType";
 import {ActiveType} from "../../enums/activeType";
 
 export class StoreSearchDto {
+  slug:string;
   id:string;
   pageIndex:number=1;
   pageSize:number=7;

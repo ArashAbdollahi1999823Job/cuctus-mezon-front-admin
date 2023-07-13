@@ -27,6 +27,7 @@ export class TypeEditComponent implements OnDestroy,AfterViewInit {
     parentTypeId: new FormControl(null, [Validators.required]),
     isActive: new FormControl(),
     isDelete: new FormControl(),
+    sort: new FormControl('', [Validators.min(0), Validators.max(100)]),
   })
   public typeDto: TypeDto;
   constructor(private typeService: TypeService, private activatedRoute: ActivatedRoute, private title: Title,private toastService:ToastrService,private router:Router,private ef:ElementRef,private renderer: Renderer2) {}
@@ -51,6 +52,7 @@ export class TypeEditComponent implements OnDestroy,AfterViewInit {
         this.typeEditForm.controls["summary"].setValue(this.typeDto.summary);
         this.typeEditForm.controls["parentTypeId"].setValue(this.typeDto.parentTypeId);
         this.typeEditForm.controls["isActive"].setValue(this.typeDto.isActive);
+        this.typeEditForm.controls["sort"].setValue(this.typeDto.sort);
         this.typeEditForm.controls["isDelete"].setValue(false);
       }
     })
@@ -71,6 +73,7 @@ export class TypeEditComponent implements OnDestroy,AfterViewInit {
     typeEditDto.isActive= this.typeEditForm.controls['isActive'].value;
     typeEditDto.isDelete= this.typeEditForm.controls['isDelete'].value;
     typeEditDto.slug= this.typeEditForm.controls['slug'].value;
+    typeEditDto.sort= this.typeEditForm.controls['sort'].value;
     this.subscription= this.typeService.typeEdit(typeEditDto).subscribe((res:boolean)=>{
       if(res==true){
         this.toastService.success(` دسته باموفقیت اپدیت شد.`);

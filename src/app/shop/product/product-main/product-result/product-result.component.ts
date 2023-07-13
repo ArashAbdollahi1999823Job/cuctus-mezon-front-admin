@@ -55,6 +55,7 @@ export class ProductResultComponent implements OnDestroy, OnChanges,AfterViewIni
       productEditDto.summary = productDto.summary;
       productEditDto.isActive = productDto.isActive;
       productEditDto.typeId = productDto.typeId;
+      productEditDto.brandId = productDto.brandId;
       productEditDto.inventoryId = productDto.inventoryId;
       productEditDto.offId ="00000000-0000-0000-0000-000000000000";
       this.subscription = this.productService.productEdit(productEditDto).subscribe((res: boolean) => {
@@ -94,7 +95,6 @@ export class ProductResultComponent implements OnDestroy, OnChanges,AfterViewIni
     localStorage.setItem(environment.storage.typeIdForProductItemMain, typeId);
     localStorage.setItem(environment.storage.productPictureForProductItemMain, productPicture);
   }
-
   setDataForProductColorMain(productId :string, productPicture: string) :void {
     localStorage.setItem(environment.storage.productIdForProductColorMain,productId);
     localStorage.setItem(environment.storage.productPictureForProductColorMain, productPicture);

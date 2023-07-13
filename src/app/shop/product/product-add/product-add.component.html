@@ -14,6 +14,18 @@
         </div>
       </div>
       <div class="body-input">
+        <label for="brandId">انتخاب برند </label>
+        <select class="select-list" name="brandId" formControlName="brandId" id="brandId"
+                [ngClass]="productAddForm.controls.brandId.errors?.required ? 'input-error' :'input-success'">
+          <option value="00000000-0000-0000-0000-000000000000" >بدون برند</option>
+          <option *ngFor="let item of brandDtos" value="{{item.id}}" >{{item.name}}</option>
+        </select>
+        <div class="error"
+             *ngIf="productAddForm.controls.brandId.errors?.required ">
+          لطفا  برند را انتخاب کنید !
+        </div>
+      </div>
+      <div class="body-input">
         <label for="inventoryId">انتخاب انبار</label>
         <select class="select-list" name="inventoryId" formControlName="inventoryId" id="inventoryId"
                 [ngClass]="productAddForm.controls.inventoryId.errors?.required ? 'input-error' :'input-success'" >
@@ -104,7 +116,7 @@
           لطفا توضیحات متا را وارد کنید !
         </div>
         <div class="error" *ngIf=" productAddForm.controls.metaDescription.hasError('maxlength')">تعداد
-          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+          کاراکتر ها نمیتواند بیشتر از 200 باشد !
         </div>
         <div class="error" *ngIf=" productAddForm.controls.metaDescription.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 10 باشد !
@@ -121,7 +133,7 @@
           لطفا سامری را وارد کنید !
         </div>
         <div class="error" *ngIf=" productAddForm.controls.summary.hasError('maxlength')">تعداد
-          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+          کاراکتر ها نمیتواند بیشتر از 100 باشد !
         </div>
         <div class="error" *ngIf=" productAddForm.controls.summary.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 10 باشد !

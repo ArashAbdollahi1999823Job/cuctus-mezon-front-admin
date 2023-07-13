@@ -13,6 +13,8 @@ import {ProductAddDto} from "../../../shared/dto/product/productAddDto";
 import {ProductService} from "../product-service/product.service";
 import {InventoryParamDto} from "../../../shared/dto/inventory/inventoryParamDto";
 import {environment} from "../../../../environments/environment";
+import {BrandService} from "../../brand/brand-service/brand.service";
+import {BrandDto} from "../../../shared/dto/brand/brandDto";
 @Component({
   selector: 'product-add',
   templateUrl: './product-add.component.html',
@@ -20,6 +22,7 @@ import {environment} from "../../../../environments/environment";
 })
 export class ProductAddComponent implements OnInit, OnDestroy,AfterViewInit {
   public typesDto: TypeDto[];
+  public brandDtos: BrandDto[];
   public inventoriesDto: InventoryDto[];
   public subscription: Subscription;
   public productAddForm: FormGroup = new FormGroup({
@@ -27,14 +30,17 @@ export class ProductAddComponent implements OnInit, OnDestroy,AfterViewInit {
     slug: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.minLength(3)]),
     price: new FormControl(null, [Validators.required, Validators.maxLength(10), Validators.minLength(1)]),
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
-    metaDescription: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
-    summary: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
+    metaDescription: new FormControl(null, [Validators.required, Validators.maxLength(200), Validators.minLength(10)]),
+    summary: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.minLength(10)]),
     inventoryId: new FormControl(null, [Validators.required]),
     typeId: new FormControl(null, [Validators.required]),
+    brandId: new FormControl("00000000-0000-0000-0000-000000000000"),
   })
-  constructor(private typeService: TypeService, private toast: ToastrService, private router: Router, private inventoryService: InventoryService,private productService:ProductService,private ef:ElementRef,private renderer: Renderer2) {}
+  constructor(private typeService: TypeService, private toast: ToastrService, private router: Router, private inventoryService:
+    InventoryService,private productService:ProductService,private ef:ElementRef,private renderer: Renderer2,private brandService:BrandService) {}
   ngOnInit(): void {
     this.typeGet();
+    this.brandGet();
     this.inventoryGet();
   }
   ngAfterViewInit() {
@@ -43,6 +49,11 @@ export class ProductAddComponent implements OnInit, OnDestroy,AfterViewInit {
   typeGet() {
     this.subscription = this.typeService.typeGet().subscribe((res: PaginationDto<TypeDto>) => {
       this.typesDto = res.data;
+    });
+  }
+  brandGet() {
+    this.subscription = this.brandService.brandGetAll().subscribe((paginationBrandDtoRes: PaginationDto<BrandDto>) => {
+      this.brandDtos = paginationBrandDtoRes.data;
     });
   }
   inventoryGet() {

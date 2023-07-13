@@ -9,4 +9,5 @@ export class TypeEditDto {
   isActive: boolean;
   isDelete: boolean;
   remove: boolean;
+  sort:number;
 }

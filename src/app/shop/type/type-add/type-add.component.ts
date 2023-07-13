@@ -24,6 +24,7 @@ export class TypeAddComponent implements OnInit , OnDestroy,AfterViewInit{
     metaDescription: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     summary: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     parentTypeId: new FormControl(null, [Validators.required]),
+    sort: new FormControl('', [Validators.min(0), Validators.max(100)]),
   })
   constructor(private typeService: TypeService, private toast: ToastrService,private router:Router,private activatedRoute:ActivatedRoute,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit(): void {

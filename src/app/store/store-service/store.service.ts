@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {Observable} from "rxjs/internal/Observable";
-import {StoreSearchDto} from "../../shared/dto/store/storeُSearchDto";
+import {StoreSearchDto} from "../../shared/dto/store/storeSearchDto";
 import {StoreEditDto} from "../../shared/dto/store/storeEditDto";
 import {StoreAddDto} from "../../shared/dto/store/storeAddDto";
 import {StoreDto} from "../../shared/dto/store/storeDto";

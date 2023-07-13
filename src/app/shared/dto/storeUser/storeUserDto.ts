@@ -1,4 +1,5 @@
 export class StoreUserDto{
+  slug:string;
   id: string;
   name:string;
   address:string;

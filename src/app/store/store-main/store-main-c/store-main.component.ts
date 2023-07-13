@@ -3,7 +3,7 @@ import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {StoreDto} from "../../../shared/dto/store/storeDto";
 import {StoreService} from "../../store-service/store.service";
 import {Subscription} from "rxjs/internal/Subscription";
-import {StoreSearchDto} from "../../../shared/dto/store/storeُSearchDto";
+import {StoreSearchDto} from "../../../shared/dto/store/storeSearchDto";
 @Component({
   selector: 'store-main',
   templateUrl: './store-main.component.html',

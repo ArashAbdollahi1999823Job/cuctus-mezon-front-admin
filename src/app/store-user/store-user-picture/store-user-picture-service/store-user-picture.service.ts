@@ -7,7 +7,7 @@ import {StoreUserPictureParamDto} from "../../../shared/dto/storeUserPicture/sto
 import {StoreUserPictureDto} from "../../../shared/dto/storeUserPicture/storeUserPictureDto";
 import {TypePictureEditDto} from "../../../shared/dto/typePicture/typePictureEditDto";
 import {StoreUserPictureEditDto} from "../../../shared/dto/storeUserPicture/storeUserPictureEditDto";
-import {StoreSearchDto} from "../../../shared/dto/store/storeُSearchDto";
+import {StoreSearchDto} from "../../../shared/dto/store/storeSearchDto";
 @Injectable({
   providedIn: 'root'
 })

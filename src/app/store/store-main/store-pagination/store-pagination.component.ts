@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {StoreSearchDto} from "../../../shared/dto/store/storeُSearchDto";
+import {StoreSearchDto} from "../../../shared/dto/store/storeSearchDto";
 import {StoreService} from "../../store-service/store.service";
 
 @Component({

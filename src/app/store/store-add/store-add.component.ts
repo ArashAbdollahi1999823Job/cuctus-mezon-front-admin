@@ -9,6 +9,7 @@ import {StoreAddDto} from "../../shared/dto/store/storeAddDto";
 import {StoreService} from "../store-service/store.service";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs/internal/Subscription";
+import { slugify } from 'src/app/shared/tool/slugify';
 @Component({
   selector: 'store-add',
   templateUrl: './store-add.component.html',
@@ -29,6 +30,7 @@ export class StoreAddComponent implements OnInit,OnDestroy,AfterViewInit {
     mobileNumber: new FormControl(null, [Validators.pattern("^[0-9]*$"), Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     userId: new FormControl(null, [Validators.required]),
+    slug: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.minLength(3)]),
   })
   ngOnInit(): void {
     this.userGet();
@@ -50,6 +52,10 @@ export class StoreAddComponent implements OnInit,OnDestroy,AfterViewInit {
    this.subscription= this.userService.userGetAll().subscribe((res:PaginationDto<UserDto>) => {
       this.usersDto = res.data;
     });
+  }
+
+  slugify() {
+    this.storeAddForm.controls['slug'].setValue(slugify(this.storeAddForm.controls['name'].value+"-"+Math.floor((Math.random() * 1000) + 1)));
   }
   ngOnDestroy(): void {
     if(this.subscription){this.subscription.unsubscribe();}

@@ -1,4 +1,5 @@
 export class StoreDto {
+  slug:string;
   name: string;
   address: string;
   phoneNumber: string;

@@ -9,6 +9,7 @@ export class ProductEditDto{
   summary: string;
   isActive: boolean;
   typeId:string;
+  brandId:string;
   inventoryId:string;
   offId:string;
 }

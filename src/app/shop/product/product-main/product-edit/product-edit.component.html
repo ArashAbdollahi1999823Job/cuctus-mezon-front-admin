@@ -14,6 +14,16 @@
         </div>
       </div>
       <div class="body-input">
+        <label for="brandId">انتخاب برند </label>
+        <select class="select-list" name="brandId" formControlName="brandId" id="brandId"
+                [ngClass]="productEditForm.controls.brandId.errors?.required ? 'input-error' :'input-success'">
+          <option [ngValue]="null" disabled>انتخاب برند</option>
+          <option value="00000000-0000-0000-0000-000000000000" >بدون برند</option>
+          <option  [defaultSelected]="item.id == productDto?.brandId " *ngFor="let item of brandDtos" value="{{item.id}}" >{{item.name}}</option>
+        </select>
+      </div>
+
+      <div class="body-input">
         <label for="inventoryId">انتخاب انبار</label>
         <select class="select-list" name="inventoryId" formControlName="inventoryId" id="inventoryId">
           <option [ngValue]="null" disabled>انتخاب انبار</option>
@@ -104,7 +114,7 @@
           لطفا توضیحات متا را وارد کنید !
         </div>
         <div class="error" *ngIf=" productEditForm.controls.metaDescription.hasError('maxlength')">تعداد
-          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+          کاراکتر ها نمیتواند بیشتر از 200 باشد !
         </div>
         <div class="error" *ngIf=" productEditForm.controls.metaDescription.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 10 باشد !
@@ -121,7 +131,7 @@
           لطفا سامری را وارد کنید !
         </div>
         <div class="error" *ngIf=" productEditForm.controls.summary.hasError('maxlength')">تعداد
-          کاراکتر ها نمیتواند بیشتر از 500 باشد !
+          کاراکتر ها نمیتواند بیشتر از 100 باشد !
         </div>
         <div class="error" *ngIf=" productEditForm.controls.summary.hasError('minlength')">تعداد
           کاراکتر ها نمیتواند کمتر از 10 باشد !
@@ -132,7 +142,7 @@
         <input type="checkbox" id="boss" formControlName="isActive">
       </div>
       <button type="submit" class="btn" [disabled]="!productEditForm.valid || productEditForm.pristine"
-              [ngClass]="!productEditForm.valid ? 'disable':''">اپدیت محصول
+              [ngClass]="!productEditForm.valid || productEditForm.pristine  ? 'disable':''">اپدیت محصول
       </button>
     </div>
   </form>

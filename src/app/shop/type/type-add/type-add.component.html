@@ -66,6 +66,23 @@
         </div>
       </div>
       <div class="body-input">
+        <label for="sort">ترتیب</label>
+        <input type="number" placeholder="ترتیب" id="sort" formControlName="sort" [ngClass]="
+                     typeAddForm.controls.sort.touched && typeAddForm.controls.sort.errors?.required
+                     || typeAddForm.controls.sort.errors?.maxlength ||
+                     typeAddForm.controls.sort.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typeAddForm.controls.sort.errors?.required &&typeAddForm.controls.sort.touched">
+          لطفا ترتیب را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typeAddForm.controls.sort.hasError('maxlength')">تعداد
+          شماره نمیتواند بیشتر از ۱۰۰ باشد!
+        </div>
+        <div class="error" *ngIf=" typeAddForm.controls.sort.hasError('minlength')">تعداد
+          شماره ترتیب  نمیتواند کمتر 1 باشد!
+        </div>
+      </div>
+      <div class="body-input">
         <label for="metaDescription">توضیحات متا</label>
         <textarea  placeholder="توضیحات متا..." id="metaDescription" formControlName="metaDescription" [ngClass]="
                      typeAddForm.controls.metaDescription.touched && typeAddForm.controls.metaDescription.errors?.required

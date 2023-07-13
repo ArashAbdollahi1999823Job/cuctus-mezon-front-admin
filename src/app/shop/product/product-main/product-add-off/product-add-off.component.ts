@@ -63,6 +63,7 @@ export class ProductAddOffComponent implements OnInit {
     productEditDto.isActive=this.productDto.isActive;
     productEditDto.typeId=this.productDto.typeId;
     productEditDto.inventoryId=this.productDto.inventoryId;
+    productEditDto.brandId=this.productDto.brandId ? this.productDto.brandId :"00000000-0000-0000-0000-000000000000" ;
     productEditDto.offId=offId;
     this.subscription=this.productService.productEdit(productEditDto).subscribe((res:boolean)=>{
       if(res==true){

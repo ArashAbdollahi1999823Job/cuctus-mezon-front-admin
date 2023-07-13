@@ -14,6 +14,8 @@ import {ProductDto} from "../../../../shared/dto/product/productDto";
 import {ProductService} from "../../product-service/product.service";
 import {ProductEditDto} from "../../../../shared/dto/product/ProductEditDto";
 import { slugify } from 'src/app/shared/tool/slugify';
+import {BrandService} from "../../../brand/brand-service/brand.service";
+import {BrandDto} from "../../../../shared/dto/brand/brandDto";
 @Component({
   selector: 'product-edit',
   templateUrl: './product-edit.component.html',
@@ -22,6 +24,7 @@ import { slugify } from 'src/app/shared/tool/slugify';
 export class ProductEditComponent implements OnDestroy,OnInit,AfterViewInit {
   public inventoryParamDto:InventoryParamDto;
   public typesDto: TypeDto[];
+  public brandDtos: BrandDto[];
   public inventoriesDto: InventoryDto[];
   public subscription: Subscription;
   public productId: string;
@@ -30,19 +33,22 @@ export class ProductEditComponent implements OnDestroy,OnInit,AfterViewInit {
     slug: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.minLength(3)]),
     price: new FormControl(null, [Validators.required, Validators.maxLength(10), Validators.minLength(1)]),
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
-    metaDescription: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
-    summary: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
+    metaDescription: new FormControl(null, [Validators.required, Validators.maxLength(200), Validators.minLength(10)]),
+    summary: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.minLength(10)]),
     inventoryId: new FormControl(null, [Validators.required]),
+    brandId: new FormControl("00000000-0000-0000-0000-000000000000"),
     typeId: new FormControl(null, [Validators.required]),
     isActive: new FormControl(),
   })
   public productDto: ProductDto;
   constructor(private typeService: TypeService, private activatedRoute: ActivatedRoute, private title: Title,
-              private toastService:ToastrService,private router:Router,private inventoryService:InventoryService,private productService:ProductService,private ef:ElementRef,private renderer: Renderer2) {}
+              private toastService:ToastrService,private router:Router,private inventoryService:InventoryService
+              ,private productService:ProductService,private ef:ElementRef,private renderer: Renderer2,private brandService:BrandService) {}
   ngOnInit(): void {
     this.inventoryParamDto=this.inventoryService.inventoryGetParam();
     this.productId = this.activatedRoute.snapshot.paramMap.get('ProductId');
     this.typeGet();
+    this.brandGet();
     this.productGetById(this.productId);
     this.inventoryGet();
 
@@ -77,6 +83,11 @@ export class ProductEditComponent implements OnDestroy,OnInit,AfterViewInit {
       this.typesDto = res.data;
     });
   }
+  brandGet() {
+    this.subscription = this.brandService.brandGetAll().subscribe((paginationBrandDtoRes: PaginationDto<BrandDto>) => {
+      this.brandDtos = paginationBrandDtoRes.data;
+    });
+  }
   productEdit() {
     let productEditDto=new ProductEditDto();
     productEditDto.id =this.productId;
@@ -89,6 +100,7 @@ export class ProductEditComponent implements OnDestroy,OnInit,AfterViewInit {
     productEditDto.typeId= this.productEditForm.controls['typeId'].value;
     productEditDto.inventoryId= this.productEditForm.controls['inventoryId'].value;
     productEditDto.isActive= this.productEditForm.controls['isActive'].value;
+    productEditDto.brandId= this.productEditForm.controls['brandId'].value;
     productEditDto.offId=this.productDto.offId;
     this.subscription= this.productService.productEdit(productEditDto).subscribe((res:boolean)=>{
       if(res==true){

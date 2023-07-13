@@ -50,6 +50,23 @@
         </div>
       </div>
       <div class="body-input">
+        <label for="sort">ترتیب</label>
+        <input type="number" placeholder="ترتیب" id="sort" formControlName="sort" [ngClass]="
+                     typeEditForm.controls.sort.touched && typeEditForm.controls.sort.errors?.required
+                     || typeEditForm.controls.sort.errors?.maxlength ||
+                     typeEditForm.controls.sort.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="typeEditForm.controls.sort.errors?.required &&typeEditForm.controls.sort.touched">
+          لطفا ترتیب را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.sort.hasError('maxlength')">تعداد
+          شماره نمیتواند بیشتر از ۱۰۰ باشد!
+        </div>
+        <div class="error" *ngIf=" typeEditForm.controls.sort.hasError('minlength')">تعداد
+          شماره ترتیب  نمیتواند کمتر 1 باشد!
+        </div>
+      </div>
+      <div class="body-input">
         <label for="description">توضیحات</label>
         <input type="text" placeholder="توضیحات..." id="description" formControlName="description" [ngClass]="
                      typeEditForm.controls.description.touched && typeEditForm.controls.description.errors?.required

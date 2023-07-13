@@ -5,4 +5,5 @@ export class TypeAddDto {
   description: string;
   metaDescription: string;
   summary: string;
+  sort:number;
 }

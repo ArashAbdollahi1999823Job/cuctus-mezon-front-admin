@@ -8,4 +8,5 @@ export class TypeDto {
   isActive: true;
   parentTypeId:string;
   parentType:string;
+  sort:number;
 }

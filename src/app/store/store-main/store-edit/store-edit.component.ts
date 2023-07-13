@@ -11,8 +11,9 @@ import {StoreService} from "../../store-service/store.service";
 import {StoreDto} from "../../../shared/dto/store/storeDto";
 import {StoreEditDto} from "../../../shared/dto/store/storeEditDto";
 import {Subscription} from "rxjs/internal/Subscription";
-import {StoreSearchDto} from "../../../shared/dto/store/storeُSearchDto";
+import {StoreSearchDto} from "../../../shared/dto/store/storeSearchDto";
 import {environment} from "../../../../environments/environment";
+import { slugify } from 'src/app/shared/tool/slugify';
 @Component({
   selector: 'store-edit',
   templateUrl: './store-edit.component.html',
@@ -36,6 +37,8 @@ export class StoreEditComponent implements OnInit, OnDestroy,AfterViewInit {
     description: new FormControl(null, [Validators.required, Validators.maxLength(500), Validators.minLength(10)]),
     userId: new FormControl(null, [Validators.required]),
     isActive: new FormControl(),
+    slug: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.minLength(3)]),
+
   })
   ngOnInit(): void {
     this.storeId = this.activatedRoute.snapshot.paramMap.get('StoreId');
@@ -55,6 +58,7 @@ export class StoreEditComponent implements OnInit, OnDestroy,AfterViewInit {
       this.storeEditForm.controls.address.setValue(this.storeDto.address);
       this.storeEditForm.controls.description.setValue(this.storeDto.description);
       this.storeEditForm.controls.userId.setValue(this.storeDto.userId);
+      this.storeEditForm.controls.slug.setValue(this.storeDto.slug);
       this.storeEditForm.controls["isActive"].setValue(this.storeDto.isActive);
     })
   }
@@ -76,6 +80,7 @@ export class StoreEditComponent implements OnInit, OnDestroy,AfterViewInit {
     storeEditDto.description = this.storeEditForm.controls.description.value;
     storeEditDto.address = this.storeEditForm.controls.address.value;
     storeEditDto.userId = this.storeEditForm.controls.userId.value;
+    storeEditDto.slug = this.storeEditForm.controls.slug.value;
     storeEditDto.isActive = this.storeEditForm.controls['isActive'].value;
     this.subscription = this.storeService.storeEdit(storeEditDto).subscribe((res: boolean) => {
       if (res == true) {
@@ -83,6 +88,9 @@ export class StoreEditComponent implements OnInit, OnDestroy,AfterViewInit {
         this.router.navigateByUrl("/Store/StoreMain");
       }
     })
+  }
+  slugify() {
+    this.storeEditForm.controls['slug'].setValue(slugify(this.storeEditForm.controls['name'].value+"-"+Math.floor((Math.random() * 1000) + 1)));
   }
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();

@@ -3,7 +3,7 @@ import {UserDto} from "../../../shared/dto/user/userDto";
 import {UserSearchDto} from "../../../shared/dto/user/userSearchDto";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {UserService} from "../../../user/user-service/user.service";
-import {StoreSearchDto} from "../../../shared/dto/store/storeُSearchDto";
+import {StoreSearchDto} from "../../../shared/dto/store/storeSearchDto";
 import {StoreService} from "../../store-service/store.service";
 @Component({
   selector: 'store-filter',

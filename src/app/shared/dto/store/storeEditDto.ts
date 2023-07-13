@@ -1,4 +1,5 @@
 export class StoreEditDto {
+  slug:string;
   id: string;
   name: string
   address: string;
