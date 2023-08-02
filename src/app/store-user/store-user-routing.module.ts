@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {StoreUserComponent} from "./store-user-c/store-user.component";
 import {StoreUserEditComponent} from "./store-user-Edit/store-user-edit.component";
 import {StoreUserPictureComponent} from "./store-user-picture/store-user-picture-c/store-user-picture.component";
-import * as path from "path";
 import {
   StoreUserPictureMainComponent
 } from "./store-user-picture/store-user-picture-main/store-user-picture-main-c/store-user-picture-main.component";

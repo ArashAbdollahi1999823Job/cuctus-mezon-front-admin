@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import {AuthService} from "../../auth/services/auth.service";
 import {ToastrService} from "ngx-toastr";
@@ -9,7 +9,7 @@ import {UserAuthorizeDto} from "../dto/identity/userAuthorizeDto";
 @Injectable({
   providedIn: 'root'
 })
-export class SellerJustGuard implements CanActivate {
+export class SellerJustGuard  {
   constructor(private authService: AuthService, private toastService: ToastrService) {
   }
   canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean> {

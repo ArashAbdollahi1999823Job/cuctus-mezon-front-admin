@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from "../../auth/services/auth.service";
 import {ToastrService} from "ngx-toastr";
@@ -9,7 +9,7 @@ import {map} from "rxjs/internal/operators/map";
 @Injectable({
   providedIn: 'root'
 })
-export class BossGuard implements CanActivate {
+export class BossGuard  {
   constructor(private authService: AuthService, private toastService: ToastrService) {
   }
 
