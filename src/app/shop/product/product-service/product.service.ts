@@ -41,6 +41,7 @@ export class ProductService {
     requestProductParam = requestProductParam.append('pageIndex', this.productSearchDto.pageIndex);
     requestProductParam = requestProductParam.append('pageSize', this.productSearchDto.pageSize);
     requestProductParam=requestProductParam.append('sortType',this.productSearchDto.sortType);
+    requestProductParam=requestProductParam.append('minutesCache',this.productSearchDto.minutesCache)
     return requestProductParam;
   }
   public productAdd(productAddDto: ProductAddDto):Observable<boolean> {

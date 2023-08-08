@@ -36,6 +36,7 @@ export class ProductPictureService {
     if (this.productPictureParam.productId) productPictureParam = productPictureParam.append("productId", this.productPictureParam.productId);
     if (this.productPictureParam.id) productPictureParam=productPictureParam.append('id',this.productPictureParam.id);
     if (this.productPictureParam.sort) productPictureParam=productPictureParam.append('sort',this.productPictureParam.sort);
+    productPictureParam=productPictureParam.append('minutesCache',this.productPictureParam.minutesCache)
     return this.http.get<ProductPictureDto[]>(`${this.backendUrlAdmin}/ProductPictureAdmin/ProductPictureGetAll`, {params: productPictureParam});
   }
   public productPictureDelete(id:string){

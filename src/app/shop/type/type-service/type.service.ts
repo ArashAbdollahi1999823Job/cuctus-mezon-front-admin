@@ -50,7 +50,6 @@ export class TypeService {
     return this.http.post<boolean>(`${this.backendUrlAdmin}/TypeAdmin/TypeAdd`, typeAddDto);
   }
   public typeEdit(typeEditDto:TypeEditDto):Observable<boolean> {
-    console.log(typeEditDto)
     return this.http.put<boolean>(`${this.backendUrlAdmin}/TypeAdmin/TypeEdit`, typeEditDto);
   }
   public typeGetById(id:string): Observable<PaginationDto<TypeDto>> {
